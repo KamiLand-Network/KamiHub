@@ -19,6 +19,7 @@ bukkit {
     description = "${project.description}"
     authors = listOf("KamiLand", "while1cry")
     website = "https://www.kamiland.net/plugins/ultimatehub"
+    softDepend = listOf("PlaceholderAPI", "SuperVanish")
 
     foliaSupported = true
 
@@ -27,13 +28,17 @@ bukkit {
 
 repositories {
     mavenCentral()
+    maven("https://www.jitpack.io")
     // PaperMC
-    maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://repo.papermc.io/repository/maven-public")
 
     // Panda (LiteCommands)
     maven("https://repo.panda-lang.org/releases")
     // InvUI
     maven("https://repo.xenondevs.xyz/releases")
+
+    // PlaceholderAPI
+    maven("https://repo.extendedclip.com/releases")
 }
 
 dependencies {
@@ -44,6 +49,9 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
     implementation("dev.rollczi:litecommands-bukkit:3.10.0")
     implementation("xyz.xenondevs.invui:invui:1.46")
+
+    compileOnly("me.clip:placeholderapi:2.11.6")
+    compileOnly("com.github.LeonMangler:SuperVanish:6.2.18")
 }
 
 tasks.build {
