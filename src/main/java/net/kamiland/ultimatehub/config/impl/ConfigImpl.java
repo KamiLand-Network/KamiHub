@@ -18,6 +18,7 @@ public abstract class ConfigImpl implements Config {
     public ConfigImpl(UltimateHub plugin, String path) {
         this.plugin = plugin;
         this.file = new File(plugin.getDataFolder(), path);
+        plugin.saveResource(path, false);
     }
 
     @Override

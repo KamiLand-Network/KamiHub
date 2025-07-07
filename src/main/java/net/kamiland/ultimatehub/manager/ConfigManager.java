@@ -57,7 +57,9 @@ public class ConfigManager {
     public void load() {
         logger.info("Loading config...");
         pluginConfig = new PluginConfigImpl(plugin);
+        pluginConfig.load();
         spawnConfig = new SpawnConfigImpl(plugin);
+        spawnConfig.load();
     }
 
 }
