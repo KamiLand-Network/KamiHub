@@ -1,0 +1,89 @@
+config-version: 1.0
+
+modules:
+  action-bar:
+    enabled: true
+    interval: 1000
+    messages:
+      - '<green>Welcome to the server!'
+      - '<aqua>Enjoy your stay!'
+      - '<red>Be careful!'
+      - '<purple>Have fun!'
+  agreement:
+    enabled: true
+    on-first-join: true
+    on-every-join: false
+    on-change: true
+    kick-on-disagree: true
+    kick-message: |
+      <red>You have not agreed to the agreement.</red>
+    pages:
+      - |
+        114514
+      - |
+        114514
+    agree: '<green>Agree</green>'
+    disagree: '<red>Disagree</red>'
+  anti-break:
+    enabled: true
+    creative-only: true
+  anti-interact:
+    enabled: true
+    creative-only: true
+  anti-place:
+    enabled: true
+    creative-only: true
+  boos-bar:
+    enabled: true
+    interval: 1000
+    progress: 0.8
+    color: RED
+    overlay: NOTCHED_10
+    messages:
+      - 'Welcome to the server!'
+      - 'Enjoy your stay!'
+      - 'Be careful!'
+  broadcast:
+    enabled: true
+    interval: 10000
+    messages:
+      - |
+        <red>Welcome to the server!</red>
+        <green>Enjoy your stay!</green>
+      - |
+        <red>Good luck!</red>
+        <green>Have fun!</green>
+  clear-chat:
+    enabled: true
+    on-join: true
+  easter-egg:
+    enabled: true
+  inventory:
+    enabled: true
+    clear-on-join: false
+  join-message:
+    enabled: true
+    # See groups.yml
+  quit-message:
+    enabled: true
+    # See groups.yml
+  potion-effect:
+    enabled: true
+    clear-on-join: true
+    give-on-join: true
+    effects:
+      - name: SPEED
+        duration: 'infinite'
+        amplifier: 1
+        particles: false
+      - name: JUMP_BOOST
+        duration: '20'
+        amplifier: 0
+        particles: true
+  spawn:
+    enabled: true
+    on-join: true
+    on-command: true
+  void-teleport:
+    enabled: true
+    level: -64
