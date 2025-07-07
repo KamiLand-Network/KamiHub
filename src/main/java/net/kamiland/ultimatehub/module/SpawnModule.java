@@ -7,7 +7,22 @@ public class SpawnModule implements Module {
     private boolean enabled;
 
     @Override
+    public String getName() {
+        return "";
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
+    @Override
     public void setEnabled(boolean enabled) {
+    }
+
+    @Override
+    public void setup() {
+
     }
 
     @Override

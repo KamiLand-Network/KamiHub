@@ -2,7 +2,7 @@ package net.kamiland.ultimatehub.module;
 
 import org.jetbrains.annotations.Nullable;
 
-public class ClearChatModule implements Module {
+public class BroadcastModule implements Module {
 
     @Override
     public String getName() {
