@@ -3,12 +3,51 @@ config-version: 1.0
 modules:
   action-bar:
     enabled: true
-    interval: 60
+    interval: 2
     messages:
-      - '<green>Welcome to the server!'
-      - '<aqua>Enjoy your stay!'
-      - '<red>Be careful!'
-      - '<purple>Have fun!'
+      - ''
+      - '<rainbow>V'
+      - '<rainbow>Vi'
+      - '<rainbow>Vis'
+      - '<rainbow>Visi'
+      - '<rainbow>Visit'
+      - '<rainbow>Visit '
+      - '<rainbow>Visit w'
+      - '<rainbow>Visit ww'
+      - '<rainbow>Visit www'
+      - '<rainbow>Visit www.'
+      - '<rainbow>Visit www.e'
+      - '<rainbow>Visit www.ex'
+      - '<rainbow>Visit www.exa'
+      - '<rainbow>Visit www.exam'
+      - '<rainbow>Visit www.examp'
+      - '<rainbow>Visit www.exampl'
+      - '<rainbow>Visit www.example'
+      - '<rainbow>Visit www.example.'
+      - '<rainbow>Visit www.example.c'
+      - '<rainbow>Visit www.example.co'
+      - '<rainbow>Visit www.example.com'
+      - '<rainbow>isit www.example.com'
+      - '<rainbow>sit www.example.com'
+      - '<rainbow>it www.example.com'
+      - '<rainbow>t www.example.com'
+      - '<rainbow> www.example.com'
+      - '<rainbow>www.example.com'
+      - '<rainbow>ww.example.com'
+      - '<rainbow>w.example.com'
+      - '<rainbow>.example.com'
+      - '<rainbow>example.com'
+      - '<rainbow>xample.com'
+      - '<rainbow>ample.com'
+      - '<rainbow>mple.com'
+      - '<rainbow>ple.com'
+      - '<rainbow>le.com'
+      - '<rainbow>e.com'
+      - '<rainbow>.com'
+      - '<rainbow>com'
+      - '<rainbow>om'
+      - '<rainbow>m'
+      - ''
   agreement:
     enabled: true
     on-first-join: true
@@ -26,23 +65,23 @@ modules:
     disagree: '<red>Disagree</red>'
   anti-break:
     enabled: true
-    creative-only: true
+    break-creative-only: true
   anti-interact:
     enabled: true
     creative-only: true
   anti-place:
     enabled: true
     creative-only: true
-  boos-bar:
+  boss-bar:
     enabled: true
-    interval: 1000
+    interval: 600
     progress: 0.8
     color: RED
     overlay: NOTCHED_10
     messages:
-      - 'Welcome to the server!'
-      - 'Enjoy your stay!'
-      - 'Be careful!'
+      - '<red>www.example.com'
+      - '<aqua>store.example.com'
+      - '<green>discord.example.com'
   broadcast:
     enabled: true
     interval: 10000
