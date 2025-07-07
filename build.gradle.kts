@@ -62,6 +62,7 @@ tasks.shadowJar {
     archiveBaseName.set("UltimateHub")
     archiveClassifier.set("")
 
+    relocate("org.jetbrains", "net.kamiland.ultimatehub.lib.jetbrains")
     relocate("dev.rollczi", "net.kamiland.ultimatehub.lib.rollczi")
     relocate("xyz.xenondevs", "net.kamiland.ultimatehub.lib.xenondevs")
 
