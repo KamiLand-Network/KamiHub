@@ -3,7 +3,7 @@ config-version: 1.0
 modules:
   action-bar:
     enabled: true
-    interval: 1000
+    interval: 60
     messages:
       - '<green>Welcome to the server!'
       - '<aqua>Enjoy your stay!'
