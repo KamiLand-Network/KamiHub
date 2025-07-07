@@ -19,7 +19,7 @@ bukkit {
     description = "${project.description}"
     authors = listOf("KamiLand", "while1cry")
     website = "https://www.kamiland.net/plugins/ultimatehub"
-    softDepend = listOf("PlaceholderAPI", "SuperVanish")
+    softDepend = listOf("PlaceholderAPI")
 
     foliaSupported = true
 
@@ -50,8 +50,8 @@ dependencies {
     implementation("dev.rollczi:litecommands-bukkit:3.10.0")
     implementation("xyz.xenondevs.invui:invui:1.46")
 
+    implementation("com.github.LeonMangler:SuperVanish:6.2.19")
     compileOnly("me.clip:placeholderapi:2.11.6")
-    compileOnly("com.github.LeonMangler:SuperVanish:6.2.18")
 }
 
 tasks.build {
@@ -64,6 +64,8 @@ tasks.shadowJar {
 
     relocate("dev.rollczi", "net.kamiland.ultimatehub.lib.rollczi")
     relocate("xyz.xenondevs", "net.kamiland.ultimatehub.lib.xenondevs")
+
+    relocate("dev.myzelyam", "net.kamiland.ultimatehub.lib.myzelyam")
 
     mergeServiceFiles()
     minimize()
