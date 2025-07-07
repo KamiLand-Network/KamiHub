@@ -1,40 +1,25 @@
 package net.kamiland.ultimatehub.config.impl;
 
+import net.kamiland.ultimatehub.UltimateHub;
 import net.kamiland.ultimatehub.config.PluginConfig;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.jetbrains.annotations.NotNull;
-
-import java.io.File;
 
 public class PluginConfigImpl extends ConfigImpl implements PluginConfig {
 
-    public PluginConfigImpl(@NotNull File file) {
-        super(file);
-    }
+    private String CONFIG_VERSION;
 
-    @Override
-    public String getConfigVersion() {
-        return "";
-    }
-
-    @Override
-    public File getFile() {
-        return null;
-    }
-
-    @Override
-    public FileConfiguration getConfig() {
-        return null;
+    public PluginConfigImpl(UltimateHub plugin) {
+        super(plugin, "config.yml");
     }
 
     @Override
     public void load() {
-
+        super.load();
+        CONFIG_VERSION = config.getString("config-version", "1.0");
     }
 
     @Override
-    public void save() {
-
+    public String getConfigVersion() {
+        return CONFIG_VERSION;
     }
 
 }
