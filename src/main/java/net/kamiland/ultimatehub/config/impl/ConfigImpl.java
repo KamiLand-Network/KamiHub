@@ -1,9 +1,9 @@
 package net.kamiland.ultimatehub.config.impl;
 
+import net.kamiland.ultimatehub.UltimateHub;
 import net.kamiland.ultimatehub.config.Config;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -11,11 +11,13 @@ import java.io.IOException;
 
 public abstract class ConfigImpl implements Config {
 
-    private final File file;
-    private FileConfiguration config;
+    protected final UltimateHub plugin;
+    protected final File file;
+    protected FileConfiguration config;
 
-    public ConfigImpl(@NotNull final File file) {
-        this.file = file;
+    public ConfigImpl(UltimateHub plugin, String path) {
+        this.plugin = plugin;
+        this.file = new File(plugin.getDataFolder(), path);
     }
 
     @Override
@@ -39,7 +41,7 @@ public abstract class ConfigImpl implements Config {
         try {
             config.save(this.file);
         } catch (IOException e) {
-            e.printStackTrace();
+            plugin.getSLF4JLogger().error(e.getLocalizedMessage());
         }
     }
 
