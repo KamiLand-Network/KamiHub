@@ -4,7 +4,6 @@ plugins {
     id("java")
     id("de.eldoria.plugin-yml.bukkit") version "0.7.1"
     id("com.gradleup.shadow") version "8.3.7"
-    id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
 group = "net.kamiland"
@@ -55,10 +54,14 @@ dependencies {
     compileOnly("me.clip:placeholderapi:2.11.6")
 }
 
-tasks.runServer {
-    minecraftVersion("1.18.2")
-    downloadPlugins {
-        hangar("PlaceholderAPI", "2.11.6")
+val copyShadowJar by tasks.registering(Copy::class) {
+    from(tasks.named("shadowJar"))
+    into("/run/plugins")
+
+    dependsOn("shadowJar")
+
+    doFirst {
+        file("/run/plugins").mkdirs()
     }
 }
 
@@ -70,12 +73,11 @@ tasks.shadowJar {
     archiveBaseName.set("UltimateHub")
     archiveClassifier.set("")
 
-// Disable relocates during development debugging
-//    relocate("org.jetbrains", "net.kamiland.ultimatehub.lib.jetbrains")
-//    relocate("dev.rollczi", "net.kamiland.ultimatehub.lib.rollczi")
-//    relocate("xyz.xenondevs", "net.kamiland.ultimatehub.lib.xenondevs")
-//
-//    relocate("dev.myzelyam", "net.kamiland.ultimatehub.lib.myzelyam")
+    relocate("org.jetbrains", "net.kamiland.ultimatehub.lib.jetbrains")
+    relocate("dev.rollczi", "net.kamiland.ultimatehub.lib.rollczi")
+    relocate("xyz.xenondevs", "net.kamiland.ultimatehub.lib.xenondevs")
+
+    relocate("dev.myzelyam", "net.kamiland.ultimatehub.lib.myzelyam")
 
     mergeServiceFiles()
     minimize()
@@ -84,12 +86,4 @@ tasks.shadowJar {
 tasks.compileJava {
     options.encoding = "UTF-8"
     options.compilerArgs.add("-parameters")
-}
-
-tasks.withType(xyz.jpenilla.runtask.task.AbstractRun::class) {
-    javaLauncher = javaToolchains.launcherFor {
-        vendor = JvmVendorSpec.JETBRAINS
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-    jvmArgs("-XX:+AllowEnhancedClassRedefinition")
 }
