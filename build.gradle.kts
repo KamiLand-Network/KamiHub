@@ -60,7 +60,7 @@ tasks.build {
 
 tasks.shadowJar {
     archiveBaseName.set("UltimateHub")
-    archiveClassifier.set("${project.version}")
+    archiveClassifier.set("")
 
     relocate("dev.rollczi", "net.kamiland.ultimatehub.lib.rollczi")
     relocate("xyz.xenondevs", "net.kamiland.ultimatehub.lib.xenondevs")
