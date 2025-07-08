@@ -84,7 +84,7 @@ modules:
       - '<green>discord.example.com'
   broadcast:
     enabled: true
-    interval: 10000
+    interval: 1800
     messages:
       - |
         <red>Welcome to the server!</red>
@@ -100,6 +100,10 @@ modules:
   inventory:
     enabled: true
     clear-on-join: false
+    clear-on-quit: false
+    give-on-join: false
+    give-on-quit: false
+  # See items.yml
   join-message:
     enabled: true
     # See groups.yml
