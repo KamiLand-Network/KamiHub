@@ -1,7 +1,7 @@
 package net.kamiland.ultimatehub.manager;
 
 import net.kamiland.ultimatehub.UltimateHub;
-import net.kamiland.ultimatehub.module.ActionBarModule;
+import net.kamiland.ultimatehub.module.*;
 import net.kamiland.ultimatehub.module.Module;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,6 +14,12 @@ public class ModuleManager {
 
     public ModuleManager(UltimateHub plugin, ConfigManager configManager) {
         modules.put("actionbar", new ActionBarModule(plugin, configManager));
+        modules.put("antibreak", new AntiBreakModule(plugin, configManager));
+        modules.put("antiinteract", new AntiInteractModule(plugin, configManager));
+        modules.put("antiplace", new AntiPlaceModule(plugin, configManager));
+        modules.put("bossbar", new BossBarModule(plugin, configManager));
+        modules.put("broadcast", new BroadcastModule(plugin, configManager));
+        modules.put("clearchat", new ClearChatModule(plugin, configManager));
     }
 
     @Nullable

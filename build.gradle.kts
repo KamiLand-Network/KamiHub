@@ -54,14 +54,26 @@ dependencies {
     compileOnly("me.clip:placeholderapi:2.11.6")
 }
 
+val copyShadowJar by tasks.registering(Copy::class) {
+    from(tasks.named("shadowJar"))
+    into("/run/plugins")
+
+    dependsOn("shadowJar")
+
+    doFirst {
+        file("/run/plugins").mkdirs()
+    }
+}
+
 tasks.build {
     dependsOn(tasks.shadowJar)
 }
 
 tasks.shadowJar {
     archiveBaseName.set("UltimateHub")
-    archiveClassifier.set("${project.version}")
+    archiveClassifier.set("")
 
+    relocate("org.jetbrains", "net.kamiland.ultimatehub.lib.jetbrains")
     relocate("dev.rollczi", "net.kamiland.ultimatehub.lib.rollczi")
     relocate("xyz.xenondevs", "net.kamiland.ultimatehub.lib.xenondevs")
 

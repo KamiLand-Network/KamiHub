@@ -44,7 +44,10 @@ public class MessageUtil {
      * @return Formatted Adventure Component ready for sending
      */
     public static Component getMessage(Player player, String miniMessage, String... replacements) {
-        // ... existing replacement logic ...
+        for (int i = 0; i < replacements.length; i++) {
+            miniMessage = miniMessage.replaceAll("\\{" + i + "}", replacements[i]);
+        }
+        miniMessage = miniMessage.stripTrailing();
 
         /* Auto-handles PlaceholderAPI integration when available */
         if (ServerManager.PLACEHOLDER_API)

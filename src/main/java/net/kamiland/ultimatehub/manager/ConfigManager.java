@@ -4,8 +4,6 @@ import lombok.Getter;
 import net.kamiland.ultimatehub.UltimateHub;
 import net.kamiland.ultimatehub.config.PluginConfig;
 import net.kamiland.ultimatehub.config.SpawnConfig;
-import net.kamiland.ultimatehub.config.impl.PluginConfigImpl;
-import net.kamiland.ultimatehub.config.impl.SpawnConfigImpl;
 import org.slf4j.Logger;
 
 /**
@@ -56,8 +54,10 @@ public class ConfigManager {
      */
     public void load() {
         logger.info("Loading config...");
-        pluginConfig = new PluginConfigImpl(plugin);
-        spawnConfig = new SpawnConfigImpl(plugin);
+        pluginConfig = new PluginConfig(plugin);
+        pluginConfig.load();
+        spawnConfig = new SpawnConfig(plugin);
+        spawnConfig.load();
     }
 
 }
