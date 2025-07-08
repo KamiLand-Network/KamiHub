@@ -17,7 +17,7 @@ public class ActionBarModule implements Module {
     public ActionBarModule(UltimateHub plugin, ConfigManager configManager) {
         this.plugin = plugin;
         this.configManager = configManager;
-        setEnabled(configManager.getPluginConfig().IS_ACTIONBAR_ENABLED());
+        setEnabled(configManager.getPluginConfig().IS_ACTIONBAR_ENABLED);
     }
 
     @Override
@@ -50,12 +50,12 @@ public class ActionBarModule implements Module {
                 public void run() {
                     plugin.getServer().getOnlinePlayers().forEach(player -> {
                         if (getPermission() != null && player.hasPermission(getPermission()))
-                            player.sendActionBar(MessageUtil.getMessage(player, configManager.getPluginConfig().ACTION_BAR_MESSAGES()[i]));
+                            player.sendActionBar(MessageUtil.getMessage(player, configManager.getPluginConfig().ACTIONBAR_MESSAGES[i]));
                     });
-                    if (++i >= configManager.getPluginConfig().ACTION_BAR_MESSAGES().length)
+                    if (++i >= configManager.getPluginConfig().ACTIONBAR_MESSAGES.length)
                         i = 0;
                 }
-            }.runTaskTimer(plugin, 0L, configManager.getPluginConfig().ACTION_BAR_INTERVAL());
+            }.runTaskTimer(plugin, 0L, configManager.getPluginConfig().ACTIONBAR_INTERVAL);
         } else {
             if (actionBarTimerTask != null) {
                 actionBarTimerTask.cancel();
