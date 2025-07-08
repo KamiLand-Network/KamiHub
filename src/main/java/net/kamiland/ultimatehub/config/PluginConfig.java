@@ -47,6 +47,9 @@ public class PluginConfig extends Config {
 
     public boolean IS_INVENTORY_ENABLED;
     public boolean IS_INVENTORY_CLEAR_ON_JOIN;
+    public boolean IS_INVENTORY_CLEAR_ON_QUIT;
+    public boolean IS_INVENTORY_GIVE_ON_JOIN;
+    public boolean IS_INVENTORY_GIVE_ON_QUIT;
 
     public boolean IS_JOINMESSAGE_ENABLED;
 
@@ -95,6 +98,9 @@ public class PluginConfig extends Config {
 
         IS_INVENTORY_ENABLED = config.getBoolean("modules.inventory.enabled", false);
         IS_INVENTORY_CLEAR_ON_JOIN = config.getBoolean("modules.inventory.clear-on-join");
+        IS_INVENTORY_CLEAR_ON_QUIT = config.getBoolean("modules.inventory.clear-on-quit");
+        IS_INVENTORY_GIVE_ON_JOIN = config.getBoolean("modules.inventory.give-on-join");
+        IS_INVENTORY_GIVE_ON_QUIT = config.getBoolean("modules.inventory.give-on-quit");
 
         IS_JOINMESSAGE_ENABLED = config.getBoolean("modules.join-message.enabled", false);
 
