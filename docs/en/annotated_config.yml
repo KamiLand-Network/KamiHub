@@ -240,8 +240,6 @@ modules:
     clear-on-quit: false
     # Give defined items on join (see items.yml)
     give-on-join: false
-    # Give defined items on quit (see items.yml)
-    give-on-quit: false
 
   # Join/quit messages
   # Some servers may show different messages based on player groups

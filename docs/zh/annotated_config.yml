@@ -240,8 +240,6 @@ modules:
     clear-on-quit: false
     # 在玩家加入服务器时给予定义的物品，详见 items.yml
     give-on-join: false
-    # 在玩家退出服务器时给予定义的物品，详见 items.yml
-    give-on-quit: false
 
   # 加入和退出消息
   # 一些服务器可能根据不同的用户组显示不同的加入/退出消息
