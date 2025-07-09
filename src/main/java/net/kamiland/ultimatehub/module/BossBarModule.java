@@ -61,33 +61,31 @@ public class BossBarModule extends EventModule {
 
     private void setBossBar(Player player) {
         if (isEnabled()) {
-            if (player.hasPermission(getPermission())) {
-                BossBar bossBar = BossBar.bossBar(
-                        MessageUtil.getMessage(player, configManager.getPluginConfig().BOSSBAR_MESSAGES[0]),
-                        configManager.getPluginConfig().BOSSBAR_PROGRESS,
-                        BossBar.Color.valueOf(configManager.getPluginConfig().BOSSBAR_COLOR),
-                        BossBar.Overlay.valueOf(configManager.getPluginConfig().BOSSBAR_OVERLAY)
-                );
-                player.showBossBar(bossBar);
-
-                BukkitTask playerTask = new BukkitRunnable() {
-                    int i = 0;
-                    @Override
-                    public void run() {
-                        if (++i >= configManager.getPluginConfig().BOSSBAR_MESSAGES.length)
-                            i = 0;
-                        if (player.hasPermission(getPermission())) {
-                            bossBar.name(MessageUtil.getMessage(player, configManager.getPluginConfig().BOSSBAR_MESSAGES[i]));
-                            bossBar.progress(configManager.getPluginConfig().BOSSBAR_PROGRESS);
-                            bossBar.color(BossBar.Color.valueOf(configManager.getPluginConfig().BOSSBAR_COLOR));
-                            bossBar.overlay(BossBar.Overlay.valueOf(configManager.getPluginConfig().BOSSBAR_OVERLAY));
-                        }
+            BossBar bossBar = BossBar.bossBar(
+                    MessageUtil.getMessage(player, configManager.getPluginConfig().BOSSBAR_MESSAGES[0]),
+                    configManager.getPluginConfig().BOSSBAR_PROGRESS,
+                    BossBar.Color.valueOf(configManager.getPluginConfig().BOSSBAR_COLOR),
+                    BossBar.Overlay.valueOf(configManager.getPluginConfig().BOSSBAR_OVERLAY));
+            BukkitTask playerTask = new BukkitRunnable() {
+                int i = 0;
+                @Override
+                public void run() {
+                    if (++i >= configManager.getPluginConfig().BOSSBAR_MESSAGES.length)
+                        i = 0;
+                    if (player.hasPermission(getPermission())) {
+                        bossBar.name(MessageUtil.getMessage(player, configManager.getPluginConfig().BOSSBAR_MESSAGES[i]));
+                        bossBar.progress(configManager.getPluginConfig().BOSSBAR_PROGRESS);
+                        bossBar.color(BossBar.Color.valueOf(configManager.getPluginConfig().BOSSBAR_COLOR));
+                        bossBar.overlay(BossBar.Overlay.valueOf(configManager.getPluginConfig().BOSSBAR_OVERLAY));
+                        player.showBossBar(bossBar);
+                    } else {
+                        player.hideBossBar(bossBar
+                        );
                     }
-                }.runTaskTimer(plugin, configManager.getPluginConfig().BOSSBAR_INTERVAL, configManager.getPluginConfig().BOSSBAR_INTERVAL);
-
-                playerBossBars.put(player, bossBar);
-                playerTasks.put(player, playerTask);
-            }
+                }
+            }.runTaskTimer(plugin, 0, configManager.getPluginConfig().BOSSBAR_INTERVAL);
+            playerBossBars.put(player, bossBar);
+            playerTasks.put(player, playerTask);
         }
     }
 
