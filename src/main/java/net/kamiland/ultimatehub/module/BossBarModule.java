@@ -24,7 +24,7 @@ public class BossBarModule extends EventModule {
     private final Map<Player, BukkitTask> playerTasks = new HashMap<>();
 
     public BossBarModule(UltimateHub plugin, ConfigManager configManager) {
-        super(plugin, "bossbar");
+        super(plugin, "boss-bar");
         this.plugin = plugin;
         this.configManager = configManager;
 
