@@ -6,64 +6,50 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ClearChatModule implements Module, Listener {
+public class ClearChatModule extends EventModule {
 
     private final UltimateHub plugin;
     private final ConfigManager configManager;
-    private boolean enabled = false;
 
     public ClearChatModule(UltimateHub plugin, ConfigManager configManager) {
+        super(plugin, "clear-chat");
         this.plugin = plugin;
         this.configManager = configManager;
-
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
 
         setEnabled(configManager.getPluginConfig().IS_CLEARCHAT_ENABLED);
     }
 
-    @Override
-    public String getName() {
-        return "clearchat";
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
-        if (this.enabled == enabled)
-            return;
-        this.enabled = enabled;
-        setup();
-    }
-
-    @Override
-    public void setup() {
-        // Idk what to do with this...
-    }
-
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
-        if (enabled && getPermission() != null && event.getPlayer().hasPermission(getPermission())) {
+        if (isEnabled() && event.getPlayer().hasPermission(getBypassPermission())) {
             for (int i = 0; i < 100; i++)
                 event.getPlayer().sendMessage("");
         }
     }
 
     @Override
-    @Nullable
-    public String getPermission() {
-        return "ultimatehub.clearchat";
+    protected void load() {
+
+    }
+
+    @Override
+    protected void unload() {
+
     }
 
     @Override
     @Nullable
-    public String getBypassPermission() {
+    public String getPermission() {
         return null;
+    }
+
+    @Override
+    @NotNull
+    public String getBypassPermission() {
+        return "ultimatehub.clear-chat.bypass";
     }
 
 }

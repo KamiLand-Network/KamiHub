@@ -13,13 +13,13 @@ public class ModuleManager {
     private final HashMap<String, Module> modules = new HashMap<>();
 
     public ModuleManager(UltimateHub plugin, ConfigManager configManager) {
-        modules.put("actionbar", new ActionBarModule(plugin, configManager));
-        modules.put("antibreak", new AntiBreakModule(plugin, configManager));
-        modules.put("antiinteract", new AntiInteractModule(plugin, configManager));
-        modules.put("antiplace", new AntiPlaceModule(plugin, configManager));
-        modules.put("bossbar", new BossBarModule(plugin, configManager));
-        modules.put("broadcast", new BroadcastModule(plugin, configManager));
-        modules.put("clearchat", new ClearChatModule(plugin, configManager));
+        put(new ActionBarModule(plugin, configManager));
+        put(new AntiBreakModule(plugin, configManager));
+        put(new AntiInteractModule(plugin, configManager));
+        put(new AntiPlaceModule(plugin, configManager));
+        put(new BossBarModule(plugin, configManager));
+        put(new BroadcastModule(plugin, configManager));
+        put(new ClearChatModule(plugin, configManager));
     }
 
     @Nullable
@@ -44,6 +44,10 @@ public class ModuleManager {
     public boolean isModuleEnabled(String name) {
         Module module = getModule(name);
         return module != null && module.isEnabled();
+    }
+
+    private void put(Module module) {
+        modules.put(module.getName(), module);
     }
 
 }

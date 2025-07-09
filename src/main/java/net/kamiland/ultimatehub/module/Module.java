@@ -1,54 +1,34 @@
 package net.kamiland.ultimatehub.module;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import net.kamiland.ultimatehub.UltimateHub;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Core interface for plugin modules. All functional components should implement
- * this interface to integrate with the module management system.
- *
- * @author while1cry
- */
-public interface Module {
+@RequiredArgsConstructor
+public abstract class Module {
 
-    /**
-     * Gets the unique identifier for this module.
-     *
-     * @return Module name used in configuration and command systems
-     */
-    String getName();
+    protected final UltimateHub plugin;
+    @Getter
+    protected final String name;
+    @Getter
+    private boolean enabled = false;
 
-    /**
-     * Checks the activation status of the module.
-     *
-     * @return true if the module is currently enabled
-     */
-    boolean isEnabled();
+    public void setEnabled(boolean enabled) {
+        if (enabled == this.enabled) return;
+        this.enabled = enabled;
+        if (enabled) load();
+        else unload();
+    }
 
-    /**
-     * Updates the module's activation state.
-     *
-     * @param enabled New activation state (true=active, false=disabled)
-     */
-    void setEnabled(boolean enabled);
+    protected abstract void load();
 
-    /**
-     * Initializes module functionality. Called when the module is enabled.
-     * Implementations should register listeners and schedule tasks here.
-     */
-    void setup();
+    protected abstract void unload();
 
-    /**
-     * Gets the required permission node for this module.
-     *
-     * @return Permission string, or null if no permission is required
-     */
-    @Nullable String getPermission();
+    @Nullable
+    public abstract String getPermission();
 
-    /**
-     * Gets the bypass permission that overrides module restrictions.
-     *
-     * @return Bypass permission string, or null if no bypass available
-     */
-    @Nullable String getBypassPermission();
+    @Nullable
+    public abstract String getBypassPermission();
 
 }

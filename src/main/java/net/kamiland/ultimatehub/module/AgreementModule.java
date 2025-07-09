@@ -1,26 +1,22 @@
 package net.kamiland.ultimatehub.module;
 
+import net.kamiland.ultimatehub.UltimateHub;
+import net.kamiland.ultimatehub.manager.ConfigManager;
 import org.jetbrains.annotations.Nullable;
 
-public class AgreementModule implements Module {
+public class AgreementModule extends EventModule {
 
-    @Override
-    public String getName() {
-        return "";
+    public AgreementModule(UltimateHub plugin, ConfigManager configManager) {
+        super(plugin, "agreement");
     }
 
     @Override
-    public boolean isEnabled() {
-        return false;
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
+    protected void load() {
 
     }
 
     @Override
-    public void setup() {
+    protected void unload() {
 
     }
 

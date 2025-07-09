@@ -6,61 +6,42 @@ import net.kamiland.ultimatehub.util.MessageUtil;
 import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class BossBarModule implements Module, Listener {
+public class BossBarModule extends EventModule {
 
     private final UltimateHub plugin;
     private final ConfigManager configManager;
     private final Map<Player, BossBar> playerBossBars = new HashMap<>();
     private final Map<Player, BukkitTask> playerTasks = new HashMap<>();
-    private boolean enabled = false;
 
     public BossBarModule(UltimateHub plugin, ConfigManager configManager) {
+        super(plugin, "bossbar");
         this.plugin = plugin;
         this.configManager = configManager;
-
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
 
         setEnabled(configManager.getPluginConfig().IS_BOSSBAR_ENABLED);
     }
 
     @Override
-    public String getName() {
-        return "bossbar";
+    public void load() {
+        plugin.getServer().getOnlinePlayers().forEach(this::setBossBar);
     }
 
     @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
-        if (this.enabled == enabled)
-            return;
-        this.enabled = enabled;
-        setup();
-    }
-
-    @Override
-    public void setup() {
-        if (!enabled) {
-            playerTasks.values().forEach(BukkitTask::cancel);
-            playerTasks.clear();
-            playerBossBars.keySet().forEach(player -> player.hideBossBar(playerBossBars.get(player)));
-            playerBossBars.clear();
-        } else {
-            plugin.getServer().getOnlinePlayers().forEach(this::setBossBar);
-        }
+    public void unload() {
+        playerTasks.values().forEach(BukkitTask::cancel);
+        playerTasks.clear();
+        playerBossBars.keySet().forEach(player -> player.hideBossBar(playerBossBars.get(player)));
+        playerBossBars.clear();
     }
 
     @EventHandler
@@ -79,8 +60,8 @@ public class BossBarModule implements Module, Listener {
     }
 
     private void setBossBar(Player player) {
-        if (enabled) {
-            if (getPermission() != null && player.hasPermission(getPermission())) {
+        if (isEnabled()) {
+            if (player.hasPermission(getPermission())) {
                 BossBar bossBar = BossBar.bossBar(
                         MessageUtil.getMessage(player, configManager.getPluginConfig().BOSSBAR_MESSAGES[0]),
                         configManager.getPluginConfig().BOSSBAR_PROGRESS,
@@ -95,7 +76,7 @@ public class BossBarModule implements Module, Listener {
                     public void run() {
                         if (++i >= configManager.getPluginConfig().BOSSBAR_MESSAGES.length)
                             i = 0;
-                        if (getPermission() != null && player.hasPermission(getPermission())) {
+                        if (player.hasPermission(getPermission())) {
                             bossBar.name(MessageUtil.getMessage(player, configManager.getPluginConfig().BOSSBAR_MESSAGES[i]));
                             bossBar.progress(configManager.getPluginConfig().BOSSBAR_PROGRESS);
                             bossBar.color(BossBar.Color.valueOf(configManager.getPluginConfig().BOSSBAR_COLOR));
@@ -111,7 +92,7 @@ public class BossBarModule implements Module, Listener {
     }
 
     @Override
-    @Nullable
+    @NotNull
     public String getPermission() {
         return "ultimatehub.bossbar";
     }

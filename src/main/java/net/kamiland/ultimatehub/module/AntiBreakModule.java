@@ -6,50 +6,36 @@ import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class AntiBreakModule implements Module, Listener {
+public class AntiBreakModule extends EventModule {
 
     private final UltimateHub plugin;
     private final ConfigManager configManager;
-    private boolean enabled = false;
 
     public AntiBreakModule(UltimateHub plugin, ConfigManager configManager) {
+        super(plugin, "anti-break");
         this.plugin = plugin;
         this.configManager = configManager;
-
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
 
         setEnabled(configManager.getPluginConfig().IS_ANTIBREAK_ENABLED);
     }
 
     @Override
-    public String getName() {
-        return "antibreak";
+    protected void load() {
+
     }
 
     @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
+    protected void unload() {
 
-    @Override
-    public void setEnabled(boolean enabled) {
-        if (this.enabled == enabled)
-            return;
-        this.enabled = enabled;
-        setup();
-    }
-
-    @Override
-    public void setup() {
-        // Idk what to do with this...
     }
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        if (enabled) {
-            if (getBypassPermission() != null && event.getPlayer().hasPermission(getBypassPermission())) {
+        if (isEnabled()) {
+            if (event.getPlayer().hasPermission(getBypassPermission())) {
                 if (configManager.getPluginConfig().IS_ANTIBREAK_CREATIVE_ONLY) {
                     if (event.getPlayer().getGameMode() == GameMode.CREATIVE)
                         return;
@@ -66,7 +52,7 @@ public class AntiBreakModule implements Module, Listener {
     }
 
     @Override
-    @Nullable
+    @NotNull
     public String getBypassPermission() {
         return "ultimatehub.antibreak.bypass";
     }

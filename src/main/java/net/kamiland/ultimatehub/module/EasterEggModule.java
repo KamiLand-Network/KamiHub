@@ -1,26 +1,22 @@
 package net.kamiland.ultimatehub.module;
 
+import net.kamiland.ultimatehub.UltimateHub;
+import net.kamiland.ultimatehub.manager.ConfigManager;
 import org.jetbrains.annotations.Nullable;
 
-public class EasterEggModule implements Module {
+public class EasterEggModule extends EventModule {
 
-    @Override
-    public String getName() {
-        return "";
+    public EasterEggModule(UltimateHub plugin, ConfigManager configManager) {
+        super(plugin, "easter-egg");
     }
 
     @Override
-    public boolean isEnabled() {
-        return false;
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
+    protected void load() {
 
     }
 
     @Override
-    public void setup() {
+    protected void unload() {
 
     }
 

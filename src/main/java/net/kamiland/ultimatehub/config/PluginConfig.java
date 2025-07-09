@@ -51,9 +51,7 @@ public class PluginConfig extends Config {
     public boolean IS_INVENTORY_GIVE_ON_JOIN;
     public boolean IS_INVENTORY_GIVE_ON_QUIT;
 
-    public boolean IS_JOINMESSAGE_ENABLED;
-
-    public boolean IS_QUITMESSAGE_ENABLED;
+    public boolean IS_JQMESSAGE_ENABLED;
 
     public boolean IS_POTIONEFFECT_ENABLED;
     public boolean IS_POTIONEFFECT_CLEAR_ON_JOIN;
@@ -102,9 +100,7 @@ public class PluginConfig extends Config {
         IS_INVENTORY_GIVE_ON_JOIN = config.getBoolean("modules.inventory.give-on-join");
         IS_INVENTORY_GIVE_ON_QUIT = config.getBoolean("modules.inventory.give-on-quit");
 
-        IS_JOINMESSAGE_ENABLED = config.getBoolean("modules.join-message.enabled", false);
-
-        IS_QUITMESSAGE_ENABLED = config.getBoolean("modules.quit-message.enabled", false);
+        IS_JQMESSAGE_ENABLED = config.getBoolean("modules.join&quit-message.enabled", false);
 
         IS_POTIONEFFECT_ENABLED = config.getBoolean("modules.potion-effect.enabled", false);
         IS_POTIONEFFECT_CLEAR_ON_JOIN = config.getBoolean("modules.potion-effect.clear-on-join");

@@ -1,40 +1,41 @@
 package net.kamiland.ultimatehub.module;
 
+import net.kamiland.ultimatehub.UltimateHub;
+import net.kamiland.ultimatehub.manager.ConfigManager;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class SpawnModule implements Module {
+public class SpawnModule extends Module {
 
-    private boolean enabled;
+    private final UltimateHub plugin;
+    private final ConfigManager configManager;
 
-    @Override
-    public String getName() {
-        return "";
+    public SpawnModule(UltimateHub plugin, ConfigManager configManager) {
+        super(plugin, "");
+        this.plugin = plugin;
+        this.configManager = configManager;
     }
 
     @Override
-    public boolean isEnabled() {
-        return false;
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
-    }
-
-    @Override
-    public void setup() {
+    protected void load() {
 
     }
 
     @Override
-    @Nullable
+    protected void unload() {
+
+    }
+
+    @Override
+    @NotNull
     public String getPermission() {
-        return null;
+        return "ultimatehub.void-tp";
     }
 
     @Override
     @Nullable
     public String getBypassPermission() {
-        return null;
+        return "";
     }
 
 }

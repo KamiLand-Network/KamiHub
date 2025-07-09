@@ -1,26 +1,22 @@
 package net.kamiland.ultimatehub.module;
 
+import net.kamiland.ultimatehub.UltimateHub;
+import net.kamiland.ultimatehub.manager.ConfigManager;
 import org.jetbrains.annotations.Nullable;
 
-public class JQMessageModule implements Module {
+public class JQMessageModule extends EventModule {
 
-    @Override
-    public String getName() {
-        return "";
+    public JQMessageModule(UltimateHub plugin, ConfigManager configManager) {
+        super(plugin, "jq-message");
     }
 
     @Override
-    public boolean isEnabled() {
-        return false;
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
+    protected void load() {
 
     }
 
     @Override
-    public void setup() {
+    protected void unload() {
 
     }
 
