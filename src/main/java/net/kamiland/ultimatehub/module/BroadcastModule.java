@@ -53,7 +53,7 @@ public class BroadcastModule extends Module {
     @Override
     @NotNull
     public String getPermission() {
-        return "ultimatehub.broadcast";
+        return "ultimatehub.broadcast.notify";
     }
 
     @Override
