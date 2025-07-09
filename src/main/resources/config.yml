@@ -160,8 +160,8 @@ modules:
     enabled: true
 
   # Prevent player damage
-  # Requires permission: ultimatehub.anti-hurt (enabled by default)
-  anti-hurt:
+  # Requires permission: ultimatehub.anti-damage (enabled by default)
+  anti-damage:
     enabled: true
 
   # Prevent projectiles

@@ -159,9 +159,9 @@ modules:
   anti-hunger:
     enabled: true
 
-  # 防止玩家被攻击
-  # 需要权限：ultimatehub.anti-hurt（默认拥有）
-  anti-hurt:
+  # 防止玩家受伤
+  # 需要权限：ultimatehub.anti-damage（默认拥有）
+  anti-damage:
     enabled: true
 
   # 防止投掷物
