@@ -95,7 +95,7 @@ public class BossBarModule extends EventModule {
     @Override
     @NotNull
     public String getPermission() {
-        return "ultimatehub.bossbar";
+        return "ultimatehub.boss-bar";
     }
 
     @Override

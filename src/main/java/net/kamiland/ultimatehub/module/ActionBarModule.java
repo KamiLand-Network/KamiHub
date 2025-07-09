@@ -15,7 +15,7 @@ public class ActionBarModule extends Module {
     private BukkitTask actionBarTimerTask;
 
     public ActionBarModule(UltimateHub plugin, ConfigManager configManager) {
-        super(plugin, "actionbar");
+        super(plugin, "action-bar");
         this.plugin = plugin;
         this.configManager = configManager;
 
@@ -52,7 +52,7 @@ public class ActionBarModule extends Module {
     @Override
     @NotNull
     public String getPermission() {
-        return "ultimatehub.actionbar";
+        return "ultimatehub.action-bar";
     }
 
     @Override

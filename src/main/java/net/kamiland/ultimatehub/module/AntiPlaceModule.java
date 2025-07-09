@@ -53,7 +53,7 @@ public class AntiPlaceModule extends EventModule {
     @Override
     @NotNull
     public String getBypassPermission() {
-        return "ultimatehub.antiplace.bypass";
+        return "ultimatehub.anti-place.bypass";
     }
 
 }

@@ -54,7 +54,7 @@ public class AntiBreakModule extends EventModule {
     @Override
     @NotNull
     public String getBypassPermission() {
-        return "ultimatehub.antibreak.bypass";
+        return "ultimatehub.anti-break.bypass";
     }
 
 }

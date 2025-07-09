@@ -54,7 +54,7 @@ public class AntiInteractModule extends EventModule {
     @Override
     @NotNull
     public String getBypassPermission() {
-        return "ultimatehub.antiinteract.bypass";
+        return "ultimatehub.anti-interact.bypass";
     }
 
 }
