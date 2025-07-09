@@ -4,7 +4,6 @@ import net.kamiland.ultimatehub.UltimateHub;
 import net.kamiland.ultimatehub.manager.ConfigManager;
 import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
