@@ -36,7 +36,7 @@ public class BroadcastModule extends Module {
                         player.sendMessage(MessageUtil.getMessage(player, configManager.getPluginConfig().BROADCAST_MESSAGES[i]));
                     }
                 });
-                if (++i >= configManager.getPluginConfig().BROADCAST_MESSAGES.length)
+                if (++ i >= configManager.getPluginConfig().BROADCAST_MESSAGES.length)
                     i = 0;
             }
         }.runTaskTimer(plugin, 0L, configManager.getPluginConfig().BROADCAST_INTERVAL);

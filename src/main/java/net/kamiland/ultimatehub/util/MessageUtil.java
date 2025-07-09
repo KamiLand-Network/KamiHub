@@ -44,7 +44,7 @@ public class MessageUtil {
      * @return Formatted Adventure Component ready for sending
      */
     public static Component getMessage(Player player, String miniMessage, String... replacements) {
-        for (int i = 0; i < replacements.length; i++) {
+        for (int i = 0; i < replacements.length; i ++) {
             miniMessage = miniMessage.replaceAll("\\{" + i + "}", replacements[i]);
         }
         miniMessage = miniMessage.stripTrailing();

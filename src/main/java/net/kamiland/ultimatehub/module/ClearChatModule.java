@@ -25,7 +25,7 @@ public class ClearChatModule extends EventModule {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
         if (isEnabled() && event.getPlayer().hasPermission(getBypassPermission())) {
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 100; i ++)
                 event.getPlayer().sendMessage("");
         }
     }

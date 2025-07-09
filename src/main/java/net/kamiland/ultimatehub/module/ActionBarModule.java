@@ -35,7 +35,7 @@ public class ActionBarModule extends Module {
                     if (player.hasPermission(getPermission()))
                         player.sendActionBar(MessageUtil.getMessage(player, configManager.getPluginConfig().ACTIONBAR_MESSAGES[i]));
                 });
-                if (++i >= configManager.getPluginConfig().ACTIONBAR_MESSAGES.length)
+                if (++ i >= configManager.getPluginConfig().ACTIONBAR_MESSAGES.length)
                     i = 0;
             }
         }.runTaskTimer(plugin, 0L, configManager.getPluginConfig().ACTIONBAR_INTERVAL);
