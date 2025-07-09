@@ -74,14 +74,15 @@ modules:
     creative-only: true
   boss-bar:
     enabled: true
-    interval: 600
+    interval: 20
     progress: 0.8
     color: RED
     overlay: NOTCHED_10
     messages:
       - '<red>www.example.com'
-      - '<aqua>store.example.com'
-      - '<green>discord.example.com'
+      - '<aqua>www.example.com'
+      - '<green>www.example.com'
+      - '<yellow>www.example.com'
   broadcast:
     enabled: true
     interval: 1800
@@ -104,10 +105,7 @@ modules:
     give-on-join: false
     give-on-quit: false
   # See items.yml
-  join-message:
-    enabled: true
-    # See groups.yml
-  quit-message:
+  join&quit-message:
     enabled: true
     # See groups.yml
   potion-effect:
