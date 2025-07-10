@@ -117,10 +117,10 @@ modules:
     # 拒绝按钮
     # 如你所见，这是一个典型的MiniMessage格式，详参上文
     # 你可以让玩家执行 /agreement reject 来拒绝协议，这是等效的
-    reject: '<click:run_command:'/agreement reject'><hover:show_text:'<gray>Click to reject the player agreement'><red>Reject</hover></click>'
+    reject: '<click:run_command:"/agreement reject"><hover:show_text:"<gray>Click to reject the player agreement"><red>Reject</hover></click>'
     # 同意按钮
     # 你可以让玩家执行 /agreement agree 来同意协议，这是等效的
-    agree: '<click:run_command:'/agreement agree'><hover:show_text:'<gray>Click to agree to the player agreement'><green>Agree</hover></click>'
+    agree: '<click:run_command:"/agreement agree"><hover:show_text:"<gray>Click to agree to the player agreement"><green>Agree</hover></click>'
 
   # 防止玩家破坏方块
   # 一些写在前面的话：
@@ -173,6 +173,7 @@ modules:
     anti-entity: false
 
   # 防止玩家攻击
+  # 绕过权限：ultimatehub.anti-attack.bypass（默认管理员拥有）
   anti-attack:
     enabled: true
     # 防止玩家攻击玩家（PVP）

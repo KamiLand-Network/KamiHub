@@ -117,10 +117,10 @@ modules:
     # Reject button
     # This is standard MiniMessage format as described above
     # Equivalent to player executing /agreement reject
-    reject: '<click:run_command:'/agreement reject'><hover:show_text:'<gray>Click to reject the player agreement'><red>Reject</hover></click>'
+    reject: '<click:run_command:"/agreement reject"><hover:show_text:"<gray>Click to reject the player agreement"><red>Reject</hover></click>'
     # Agree button
     # Equivalent to player executing /agreement agree
-    agree: '<click:run_command:'/agreement agree'><hover:show_text:'<gray>Click to agree to the player agreement'><green>Agree</hover></click>'
+    agree: '<click:run_command:"/agreement agree"><hover:show_text:"<gray>Click to agree to the player agreement"><green>Agree</hover></click>'
 
   # Prevent block breaking
   # Foreword:
@@ -165,6 +165,7 @@ modules:
     enabled: true
 
   # Prevent projectiles
+  # Bypass permission: ultimatehub.anti-projectile.bypass (admins have by default)
   anti-projectile:
     enabled: true
     # Prevent players from shooting projectiles
@@ -173,6 +174,7 @@ modules:
     anti-entity: false
 
   # Prevent player attacks
+  # Bypass permission: ultimatehub.anti-attack.bypass (admins have by default)
   anti-attack:
     enabled: true
     # Prevent PVP (player vs player)
