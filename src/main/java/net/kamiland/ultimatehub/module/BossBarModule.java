@@ -3,7 +3,6 @@ package net.kamiland.ultimatehub.module;
 import net.kamiland.ultimatehub.UltimateHub;
 import net.kamiland.ultimatehub.manager.ConfigManager;
 import net.kamiland.ultimatehub.util.MessageUtil;
-import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -78,7 +77,10 @@ public class BossBarModule extends EventModule {
     @Override
     public void unload() {
         timerTask.cancel();
-        bossBarMap.forEach(Audience::hideBossBar);
+        bossBarMap.forEach((player, bossBar) -> {
+            if (bossBar!= null)
+                player.hideBossBar(bossBar);
+        });
     }
 
     @EventHandler
