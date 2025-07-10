@@ -14,9 +14,14 @@ public class ModuleManager {
 
     public ModuleManager(UltimateHub plugin, ConfigManager configManager) {
         put(new ActionBarModule(plugin, configManager));
+        put(new AntiAttackModule(plugin, configManager));
         put(new AntiBreakModule(plugin, configManager));
+        put(new AntiDamageModule(plugin, configManager));
+        put(new AntiDropModule(plugin, configManager));
+        put(new AntiHungerModule(plugin, configManager));
         put(new AntiInteractModule(plugin, configManager));
         put(new AntiPlaceModule(plugin, configManager));
+        put(new AntiProjectileModule(plugin, configManager));
         put(new BossBarModule(plugin, configManager));
         put(new BroadcastModule(plugin, configManager));
         put(new ClearChatModule(plugin, configManager));
