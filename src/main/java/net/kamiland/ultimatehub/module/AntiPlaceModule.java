@@ -18,7 +18,7 @@ public class AntiPlaceModule extends EventModule {
         this.plugin = plugin;
         this.configManager = configManager;
 
-        setEnabled(configManager.getPluginConfig().IS_ANTIPLACE_ENABLED);
+        setEnabled(configManager.getModuleConfig().IS_ANTIPLACE_ENABLED);
     }
 
     @Override
@@ -33,9 +33,9 @@ public class AntiPlaceModule extends EventModule {
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
-        if (isEnabled()) {
+        if (isEnabled() && configManager.getModuleConfig().ANTIPLACE_WORLDS.contains(event.getPlayer().getWorld().getName())) {
             if (event.getPlayer().hasPermission(getBypassPermission())) {
-                if (configManager.getPluginConfig().IS_ANTIPLACE_CREATIVE_ONLY) {
+                if (configManager.getModuleConfig().IS_ANTIPLACE_CREATIVE_ONLY) {
                     if (event.getPlayer().getGameMode() == GameMode.CREATIVE)
                         return;
                 } else return;

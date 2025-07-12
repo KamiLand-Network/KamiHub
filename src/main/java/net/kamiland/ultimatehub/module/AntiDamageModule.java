@@ -18,7 +18,7 @@ public class AntiDamageModule extends EventModule {
         this.plugin = plugin;
         this.configManager = configManager;
 
-        setEnabled(configManager.getPluginConfig().IS_ANTIDAMAGE_ENABLED);
+        setEnabled(configManager.getModuleConfig().IS_ANTIDAMAGE_ENABLED);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class AntiDamageModule extends EventModule {
 
     @EventHandler
     public void onPlayerDamage(EntityDamageEvent event) {
-        if (isEnabled()) {
+        if (isEnabled() && configManager.getModuleConfig().ANTIDAMAGE_WORLDS.contains(event.getEntity().getWorld().getName())) {
             if (event.getEntity() instanceof Player player) {
                 if (player.hasPermission(getPermission())) {
                     event.setCancelled(true);

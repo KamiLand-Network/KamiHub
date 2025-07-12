@@ -2,11 +2,14 @@ package net.kamiland.ultimatehub.module;
 
 import net.kamiland.ultimatehub.UltimateHub;
 import net.kamiland.ultimatehub.manager.ConfigManager;
-import net.kamiland.ultimatehub.util.MessageUtil;
+import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ActionBarModule extends Module {
 
@@ -19,7 +22,7 @@ public class ActionBarModule extends Module {
         this.plugin = plugin;
         this.configManager = configManager;
 
-        setEnabled(configManager.getPluginConfig().IS_ACTIONBAR_ENABLED);
+        setEnabled(configManager.getModuleConfig().IS_ACTIONBAR_ENABLED);
     }
 
     @Override
@@ -28,17 +31,12 @@ public class ActionBarModule extends Module {
             actionBarTimerTask.cancel();
         }
         actionBarTimerTask = new BukkitRunnable() {
-            int i = 0;
+            final Map<World, Integer> worldsMap = new HashMap<>();
             @Override
             public void run() {
-                plugin.getServer().getOnlinePlayers().forEach(player -> {
-                    if (player.hasPermission(getPermission()))
-                        player.sendActionBar(MessageUtil.getMessage(player, configManager.getPluginConfig().ACTIONBAR_MESSAGES[i]));
-                });
-                if (++ i >= configManager.getPluginConfig().ACTIONBAR_MESSAGES.length)
-                    i = 0;
+
             }
-        }.runTaskTimer(plugin, 0L, configManager.getPluginConfig().ACTIONBAR_INTERVAL);
+        }.runTaskTimer(plugin, 0L, configManager.getModuleConfig().ACTIONBAR_INTERVAL);
     }
 
     @Override

@@ -17,7 +17,7 @@ public class AntiDropModule extends EventModule {
         this.plugin = plugin;
         this.configManager = configManager;
 
-        setEnabled(configManager.getPluginConfig().IS_ANTIDROP_ENABLED);
+        setEnabled(configManager.getModuleConfig().IS_ANTIDROP_ENABLED);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class AntiDropModule extends EventModule {
 
     @EventHandler
     public void onPlayerDropItem(PlayerDropItemEvent event) {
-        if (isEnabled() && ! event.getPlayer().hasPermission(getBypassPermission())) {
+        if (isEnabled() && configManager.getModuleConfig().ANTIDROP_WORLDS.contains(event.getPlayer().getWorld().getName()) && ! event.getPlayer().hasPermission(getBypassPermission())) {
             event.setCancelled(true);
         }
     }

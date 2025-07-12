@@ -1,0 +1,328 @@
+# Module configurations
+modules:
+  # Action bar messages
+  # Requires permission: ultimatehub.action-bar (enabled by default)
+  action-bar:
+    # Whether enabled (applies to all below)
+    enabled: true
+    # Refresh interval in ticks
+    # In Minecraft, 1 second = 20 ticks
+    # Therefore 1 tick = 0.05 seconds
+    interval: 2
+    # Text displayed in action bar, shown in sequence
+    # All text formats in this plugin use MiniMessage, see https://docs.advntr.dev/minimessage/format.html
+    # Or our brief documentation: https://www.kamiland.net/plugins/ultimatehub/mini-message
+    # You can edit and preview MiniMessage text online here: https://webui.advntr.dev
+    worlds:
+      world:
+        - ''
+        - '<rainbow>V'
+        - '<rainbow>Vi'
+        - '<rainbow>Vis'
+        - '<rainbow>Visi'
+        - '<rainbow>Visit'
+        - '<rainbow>Visit '
+        - '<rainbow>Visit w'
+        - '<rainbow>Visit ww'
+        - '<rainbow>Visit www'
+        - '<rainbow>Visit www.'
+        - '<rainbow>Visit www.e'
+        - '<rainbow>Visit www.ex'
+        - '<rainbow>Visit www.exa'
+        - '<rainbow>Visit www.exam'
+        - '<rainbow>Visit www.examp'
+        - '<rainbow>Visit www.exampl'
+        - '<rainbow>Visit www.example'
+        - '<rainbow>Visit www.example.'
+        - '<rainbow>Visit www.example.c'
+        - '<rainbow>Visit www.example.co'
+        - '<rainbow>Visit www.example.com'
+        - '<rainbow>isit www.example.com'
+        - '<rainbow>sit www.example.com'
+        - '<rainbow>it www.example.com'
+        - '<rainbow>t www.example.com'
+        - '<rainbow> www.example.com'
+        - '<rainbow>www.example.com'
+        - '<rainbow>ww.example.com'
+        - '<rainbow>w.example.com'
+        - '<rainbow>.example.com'
+        - '<rainbow>example.com'
+        - '<rainbow>xample.com'
+        - '<rainbow>ample.com'
+        - '<rainbow>mple.com'
+        - '<rainbow>ple.com'
+        - '<rainbow>le.com'
+        - '<rainbow>e.com'
+        - '<rainbow>.com'
+        - '<rainbow>com'
+        - '<rainbow>om'
+        - '<rainbow>m'
+        - ''
+
+  # Player agreement
+  agreement:
+    enabled: true
+    # Open agreement when player joins for the first time
+    on-first-join: true
+    # Open agreement every time player joins
+    on-every-join: false
+    # Open agreement when agreement changes
+    # Requires privileged player/console to use command /agreement change
+    on-change: true
+    # Delay between player joining and opening agreement (in ticks)
+    delay: 100
+    # Prevent players from closing agreement book
+    prevent-close: true
+    # Kick player if agreement signing times out
+    kick-on-timeout: true
+    # Agreement timeout duration (in ticks)
+    timeout: 1200
+    # Kick player if they disagree with agreement
+    kick-on-disagree: true
+    # Kick message if player is kicked
+    kick-message: |
+      <red>You have not agreed to the agreement.</red>
+    # Agreement book page contents
+    pages:
+      - |
+        114514
+      - |
+        114514
+    # Reject button
+    # This is standard MiniMessage format as described above
+    # Equivalent to player executing /agreement reject
+    reject: '<click:run_command:"/agreement reject"><hover:show_text:"<gray>Click to reject the player agreement"><red>Reject</hover></click>'
+    # Agree button
+    # Equivalent to player executing /agreement agree
+    agree: '<click:run_command:"/agreement agree"><hover:show_text:"<gray>Click to agree to the player agreement"><green>Agree</hover></click>'
+
+  # Prevent block breaking
+  # Foreword:
+  # UltimateHub is not a professional world protection plugin and lacks comprehensive protection features
+  # Developer's limited understanding of game mechanics may allow bypasses in certain scenarios
+  # Therefore, we recommend using professional world protection plugins like WorldGuard: https://modrinth.com/plugin/worldguard
+  # Bypass permission: ultimatehub.anti-break.bypass (admins have by default)
+  anti-break:
+    enabled: true
+    # Only allow creative mode players to break blocks
+    # If enabled, even players with bypass permission cannot break blocks in non-creative mode
+    # Without bypass permission, creative players still cannot break blocks
+    # (Same applies below)
+    break-creative-only: true
+    worlds:
+      - world
+
+  # Prevent player interactions
+  # Bypass permission: ultimatehub.anti-interact.bypass (admins have by default)
+  anti-interact:
+    enabled: true
+    creative-only: true
+    worlds:
+      - world
+
+  # Prevent block placing
+  # Bypass permission: ultimatehub.anti-place.bypass (admins have by default)
+  anti-place:
+    enabled: true
+    creative-only: true
+    worlds:
+      - world
+
+  # Prevent item dropping
+  # Bypass permission: ultimatehub.anti-drop.bypass (admins have by default)
+  anti-drop:
+    enabled: true
+    creative-only: true
+    worlds:
+      - world
+
+  # Prevent hunger
+  # Requires permission: ultimatehub.anti-hunger (enabled by default)
+  anti-hunger:
+    enabled: true
+    worlds:
+      - world
+
+  # Prevent player damage
+  # Requires permission: ultimatehub.anti-damage (enabled by default)
+  anti-damage:
+    enabled: true
+    worlds:
+      - world
+
+  # Prevent projectiles
+  # Bypass permission: ultimatehub.anti-projectile.bypass (admins have by default)
+  anti-projectile:
+    enabled: true
+    # Prevent players from shooting projectiles
+    anti-player: false
+    # Prevent entities from shooting projectiles
+    anti-entity: false
+    worlds:
+      - world
+
+  # Prevent player attacks
+  # Bypass permission: ultimatehub.anti-attack.bypass (admins have by default)
+  anti-attack:
+    enabled: true
+    # Prevent PVP (player vs player)
+    anti-attack-player: true
+    # Prevent PVE (player vs entity)
+    anti-attack-entity: true
+    worlds:
+      - world
+
+  # Boss health bar
+  # For more information: https://minecraft.wiki/w/Bossbar
+  # Requires permission: ultimatehub.boss-bar (enabled by default)
+  boss-bar:
+    enabled: true
+    interval: 5
+    # Boss bar display names
+    # Format per line: <PROGRESS>:<COLOR>:<OVERLAY>:<NAME>
+    # PROGRESS: Bar progress (0-1)
+    # COLOR: Bar color (see wiki)
+    # OVERLAY: Bar style
+    # Ensure each line has exactly 3 colons dividing the 4 parts.
+    # Use placeholder {0} if colons are needed within the NAME.
+    worlds:
+      world:
+        - '0.1:RED:NOTCHED_10:<#000080>www.example.com'
+        - '0.2:RED:NOTCHED_10:<#13188B>www.example.com'
+        - '0.3:RED:NOTCHED_10:<#263097>www.example.com'
+        - '0.4:RED:NOTCHED_10:<#3A48A2>www.example.com'
+        - '0.5:RED:NOTCHED_10:<#4D60AD>www.example.com'
+        - '0.6:RED:NOTCHED_10:<#6078B8>www.example.com'
+        - '0.7:RED:NOTCHED_10:<#7390C4>www.example.com'
+        - '0.8:RED:NOTCHED_10:<#86A8CF>www.example.com'
+        - '0.9:RED:NOTCHED_10:<#9AC0DB>www.example.com'
+        - '1.0:RED:NOTCHED_10:<#ADD8E6>www.example.com'
+        - '0.9:RED:NOTCHED_10:<#9AC0DB>www.example.com'
+        - '0.8:RED:NOTCHED_10:<#86A8CF>www.example.com'
+        - '0.7:RED:NOTCHED_10:<#7390C4>www.example.com'
+        - '0.6:RED:NOTCHED_10:<#6078B8>www.example.com'
+        - '0.5:RED:NOTCHED_10:<#4D60AD>www.example.com'
+        - '0.4:RED:NOTCHED_10:<#3A48A2>www.example.com'
+        - '0.3:RED:NOTCHED_10:<#263097>www.example.com'
+        - '0.2:RED:NOTCHED_10:<#13188B>www.example.com'
+        - '0.1:RED:NOTCHED_10:<#000080>www.example.com'
+
+  # Broadcast messages
+  # Receive permission: ultimatehub.broadcast.notify (enabled by default)
+  broadcast:
+    enabled: true
+    interval: 1800
+    # Using MiniMessage properly can implement complex click/hover effects
+    messages:
+      - |
+        <red>Welcome to the server!</red>
+        <green>Enjoy your stay!</green>
+      - |
+        <red>Good luck!</red>
+        <green>Have fun!</green>
+
+  # Clear player chat
+  # Works by sending 100 empty messages when player joins
+  # Note: May not work if players use mods with Chat Filter or Infinite Chat History
+  # For reliable chat clearing, use F3+D (official Minecraft shortcut)
+  # Bypass permission: ultimatehub.clear-chat.bypass (admins have by default)
+  clear-chat:
+    enabled: true
+    # Clear on player join
+    on-join: true
+
+  # Easter egg features, see easter-eggs.yml
+  easter-egg:
+    enabled: true
+
+  # Inventory module
+  # Bypass permission: ultimate.inventory.bypass (admins have by default)
+  inventory:
+    enabled: true
+    # Clear inventory on join
+    # Disabled by default to prevent accidental item loss
+    clear-on-join: false
+    # Clear inventory on quit
+    clear-on-quit: false
+    # Give defined items on join (see items.yml)
+    give-on-join: false
+
+  # Join and Quit Messages
+  # Messages can be customized per group.
+  join-quit-message:
+    enabled: true
+    # Configure join/quit messages for player groups
+    # Use placeholder {0} for player name.
+    groups:
+      # Default group (mandatory)
+      default:
+        join:
+          - '<green>[+] <reset>{0}'
+        quit:
+          - '<gray>[-] <reset>{0}'
+      vip:
+        join:
+          - '<rainbow>{0} joined the server!</rainbow>'
+        quit:
+          - '<rainbow:!>{0} left the server.</rainbow>'
+
+  # Potion effects
+  # Requires permission: ultimatehub.potion-effect (not enabled by default)
+  potion-effect:
+    enabled: true
+    # Clear effects on player join
+    clear-on-join: true
+    # Clear effects on player quit
+    clear-on-quit: true
+    # Apply effects on player join
+    give-on-join: true
+    # Potion effect list
+    # For effect names, see: https://minecraft.wiki/w/Effect#Effect_list
+    # Use effect identifiers from wiki
+    effects:
+      - name: SPEED
+        # Effect duration in seconds. Use 'infinite' for permanent
+        duration: 'infinite'
+        # Effect amplifier (level - 1). Speed II requires amplifier: 1.
+        amplifier: 1
+        # Show particles
+        particles: false
+      - name: JUMP_BOOST
+        duration: '20'
+        amplifier: 0
+        particles: true
+
+  # Spawn point
+  # Requires permission: ultimatehub.spawn
+  # Settings: see spawns.yml
+  spawn:
+    enabled: true
+    # Teleport to spawn on join
+    on-join: true
+    # Teleport to spawn on /spawn command
+    on-command: true
+
+  # Time changer
+  # Lock time to specific value
+  time-changer:
+    enabled: false
+    worlds:
+      world: 6000
+
+  # Weather changer
+  # Lock weather
+  weather-changer:
+    enabled: false
+    worlds:
+      world: clear
+
+  # Void protection
+  void-teleport:
+    enabled: true
+    # Protection level - players below this Y level get teleported
+    # Players teleport to spawn point (if set)
+    # Players teleport to bed/respawn anchor (if set)
+    # Players teleport to world spawn (if neither set)
+    level: -64
+    worlds:
+      - world

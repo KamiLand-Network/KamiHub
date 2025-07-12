@@ -18,7 +18,7 @@ public class ClearChatModule extends EventModule {
         this.plugin = plugin;
         this.configManager = configManager;
 
-        setEnabled(configManager.getPluginConfig().IS_CLEARCHAT_ENABLED);
+        setEnabled(configManager.getModuleConfig().IS_CLEARCHAT_ENABLED);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

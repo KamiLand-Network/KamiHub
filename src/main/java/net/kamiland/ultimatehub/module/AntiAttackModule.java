@@ -18,7 +18,7 @@ public class AntiAttackModule extends EventModule {
         this.plugin = plugin;
         this.configManager = configManager;
 
-        setEnabled(configManager.getPluginConfig().IS_ANTIATTACK_ENABLED);
+        setEnabled(configManager.getModuleConfig().IS_ANTIATTACK_ENABLED);
     }
 
     @Override
@@ -33,14 +33,14 @@ public class AntiAttackModule extends EventModule {
 
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if (isEnabled()) {
+        if (isEnabled() && configManager.getModuleConfig().ANTIATTACK_WORLDS.contains(event.getEntity().getWorld().getName())) {
             if (event.getDamager().hasPermission(getBypassPermission()))
                 return;
             if (event.getDamager() instanceof Player) {
-                if (configManager.getPluginConfig().IS_ANTIATTACK_ENTITY && ! (event.getEntity() instanceof Player)) {
+                if (configManager.getModuleConfig().IS_ANTIATTACK_ENTITY && ! (event.getEntity() instanceof Player)) {
                     event.setCancelled(true);
                 }
-                if (configManager.getPluginConfig().IS_ANTIATTACK_PLAYER && event.getEntity() instanceof Player) {
+                if (configManager.getModuleConfig().IS_ANTIATTACK_PLAYER && event.getEntity() instanceof Player) {
                     event.setCancelled(true);
                 }
             }

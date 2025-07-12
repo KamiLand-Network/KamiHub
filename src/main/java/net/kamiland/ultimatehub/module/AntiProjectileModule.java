@@ -18,7 +18,7 @@ public class AntiProjectileModule extends EventModule {
         this.plugin = plugin;
         this.configManager = configManager;
 
-        setEnabled(configManager.getPluginConfig().IS_ANTIPROJECTILE_ENABLED);
+        setEnabled(configManager.getModuleConfig().IS_ANTIPROJECTILE_ENABLED);
     }
 
     @Override
@@ -33,10 +33,10 @@ public class AntiProjectileModule extends EventModule {
 
     @EventHandler
     public void onProjectileLaunch(ProjectileLaunchEvent event) {
-        if (isEnabled()) {
-            if (configManager.getPluginConfig().IS_ANTIPROJECTILE_PLAYER && event.getEntity().getShooter() instanceof Player shooter && ! shooter.hasPermission(getBypassPermission()))
+        if (isEnabled() && configManager.getModuleConfig().ANTIPROJECTILE_WORLDS.contains(event.getEntity().getWorld().getName())) {
+            if (configManager.getModuleConfig().IS_ANTIPROJECTILE_PLAYER && event.getEntity().getShooter() instanceof Player shooter && ! shooter.hasPermission(getBypassPermission()))
                 event.setCancelled(true);
-            else if (configManager.getPluginConfig().IS_ANTIPROJECTILE_ENTITY)
+            else if (configManager.getModuleConfig().IS_ANTIPROJECTILE_ENTITY)
                 event.setCancelled(true);
         }
     }

@@ -18,7 +18,7 @@ public class AntiHungerModule extends EventModule {
         this.plugin = plugin;
         this.configManager = configManager;
 
-        setEnabled(configManager.getPluginConfig().IS_ANTIHUNGER_ENABLED);
+        setEnabled(configManager.getModuleConfig().IS_ANTIHUNGER_ENABLED);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class AntiHungerModule extends EventModule {
 
     @EventHandler
     public void onFoodLevelChange(FoodLevelChangeEvent event) {
-        if (isEnabled() && event.getEntity() instanceof Player && ! event.getEntity().hasPermission(getPermission())) {
+        if (isEnabled() && configManager.getModuleConfig().ANTIHUNGER_WORLDS.contains(event.getEntity().getWorld().getName()) && event.getEntity() instanceof Player && ! event.getEntity().hasPermission(getPermission())) {
             event.setCancelled(true);
             event.getEntity().setFoodLevel(20);
         }

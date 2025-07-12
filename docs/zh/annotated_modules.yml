@@ -1,0 +1,333 @@
+# 各模块配置
+modules:
+  # 动作栏信息
+  # 需要权限：ultimatehub.action-bar（默认拥有）
+  action-bar:
+    # 是否启用，后同
+    enabled: true
+    # 刷新间隔，以tick为单位
+    # 在Minecraft中，1秒流逝20ticks
+    # 也就是1tick = 0.05秒
+    interval: 2
+    # action bar显示的文本，按照顺序依次显示
+    # 本插件所有的文本格式都为MiniMessage，详参 https://docs.advntr.dev/minimessage/format.html
+    # 或者本插件粗略文档：https://www.kamiland.net/plugins/ultimatehub/mini-message
+    # 你可以在这里在线编辑和预览MiniMessage格式的文本：https://webui.advntr.dev
+    worlds:
+      world:
+        - ''
+        - '<rainbow>V'
+        - '<rainbow>Vi'
+        - '<rainbow>Vis'
+        - '<rainbow>Visi'
+        - '<rainbow>Visit'
+        - '<rainbow>Visit '
+        - '<rainbow>Visit w'
+        - '<rainbow>Visit ww'
+        - '<rainbow>Visit www'
+        - '<rainbow>Visit www.'
+        - '<rainbow>Visit www.e'
+        - '<rainbow>Visit www.ex'
+        - '<rainbow>Visit www.exa'
+        - '<rainbow>Visit www.exam'
+        - '<rainbow>Visit www.examp'
+        - '<rainbow>Visit www.exampl'
+        - '<rainbow>Visit www.example'
+        - '<rainbow>Visit www.example.'
+        - '<rainbow>Visit www.example.c'
+        - '<rainbow>Visit www.example.co'
+        - '<rainbow>Visit www.example.com'
+        - '<rainbow>isit www.example.com'
+        - '<rainbow>sit www.example.com'
+        - '<rainbow>it www.example.com'
+        - '<rainbow>t www.example.com'
+        - '<rainbow> www.example.com'
+        - '<rainbow>www.example.com'
+        - '<rainbow>ww.example.com'
+        - '<rainbow>w.example.com'
+        - '<rainbow>.example.com'
+        - '<rainbow>example.com'
+        - '<rainbow>xample.com'
+        - '<rainbow>ample.com'
+        - '<rainbow>mple.com'
+        - '<rainbow>ple.com'
+        - '<rainbow>le.com'
+        - '<rainbow>e.com'
+        - '<rainbow>.com'
+        - '<rainbow>com'
+        - '<rainbow>om'
+        - '<rainbow>m'
+        - ''
+
+  # 玩家协议
+  agreement:
+    enabled: true
+    # 在玩家首次加入的时候打开协议
+    on-first-join: true
+    # 在玩家每次加入的时候打开协议
+    on-every-join: false
+    # 在协议发生更改的时候打开协议
+    # 此项需要有权限的玩家/控制台使用指令 /agreement change
+    on-change: true
+    # 从玩家进入服务器到打开协议的间隔，以tick为单位
+    delay: 100
+    # 是否防止玩家关闭协议书
+    prevent-close: true
+    # 如果玩家签订协议超时，是否踢出
+    kick-on-timeout: true
+    # 签订协议超时的时间，以tick为单位
+    timeout: 1200
+    # 如果玩家不同意协议，是否踢出
+    kick-on-disagree: true
+    # 如果踢出玩家，踢出的原因（信息）
+    kick-message: |
+      <red>You have not agreed to the agreement.</red>
+    # 协议以书本形式展示的每一页内容
+    pages:
+      - |
+        114514
+      - |
+        114514
+    # 拒绝按钮
+    # 如你所见，这是一个典型的MiniMessage格式，详参上文
+    # 你可以让玩家执行 /agreement reject 来拒绝协议，这是等效的
+    reject: '<click:run_command:"/agreement reject"><hover:show_text:"<gray>Click to reject the player agreement"><red>Reject</hover></click>'
+    # 同意按钮
+    # 你可以让玩家执行 /agreement agree 来同意协议，这是等效的
+    agree: '<click:run_command:"/agreement agree"><hover:show_text:"<gray>Click to agree to the player agreement"><green>Agree</hover></click>'
+
+  # 防止玩家破坏方块
+  # 一些写在前面的话：
+  # UltimateHub 并不是一个专业的世界保护插件，它并不具备完善的世界保护功能
+  # 开发者对游戏内容欠缺理解，可能存在某些游戏特性可以让玩家绕过这些保护
+  # 因此，开发者推荐您采用专业的世界保护插件，如开源的 WorldGuard: https://modrinth.com/plugin/worldguard
+  # 绕过权限: ultimatehub.anti-break.bypass（默认管理员拥有）
+  anti-break:
+    enabled: true
+    # 是否仅允许创造模式玩家破坏方块
+    # 如果开启，即使是拥有绕过权限的玩家，在非创造模式下也无法破坏方块
+    # 如果开启，没有绕过权限的创造模式玩家依旧不可以破坏方块
+    # 下同
+    break-creative-only: true
+    worlds:
+      - world
+
+  # 防止玩家交互
+  # 绕过权限：ultimatehub.anti-interact.bypass（默认管理员拥有）
+  anti-interact:
+    enabled: true
+    creative-only: true
+    worlds:
+      - world
+
+  # 防止玩家放置
+  # 绕过权限：ultimatehub.anti-place.bypass（默认管理员拥有）
+  anti-place:
+    enabled: true
+    creative-only: true
+    worlds:
+      - world
+
+  # 防止玩家丢弃物品
+  # 绕过权限：ultimatehub.anti-drop.bypass（默认管理员拥有）
+  anti-drop:
+    enabled: true
+    creative-only: true
+    worlds:
+      - world
+
+  # 防止饥饿
+  # 需要权限：ultimatehub.anti-hunger（默认拥有）
+  anti-hunger:
+    enabled: true
+    worlds:
+      - world
+
+  # 防止玩家受伤
+  # 需要权限：ultimatehub.anti-damage（默认拥有）
+  anti-damage:
+    enabled: true
+    worlds:
+      - world
+
+  # 防止投掷物
+  anti-projectile:
+    enabled: true
+    # 防止玩家射出投掷物
+    anti-player: false
+    # 防止生物射出投掷物
+    anti-entity: false
+    worlds:
+      - world
+
+  # 防止玩家攻击
+  # 绕过权限：ultimatehub.anti-attack.bypass（默认管理员拥有）
+  anti-attack:
+    enabled: true
+    # 防止玩家攻击玩家（PVP）
+    anti-attack-player: true
+    # 防止玩家攻击生物（实体）（PVE）
+    anti-attack-entity: true
+    worlds:
+      - world
+
+  # Boss血条栏
+  # 有关这些配置更进一步的了解，请参阅：https://minecraft.wiki/w/Bossbar
+  # 需要权限：ultimatehub.boss-bar（默认拥有
+  boss-bar:
+    enabled: true
+    interval: 5
+    # Boss bar显示的名字
+    # 每行格式按照：<PROGRESS>:<COLOR>:<OVERLAY>:<NAME>的顺序
+    # PROGRESS: Boss bar的进度，范围为0-1
+    # COLOR: Boss bar的颜色，详见 https://minecraft.wiki/w/Bossbar#Color
+    # OVERLAY: Boss bar的样式
+    # 请确保每一行有且仅有3个冒号，分成4部分
+    # 如果您想在Boss名中使用冒号，使用占位符 {0}
+    worlds:
+      world:
+        - '0.1:RED:NOTCHED_10:<#000080>www.example.com'
+        - '0.2:RED:NOTCHED_10:<#13188B>www.example.com'
+        - '0.3:RED:NOTCHED_10:<#263097>www.example.com'
+        - '0.4:RED:NOTCHED_10:<#3A48A2>www.example.com'
+        - '0.5:RED:NOTCHED_10:<#4D60AD>www.example.com'
+        - '0.6:RED:NOTCHED_10:<#6078B8>www.example.com'
+        - '0.7:RED:NOTCHED_10:<#7390C4>www.example.com'
+        - '0.8:RED:NOTCHED_10:<#86A8CF>www.example.com'
+        - '0.9:RED:NOTCHED_10:<#9AC0DB>www.example.com'
+        - '1.0:RED:NOTCHED_10:<#ADD8E6>www.example.com'
+        - '0.9:RED:NOTCHED_10:<#9AC0DB>www.example.com'
+        - '0.8:RED:NOTCHED_10:<#86A8CF>www.example.com'
+        - '0.7:RED:NOTCHED_10:<#7390C4>www.example.com'
+        - '0.6:RED:NOTCHED_10:<#6078B8>www.example.com'
+        - '0.5:RED:NOTCHED_10:<#4D60AD>www.example.com'
+        - '0.4:RED:NOTCHED_10:<#3A48A2>www.example.com'
+        - '0.3:RED:NOTCHED_10:<#263097>www.example.com'
+        - '0.2:RED:NOTCHED_10:<#13188B>www.example.com'
+        - '0.1:RED:NOTCHED_10:<#000080>www.example.com'
+
+  # 广播
+  # 接收广播的权限：ultimatehub.broadcast.notify（默认拥有）
+  broadcast:
+    enabled: true
+    interval: 1800
+    # 如果您合理的使用MiniMessage，完全可以实现拥有复杂点击和显示效果的广播
+    messages:
+      - |
+        
+        <red>Welcome to the server!</red>
+        <green>Enjoy your stay!</green>
+
+      - |
+        
+        <red>Good luck!</red>
+        <green>Have fun!</green>
+        
+
+  # 清空玩家聊天栏
+  # 该模块的原理是在玩家进入服务器时发送100条空消息，强制玩家看不见以前的消息
+  # 注意：这意味着该模块不一定完全有效，尤其是在玩家安装了有Chat Filter或Infinite Chat History之类功能的模组时
+  # 如果您的确需要清空聊天栏，请在游戏内使用 F3+D 快捷键，这是Minecraft的官方功能
+  # 绕过权限：ultimatehub.clear-chat.bypass（默认管理员拥有）
+  clear-chat:
+    enabled: true
+    # 在玩家加入时清空
+    on-join: true
+
+  # 彩蛋功能
+  easter-egg:
+    enabled: true
+    # 详见 easter-eggs.yml
+
+  # 物品栏模块
+  # 绕过权限：ultimate.inventory.bypass（默认管理员拥有）
+  inventory:
+    enabled: true
+    # 在玩家加入服务器时清空物品栏
+    # 默认关闭，因为并不是所有服务器都需要这个功能，我们不希望出现惨案
+    clear-on-join: false
+    # 在玩家退出服务器时清空物品栏
+    clear-on-quit: false
+    # 在玩家加入服务器时给予定义的物品，详见 items.yml
+    give-on-join: false
+
+  # 加入和退出消息
+  # 一些服务器可能根据不同的用户组显示不同的加入/退出消息
+  join-quit-message:
+    enabled: true
+    # 分组配置加入和退出消息
+    # 使用占位符 {0} 作为玩家名
+    groups:
+      # 默认用户组，不可删除
+      default:
+        join:
+          - '<green>[+] <reset>{0}'
+        quit:
+          - '<gray>[-] <reset>{0}'
+      vip:
+        join:
+          - '<rainbow>{0} joined the server!</rainbow>'
+        quit:
+          - '<rainbow:!>{0} left the server.</rainbow>'
+
+  # 药水效果
+  # 需要权限：ultimatehub.potion-effect（默认不拥有）
+  potion-effect:
+    enabled: true
+    # 是否在玩家加入时清除药水效果
+    clear-on-join: true
+    # 是否在玩家退出时清除药水效果
+    clear-on-quit: true
+    # 是否在玩家加入时给予以下药水效果
+    give-on-join: true
+    # 药水效果列表
+    # 关于药水效果名称，详参：https://minecraft.wiki/w/Effect#Effect_list
+    # 请使用wiki中药水效果的identifier
+    effects:
+      - name: SPEED
+        # 药水效果时长，请使用秒为单位，使用 infinite 表示无限时长
+        duration: 'infinite'
+        # 药水效果倍数，这里的倍数为显示倍数-1
+        # 如果你希望获得速度II的效果，这里应该填写1
+        amplifier: 1
+        # 是否显示粒子效果
+        particles: false
+      - name: JUMP_BOOST
+        duration: '20'
+        amplifier: 0
+        particles: true
+
+  # 出生点
+  # 需要权限：ultimatehub.spawn
+  # 有关出生点的设置，详见 spawns.yml
+  spawn:
+    enabled: true
+    # 在玩家加入时传送至出生点
+    on-join: true
+    # 在玩家执行指令 /spawn 时传送至出生点
+    on-command: true
+
+  # 时间更改器
+  # 保持时间锁定在某一刻
+  time-changer:
+    enabled: false
+    worlds:
+      world: 6000
+
+  # 天气更改器
+  # 保持天气锁定
+  weather-changer:
+    enabled: false
+    worlds:
+      world: clear
+
+  # 虚空保护
+  void-teleport:
+    enabled: true
+    # 保护层级，当玩家所处位置低于这个层级时，将被传送回
+    # - 出生点（如果设置）
+    # - 重生点（床或重生锚，如果设置）
+    # - 原版出生点（以上都没有设置）
+    level: -64
+    worlds:
+      - world

@@ -18,7 +18,7 @@ public class AntiBreakModule extends EventModule {
         this.plugin = plugin;
         this.configManager = configManager;
 
-        setEnabled(configManager.getPluginConfig().IS_ANTIBREAK_ENABLED);
+        setEnabled(configManager.getModuleConfig().IS_ANTIBREAK_ENABLED);
     }
 
     @Override
@@ -33,9 +33,9 @@ public class AntiBreakModule extends EventModule {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        if (isEnabled()) {
+        if (isEnabled() && configManager.getModuleConfig().ANTIBREAK_WORLDS.contains(event.getPlayer().getWorld().getName())) {
             if (event.getPlayer().hasPermission(getBypassPermission())) {
-                if (configManager.getPluginConfig().IS_ANTIBREAK_CREATIVE_ONLY) {
+                if (configManager.getModuleConfig().IS_ANTIBREAK_CREATIVE_ONLY) {
                     if (event.getPlayer().getGameMode() == GameMode.CREATIVE)
                         return;
                 } else return;

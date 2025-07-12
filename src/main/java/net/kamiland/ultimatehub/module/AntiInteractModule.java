@@ -18,7 +18,7 @@ public class AntiInteractModule extends EventModule {
         this.plugin = plugin;
         this.configManager = configManager;
 
-        setEnabled(configManager.getPluginConfig().IS_ANTIINTERACT_ENABLED);
+        setEnabled(configManager.getModuleConfig().IS_ANTIINTERACT_ENABLED);
     }
 
     @Override
@@ -33,9 +33,9 @@ public class AntiInteractModule extends EventModule {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (isEnabled()) {
+        if (isEnabled() && configManager.getModuleConfig().ANTIINTERACT_WORLDS.contains(event.getPlayer().getWorld().getName())) {
             if (event.getPlayer().hasPermission(getBypassPermission())) {
-                if (configManager.getPluginConfig().IS_ANTIINTERACT_CREATIVE_ONLY) {
+                if (configManager.getModuleConfig().IS_ANTIINTERACT_CREATIVE_ONLY) {
                     if (event.getPlayer().getGameMode() == GameMode.CREATIVE)
                         return;
                 } else return;

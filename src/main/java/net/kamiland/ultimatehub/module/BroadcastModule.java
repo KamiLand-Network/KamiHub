@@ -19,7 +19,7 @@ public class BroadcastModule extends Module {
         this.plugin = plugin;
         this.configManager = configManager;
 
-        setEnabled(configManager.getPluginConfig().IS_BROADCAST_ENABLED);
+        setEnabled(configManager.getModuleConfig().IS_BROADCAST_ENABLED);
     }
 
     @Override
@@ -33,13 +33,13 @@ public class BroadcastModule extends Module {
             public void run() {
                 plugin.getServer().getOnlinePlayers().forEach(player -> {
                     if (player.hasPermission(getPermission())) {
-                        player.sendMessage(MessageUtil.getMessage(player, configManager.getPluginConfig().BROADCAST_MESSAGES[i]));
+                        player.sendMessage(MessageUtil.getMessage(player, configManager.getModuleConfig().BROADCAST_MESSAGES[i]));
                     }
                 });
-                if (++ i >= configManager.getPluginConfig().BROADCAST_MESSAGES.length)
+                if (++ i >= configManager.getModuleConfig().BROADCAST_MESSAGES.length)
                     i = 0;
             }
-        }.runTaskTimer(plugin, 0L, configManager.getPluginConfig().BROADCAST_INTERVAL);
+        }.runTaskTimer(plugin, 0L, configManager.getModuleConfig().BROADCAST_INTERVAL);
     }
 
     @Override
