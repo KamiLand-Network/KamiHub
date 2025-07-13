@@ -1,9 +1,6 @@
 package net.kamiland.ultimatehub;
 
-import net.kamiland.ultimatehub.manager.ConfigManager;
-import net.kamiland.ultimatehub.manager.ModuleManager;
-import net.kamiland.ultimatehub.manager.PlayerManager;
-import net.kamiland.ultimatehub.manager.ServerManager;
+import net.kamiland.ultimatehub.manager.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.slf4j.Logger;
 
@@ -14,6 +11,7 @@ public class UltimateHub extends JavaPlugin {
     private ConfigManager configManager;
     private PlayerManager playerManager;
     private ModuleManager moduleManager;
+    private CommandManager commandManager;
 
     @Override
     public void onEnable() {
@@ -29,6 +27,9 @@ public class UltimateHub extends JavaPlugin {
         playerManager.loadAll();
 
         moduleManager = new ModuleManager(this, configManager);
+
+        commandManager = new CommandManager(this);
+        commandManager.registerCommands();
     }
 
     @Override
