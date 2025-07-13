@@ -7,7 +7,7 @@ import java.util.UUID;
 @Data
 public class PlayerData {
 
-    private UUID id;
+    private final UUID id;
     private String name;
     private boolean agreement;
 
