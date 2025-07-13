@@ -15,9 +15,9 @@ bukkit {
     name = "UltimateHub"
     main = "net.kamiland.ultimatehub.UltimateHub"
     version = "${project.version}"
-    apiVersion = "1.13"
+    apiVersion = "1.18"
     description = "${project.description}"
-    authors = listOf("KamiLand", "while1cry")
+    authors = listOf("KamiLand", "while1cry", "SuXuan_Dev")
     website = "https://www.kamiland.net/plugins/ultimatehub"
     softDepend = listOf("PlaceholderAPI")
 
