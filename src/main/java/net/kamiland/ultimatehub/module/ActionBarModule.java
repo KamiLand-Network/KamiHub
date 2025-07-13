@@ -3,7 +3,7 @@ package net.kamiland.ultimatehub.module;
 import net.kamiland.ultimatehub.UltimateHub;
 import net.kamiland.ultimatehub.config.ModuleConfig;
 import net.kamiland.ultimatehub.manager.ConfigManager;
-import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kamiland.ultimatehub.util.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -38,7 +38,6 @@ public class ActionBarModule extends Module {
         actionBarTimerTask = new BukkitRunnable() {
             final Map<World, Integer> worldsMap = new HashMap<>();
             final Map<String, List<String>> actionBarWorlds = config.ACTIONBAR_WORLDS;
-            final MiniMessage mm = MiniMessage.miniMessage();
 
             {
                 for (String worldName : actionBarWorlds.keySet()) {
@@ -60,7 +59,7 @@ public class ActionBarModule extends Module {
                         String message = messages.get(index);
                         Bukkit.getOnlinePlayers().stream()
                                 .filter(player -> player.getWorld().equals(world))
-                                .forEach(player -> player.sendActionBar(mm.deserialize(message)));
+                                .forEach(player -> player.sendActionBar(MessageUtil.getMessage(player, message)));
 
                         index = (index + 1) % messages.size();
                         worldsMap.put(world, index);
