@@ -59,6 +59,7 @@ public class ActionBarModule extends Module {
                         String message = messages.get(index);
                         Bukkit.getOnlinePlayers().stream()
                                 .filter(player -> player.getWorld().equals(world))
+                                .filter(player -> player.hasPermission(getPermission()))
                                 .forEach(player -> player.sendActionBar(MessageUtil.getMessage(player, message)));
 
                         index = (index + 1) % messages.size();
