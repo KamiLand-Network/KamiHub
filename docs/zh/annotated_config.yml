@@ -25,3 +25,43 @@
 # 如果你更改了此项，插件可能无法正常工作
 config-version: 1.0
 
+# 数据存储设置
+datasource:
+  # 数据驱动类型
+  # 目前支持：MySQL，H2
+  storage: H2
+  table-prefix: 'uh_'
+  mysql:
+    host: 'localhost'
+    port: 3306
+    database: 'minecraft'
+    username: 'ultimatehub'
+    password: 'UrPasswdHere'
+    params: '?useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+  h2:
+    # H2连接（文件模式）
+    file: './plugins/UltimateHub/data/storage'
+    username: 'ultimatehub'
+    # H2模式允许（默认）不设置密码
+    # 如果您希望启用密码以提升安全性，请在params值后面添加：;CIPHER=AES;IFEXISTS=TRUE
+    password: ''
+    params: ';MODE=MySQL;FILE_LOCK=SOCKET;TRACE_LEVEL_FILE=0;DATABASE_TO_UPPER=FALSE'
+  connection-pool:
+    # 连接池控制
+    # 最大连接数（推荐公式：CPU核心数*2 + 磁盘数）
+    maximum-pool-size: 20
+    # 最小空闲连接（推荐设为max-pool-size的1/4）
+    minimum-idle: 5
+    # 连接超时时间（毫秒，建议3000-5000）
+    connection-timeout: 3000
+    # 空闲超时（毫秒，5分钟）
+    idle-timeout: 300000
+    # 连接最大存活时间（毫秒，30分钟）
+    max-lifetime: 1800000
+    # 验证超时（毫秒）
+    validation-timeout: 1000
+    # 泄漏检测
+    # 泄漏检测阈值
+    leak-detection-threshold: 30000
+    # 推荐关闭自动提交
+    auto-commit: false

@@ -25,3 +25,44 @@
 # If you change this, the plugin may malfunction
 config-version: 1.0
 
+# Data Storage Configuration
+datasource:
+  # Data storage driver type
+  # Currently supported: MySQL, H2
+  storage: H2
+  table-prefix: 'uh_'
+  mysql:
+    host: 'localhost'
+    port: 3306
+    database: 'minecraft'
+    username: 'ultimatehub'
+    password: 'UrPasswdHere'
+    params: '?useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+  h2:
+    # H2 connection (file mode)
+    file: './plugins/UltimateHub/data/storage'
+    username: 'ultimatehub'
+    # H2 mode allows (by default) no password
+    # If you want to enable password protection for better security,
+    # add: ;CIPHER=AES;IFEXISTS=TRUE to the end of the params value
+    password: ''
+    params: ';MODE=MySQL;FILE_LOCK=SOCKET;TRACE_LEVEL_FILE=0;DATABASE_TO_UPPER=FALSE'
+  connection-pool:
+    # Connection pool settings
+    # Maximum number of connections (recommended formula: CPU cores * 2 + number of disks)
+    maximum-pool-size: 20
+    # Minimum idle connections (recommended: 1/4 of max-pool-size)
+    minimum-idle: 5
+    # Connection timeout in milliseconds (suggested: 3000–5000)
+    connection-timeout: 3000
+    # Idle timeout in milliseconds (5 minutes)
+    idle-timeout: 300000
+    # Maximum connection lifetime in milliseconds (30 minutes)
+    max-lifetime: 1800000
+    # Validation timeout in milliseconds
+    validation-timeout: 1000
+    # Leak detection
+    # Leak detection threshold
+    leak-detection-threshold: 30000
+    # Auto-commit (recommended: false)
+    auto-commit: false
