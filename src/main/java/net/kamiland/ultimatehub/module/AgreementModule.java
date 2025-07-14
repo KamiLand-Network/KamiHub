@@ -49,19 +49,10 @@ public class AgreementModule extends EventModule {
         if (!isEnabled()) return;
         Player player = event.getPlayer();
         ModuleConfig moduleConfig = configManager.getModuleConfig();
-        if (moduleConfig.IS_AGREEMENT_ON_FIRST_JOIN) {
-            if (checkIfPlayerAgreed(player)) {
-                if (moduleConfig.IS_AGREEMENT_ON_EVERY_JOIN) {
-                    // Player has agreed before, but we show the book again
-                    openBook(player);
-                }
-            } else {
-                // Player has not agreed yet, show the agreement book
-                openBook(player);
-            }
-        } else {
-            if (!moduleConfig.IS_AGREEMENT_ON_EVERY_JOIN) return;
-        }
+        if (moduleConfig.IS_AGREEMENT_ON_EVERY_JOIN)
+            openBook(player);
+        else if (! checkIfPlayerAgreed(player) && moduleConfig.IS_AGREEMENT_ON_FIRST_JOIN)
+            openBook(player);
     }
 
     @Override
@@ -116,4 +107,5 @@ public class AgreementModule extends EventModule {
         if (configManager.getModuleConfig().IS_AGREEMENT_KICK_ON_REJECT)
             kickPlayer(player);
     }
+
 }
