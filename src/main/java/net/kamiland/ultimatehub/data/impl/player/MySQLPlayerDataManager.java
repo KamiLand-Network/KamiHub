@@ -90,6 +90,7 @@ public class MySQLPlayerDataManager implements PlayerDataManager {
                 stmt.setString(1, player.getUniqueId().toString());
                 stmt.setString(2, player.getName());
                 stmt.executeUpdate();
+                conn.commit();
             } catch (SQLException e) {
                 putError(e);
                 conn.rollback();
@@ -138,6 +139,7 @@ public class MySQLPlayerDataManager implements PlayerDataManager {
                         conn.commit();
                         return playerData;
                     }
+                    conn.commit();
                 }
             } catch (SQLException e) {
                 putError(e);
@@ -165,6 +167,7 @@ public class MySQLPlayerDataManager implements PlayerDataManager {
                         conn.commit();
                         return playerData;
                     }
+                    conn.commit();
                 }
             } catch (SQLException e) {
                 putError(e);
