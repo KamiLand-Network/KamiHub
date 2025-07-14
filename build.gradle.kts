@@ -21,6 +21,11 @@ bukkit {
     website = "https://www.kamiland.net/plugins/ultimatehub"
     softDepend = listOf("PlaceholderAPI")
 
+    libraries = listOf(
+        "com.h2database:h2:2.3.232",
+        "com.zaxxer:HikariCP:6.3.0"
+    )
+
     foliaSupported = true
 
     load = BukkitPluginDescription.PluginLoadOrder.POSTWORLD
@@ -46,12 +51,19 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.38")
     annotationProcessor("org.projectlombok:lombok:1.18.38")
 
+    compileOnly("com.zaxxer:HikariCP:6.3.0")
+
     compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
     implementation("dev.rollczi:litecommands-bukkit:3.10.0")
     implementation("xyz.xenondevs.invui:invui:1.46")
 
-    implementation("com.github.LeonMangler:SuperVanish:6.2.19")
+    implementation("com.github.LeonMangler:SuperVanish:6.2.19") {
+        exclude("com.mojang", "brigadier")
+    }
     compileOnly("me.clip:placeholderapi:2.11.6")
+
+    compileOnly("com.mysql:mysql-connector-j:9.3.0")
+    compileOnly("com.h2database:h2:2.3.232")
 }
 
 val copyShadowJar by tasks.registering(Copy::class) {
@@ -74,13 +86,13 @@ tasks.shadowJar {
     archiveClassifier.set("")
 
     relocate("org.jetbrains", "net.kamiland.ultimatehub.lib.jetbrains")
+    relocate("org.intellij", "net.kamiland.ultimatehub.lib.intellij")
     relocate("dev.rollczi", "net.kamiland.ultimatehub.lib.rollczi")
     relocate("xyz.xenondevs", "net.kamiland.ultimatehub.lib.xenondevs")
 
-    relocate("dev.myzelyam", "net.kamiland.ultimatehub.lib.myzelyam")
+    relocate("de.myzelyam", "net.kamiland.ultimatehub.lib.myzelyam")
 
     mergeServiceFiles()
-    minimize()
 }
 
 tasks.compileJava {
