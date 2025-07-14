@@ -71,7 +71,15 @@ public class RuntimePlayerDataManager implements PlayerDataManager, Listener {
      */
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> loadPlayer(event.getPlayer()));
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            loadPlayer(event.getPlayer());
+            PlayerData playerData = playerDataMap.get(event.getPlayer());
+            if (playerData != null) {
+                playerData.setLoginTimes(playerData.getLoginTimes() + 1);
+                savePlayer(event.getPlayer(), playerData);
+                savePlayerToStorage(event.getPlayer());
+            }
+        });
     }
 
     /**
