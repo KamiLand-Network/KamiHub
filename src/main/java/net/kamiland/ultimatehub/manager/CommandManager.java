@@ -6,22 +6,25 @@ import net.kamiland.ultimatehub.UltimateHub;
 import net.kamiland.ultimatehub.command.AgreementCommand;
 import net.kamiland.ultimatehub.command.SpawnCommand;
 import net.kamiland.ultimatehub.command.UltimateHubCommand;
+import net.kamiland.ultimatehub.module.AgreementModule;
 import org.bukkit.command.CommandSender;
 
 public class CommandManager {
 
     private final UltimateHub plugin;
+    private final ModuleManager moduleManager;
     private LiteCommands<CommandSender> liteCommands;
 
 
-    public CommandManager(UltimateHub plugin) {
+    public CommandManager(UltimateHub plugin, ModuleManager moduleManager) {
         this.plugin = plugin;
+        this.moduleManager = moduleManager;
     }
 
     public void registerCommands() {
-        this.liteCommands = LiteBukkitFactory.builder(plugin)
+        liteCommands = LiteBukkitFactory.builder(plugin)
                 .commands(
-                        new AgreementCommand(),
+                        new AgreementCommand((AgreementModule) moduleManager.getModule("agreement")),
                         new SpawnCommand(),
                         new UltimateHubCommand()
                 )
@@ -29,6 +32,6 @@ public class CommandManager {
     }
 
     public void unRegisterCommands() {
-        if (this.liteCommands != null) this.liteCommands.unregister();
+        if (liteCommands != null) liteCommands.unregister();
     }
 }

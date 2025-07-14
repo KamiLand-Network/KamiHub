@@ -14,6 +14,7 @@ public class ModuleManager {
 
     public ModuleManager(UltimateHub plugin, ConfigManager configManager) {
         put(new ActionBarModule(plugin, configManager));
+        put(new AgreementModule(plugin, configManager));
         put(new AntiAttackModule(plugin, configManager));
         put(new AntiBreakModule(plugin, configManager));
         put(new AntiDamageModule(plugin, configManager));
