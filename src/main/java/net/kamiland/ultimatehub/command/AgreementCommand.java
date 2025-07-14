@@ -5,7 +5,11 @@ import dev.rollczi.litecommands.annotations.context.Context;
 import dev.rollczi.litecommands.annotations.execute.Execute;
 import dev.rollczi.litecommands.annotations.permission.Permission;
 import net.kamiland.ultimatehub.module.AgreementModule;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import java.util.Map;
+import java.util.UUID;
 
 @Command(name = "agreement")
 public class AgreementCommand {
@@ -18,7 +22,9 @@ public class AgreementCommand {
 
     @Execute(name = "agree")
     void agree(@Context Player player) {
-        agreementModule.playerTaskMap.remove(player.getUniqueId());
+        Map<UUID, Integer> playerTaskMap = agreementModule.playerTaskMap;
+        Bukkit.getScheduler().cancelTask(playerTaskMap.get(player.getUniqueId()));
+        playerTaskMap.remove(player.getUniqueId());
     }
 
     @Execute(name = "reject")
