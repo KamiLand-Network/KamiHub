@@ -9,6 +9,7 @@ public class PlayerData {
 
     private final UUID id;
     private String name;
+    private int loginTimes;
     private boolean agreement;
 
 }

@@ -21,11 +21,11 @@ public class ModuleConfig extends Config {
     public boolean IS_AGREEMENT_PREVENT_CLOSE;
     public boolean IS_AGREEMENT_KICK_ON_TIMEOUT;
     public int AGREEMENT_TIMEOUT;
-    public boolean IS_AGREEMENT_KICK_ON_DISAGREE;
+    public boolean IS_AGREEMENT_KICK_ON_REJECT;
     public String AGREEMENT_KICK_MESSAGE;
     public String[] AGREEMENT_PAGES;
     public String AGREEMENT_AGREE_BUTTON;
-    public String AGREEMENT_DISAGREE_BUTTON;
+    public String AGREEMENT_REJECT_BUTTON;
 
     public boolean IS_ANTIBREAK_ENABLED;
     public boolean IS_ANTIBREAK_CREATIVE_ONLY;
@@ -125,11 +125,11 @@ public class ModuleConfig extends Config {
         IS_AGREEMENT_PREVENT_CLOSE = config.getBoolean("modules.agreement.prevent-close");
         IS_AGREEMENT_KICK_ON_TIMEOUT = config.getBoolean("modules.agreement.kick-on-timeout");
         AGREEMENT_TIMEOUT = config.getInt("modules.agreement.timeout");
-        IS_AGREEMENT_KICK_ON_DISAGREE = config.getBoolean("modules.agreement.kick-on-disagree");
+        IS_AGREEMENT_KICK_ON_REJECT = config.getBoolean("modules.agreement.kick-on-reject");
         AGREEMENT_KICK_MESSAGE = config.getString("modules.agreement.kick-message");
         AGREEMENT_PAGES = config.getStringList("modules.agreement.pages").toArray(new String[0]);
         AGREEMENT_AGREE_BUTTON = config.getString("modules.agreement.agree");
-        AGREEMENT_DISAGREE_BUTTON = config.getString("modules.agreement.reject");
+        AGREEMENT_REJECT_BUTTON = config.getString("modules.agreement.reject");
 
         IS_ANTIBREAK_ENABLED = config.getBoolean("modules.anti-break.enabled");
         IS_ANTIBREAK_CREATIVE_ONLY = config.getBoolean("modules.anti-break.break-creative-only");

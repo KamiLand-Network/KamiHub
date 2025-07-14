@@ -1,6 +1,12 @@
 package net.kamiland.ultimatehub;
 
-import net.kamiland.ultimatehub.manager.*;
+import net.kamiland.ultimatehub.data.impl.cp.HikariManager;
+import net.kamiland.ultimatehub.data.impl.player.RuntimePlayerDataManager;
+import net.kamiland.ultimatehub.data.manager.cp.ConnectionPoolManager;
+import net.kamiland.ultimatehub.manager.CommandManager;
+import net.kamiland.ultimatehub.manager.ConfigManager;
+import net.kamiland.ultimatehub.manager.ModuleManager;
+import net.kamiland.ultimatehub.manager.ServerManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.slf4j.Logger;
 
@@ -9,7 +15,8 @@ public class UltimateHub extends JavaPlugin {
     private Logger logger;
     private ServerManager serverManager;
     private ConfigManager configManager;
-    private PlayerManager playerManager;
+    private ConnectionPoolManager cpManager;
+    private RuntimePlayerDataManager runtimePDM;
     private ModuleManager moduleManager;
     private CommandManager commandManager;
 
@@ -23,8 +30,9 @@ public class UltimateHub extends JavaPlugin {
         configManager = new ConfigManager(this);
         configManager.load();
 
-        playerManager = new PlayerManager(this);
-        playerManager.loadAll();
+        cpManager = new HikariManager(this, configManager);
+        cpManager.init();
+        runtimePDM = new RuntimePlayerDataManager(this, configManager, cpManager);
 
         moduleManager = new ModuleManager(this, configManager);
 
@@ -34,8 +42,9 @@ public class UltimateHub extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        moduleManager.disableAll();
-        playerManager.unloadAll();
+        if (commandManager != null) commandManager.unRegisterCommands();
+        if (moduleManager != null) moduleManager.disableAll();
+        if (cpManager != null) cpManager.close();
     }
 
 }

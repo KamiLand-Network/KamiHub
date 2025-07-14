@@ -31,7 +31,7 @@ public interface PlayerDataManager {
      * Persists player data to storage.
      * @param player Target player to save data for
      */
-    void savePlayer(Player player);
+    void savePlayer(Player player, PlayerData playerData);
 
     /**
      * Creates and caches new player data entry.
