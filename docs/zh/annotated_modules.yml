@@ -136,6 +136,13 @@ modules:
     worlds:
       - world
 
+  # 防止玩家拾取物品
+  # 绕过权限：ultimatehub.anti-pickup.bypass（默认管理员拥有）
+  anti-pickup:
+    enabled: true
+    worlds:
+      - world
+
   # 防止饥饿
   # 需要权限：ultimatehub.anti-hunger（默认拥有）
   anti-hunger:

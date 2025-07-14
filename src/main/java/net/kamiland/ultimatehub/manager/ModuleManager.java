@@ -21,6 +21,7 @@ public class ModuleManager {
         put(new AntiDropModule(plugin, configManager));
         put(new AntiHungerModule(plugin, configManager));
         put(new AntiInteractModule(plugin, configManager));
+        put(new AntiPickupModule(plugin, configManager));
         put(new AntiPlaceModule(plugin, configManager));
         put(new AntiProjectileModule(plugin, configManager));
         put(new BossBarModule(plugin, configManager));

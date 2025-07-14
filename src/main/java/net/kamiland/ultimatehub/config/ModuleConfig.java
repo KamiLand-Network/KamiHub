@@ -43,6 +43,9 @@ public class ModuleConfig extends Config {
     public boolean IS_ANTIDROP_CREATIVE_ONLY;
     public List<String> ANTIDROP_WORLDS;
 
+    public boolean IS_ANTIPICKUP_ENABLED;
+    public List<String> ANTIPICKUP_WORLDS;
+
     public boolean IS_ANTIHUNGER_ENABLED;
     public List<String> ANTIHUNGER_WORLDS;
 
@@ -146,6 +149,9 @@ public class ModuleConfig extends Config {
         IS_ANTIDROP_ENABLED = config.getBoolean("modules.anti-drop.enabled");
         IS_ANTIDROP_CREATIVE_ONLY = config.getBoolean("modules.anti-drop.creative-only");
         ANTIDROP_WORLDS = config.getStringList("modules.anti-drop.worlds");
+
+        IS_ANTIPICKUP_ENABLED = config.getBoolean("modules.anti-pickup.enabled");
+        ANTIPICKUP_WORLDS = config.getStringList("modules.anti-pickup.worlds");
 
         IS_ANTIHUNGER_ENABLED = config.getBoolean("modules.anti-hunger.enabled");
         ANTIHUNGER_WORLDS = config.getStringList("modules.anti-hunger.worlds");

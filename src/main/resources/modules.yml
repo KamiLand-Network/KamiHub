@@ -136,6 +136,13 @@ modules:
     worlds:
       - world
 
+  # Prevent item picking up
+  # Bypass permission: ultimatehub.anti-pickup.bypass (admins have by default)
+  anti-pickup:
+    enabled: true
+    worlds:
+      - world
+
   # Prevent hunger
   # Requires permission: ultimatehub.anti-hunger (enabled by default)
   anti-hunger:
