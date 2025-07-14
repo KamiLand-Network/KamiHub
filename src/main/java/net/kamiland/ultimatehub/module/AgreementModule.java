@@ -83,7 +83,7 @@ public class AgreementModule extends EventModule {
         ModuleConfig moduleConfig = configManager.getModuleConfig();
         for (String page : moduleConfig.AGREEMENT_PAGES) {
             bookPages.add(MessageUtil.getMessage(page, moduleConfig.AGREEMENT_AGREE_BUTTON,
-                    moduleConfig.AGREEMENT_DISAGREE_BUTTON));
+                    moduleConfig.AGREEMENT_REJECT_BUTTON));
         }
         return Book.book(bookTitle, bookAuthor, bookPages);
     }
@@ -112,8 +112,8 @@ public class AgreementModule extends EventModule {
         player.kick(MessageUtil.getMessage(configManager.getModuleConfig().AGREEMENT_KICK_MESSAGE));
     }
 
-    public void kickPlayerOnDisagree(Player player) {
-        if (configManager.getModuleConfig().IS_AGREEMENT_KICK_ON_DISAGREE)
+    public void onReject(Player player) {
+        if (configManager.getModuleConfig().IS_AGREEMENT_KICK_ON_REJECT)
             kickPlayer(player);
     }
 }

@@ -23,7 +23,7 @@ public class AgreementCommand {
 
     @Execute(name = "reject")
     void reject(@Context Player player) {
-        agreementModule.kickPlayerOnDisagree(player);
+        agreementModule.onReject(player);
     }
 
     @Execute(name = "change")

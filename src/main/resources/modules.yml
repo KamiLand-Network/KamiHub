@@ -78,7 +78,7 @@ modules:
     # Agreement timeout duration (in ticks)
     timeout: 1200
     # Kick player if they disagree with agreement
-    kick-on-disagree: true
+    kick-on-reject: true
     # Kick message if player is kicked
     kick-message: |
       <red>You have not agreed to the agreement.</red>

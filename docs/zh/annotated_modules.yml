@@ -77,8 +77,8 @@ modules:
     kick-on-timeout: true
     # 签订协议超时的时间，以tick为单位
     timeout: 1200
-    # 如果玩家不同意协议，是否踢出
-    kick-on-disagree: true
+    # 如果玩家拒绝协议，是否踢出
+    kick-on-reject: true
     # 如果踢出玩家，踢出的原因（信息）
     kick-message: |
       <red>You have not agreed to the agreement.</red>
