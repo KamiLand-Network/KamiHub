@@ -29,6 +29,7 @@ public class ModuleManager {
         put(new BroadcastModule(plugin, configManager));
         put(new ClearChatModule(plugin, configManager));
         put(new JQMessageModule(plugin, configManager));
+        put(new PotionEffectModule(plugin, configManager));
     }
 
     @Nullable
