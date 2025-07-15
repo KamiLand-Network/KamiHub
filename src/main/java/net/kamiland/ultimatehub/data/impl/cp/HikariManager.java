@@ -23,6 +23,7 @@ public class HikariManager implements ConnectionPoolManager {
 
     @Override
     public void init() {
+        dataSource.setPoolName("UHPool");
         switch (configManager.getPluginConfig().DATASOURCE_STORAGE.toLowerCase(Locale.ROOT)) {
             case "mysql" -> {
                 dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
