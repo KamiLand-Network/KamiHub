@@ -19,7 +19,7 @@ bukkit {
     description = "${project.description}"
     authors = listOf("KamiLand", "while1cry", "SuXuan_Dev")
     website = "https://www.kamiland.net/plugins/ultimatehub"
-    softDepend = listOf("PlaceholderAPI")
+    softDepend = listOf("PlaceholderAPI", "LuckPerms", "Vault")
 
     libraries = listOf(
         "com.h2database:h2:2.3.232",
@@ -61,6 +61,8 @@ dependencies {
         exclude("com.mojang", "brigadier")
     }
     compileOnly("me.clip:placeholderapi:2.11.6")
+    compileOnly("com.github.MilkBowl:VaultAPI:1.7")
+    compileOnly("net.luckperms:api:5.4")
 
     compileOnly("com.mysql:mysql-connector-j:9.3.0")
     compileOnly("com.h2database:h2:2.3.232")
