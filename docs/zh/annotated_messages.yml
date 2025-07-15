@@ -1,0 +1,24 @@
+# 本插件所有的文本格式都为MiniMessage，详参 https://docs.advntr.dev/minimessage/format.html
+# 或者本插件粗略文档：https://www.kamiland.net/plugins/ultimatehub/mini-message
+# 你可以在这里在线编辑和预览MiniMessage格式的文本：https://webui.advntr.dev
+
+# 该插件支持 PlaceholderAPI！前提是您把它安装进服务器内
+# 详情请参阅：https://www.kamiland.net/plugins/ultimatehub/papi
+
+prefix:
+  enabled: true
+  text: '<aqua>[UltimateHub]</aqua> '
+general:
+  no-permission: '<red>你没有权限执行此命令: <yellow>{0}'
+  reload-success: '<green>插件重载成功！'
+  unknown-command: '<red>未知的命令！请使用 <yellow>/uh help <red>查看命令用法！'
+  no-console: '<red>该命令只能由玩家执行！'
+modules:
+  anti-attack: '<red>你不能攻击其他玩家！'
+  anti-break: '<red>你不能破坏方块！'
+  anti-drop: '<red>你不能丢弃物品！'
+  anti-interact: '<red>你不能在这里交互！'
+  anti-place: '<red>你不能在这里放置方块！'
+  anti-projectile: '<red>你不能发射投掷物！'
+  spawn-teleport: '<green>你已传送到出生点！'
+  void-tp: '<green>虚空保护已生效！'

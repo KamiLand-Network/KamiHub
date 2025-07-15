@@ -1,0 +1,24 @@
+# All text formats in this plugin use MiniMessage, see https://docs.advntr.dev/minimessage/format.html
+# Or our brief documentation: https://www.kamiland.net/plugins/ultimatehub/mini-message
+# You can edit and preview MiniMessage text online here: https://webui.advntr.dev
+
+# This plugin supports PlaceholderAPI! Provided you have it installed on your server
+# Details: https://www.kamiland.net/plugins/ultimatehub/papi
+
+prefix:
+  enabled: true
+  text: '<aqua>[UH]</aqua> '
+general:
+  no-permission: '<red>You don''t have permission to do this: <yellow>{0}'
+  reload-success: '<green>Plugin reloaded successfully!'
+  unknown-command: '<red>Unknown command! Please use <yellow>/uh help<red> to view command usage!'
+  no-console: '<red>This command can only be executed by players!'
+modules:
+  anti-attack: '<red>You cannot attack other players!'
+  anti-break: '<red>You cannot break blocks here!'
+  anti-drop: '<red>You cannot drop items here!'
+  anti-interact: '<red>You cannot interact here!'
+  anti-place: '<red>You cannot place blocks here!'
+  anti-projectile: '<red>You cannot launch projectiles here!'
+  spawn-teleport: '<green>You have been teleported to spawn!'
+  void-tp: '<green>Void protection activated!'
