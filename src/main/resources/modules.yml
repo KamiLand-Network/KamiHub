@@ -264,10 +264,6 @@ modules:
     # Clear on player join
     on-join: true
 
-  # Easter egg features, see easter-eggs.yml
-  easter-egg:
-    enabled: true
-
   # Inventory module
   # Bypass permission: ultimate.inventory.bypass (admins have by default)
   inventory:

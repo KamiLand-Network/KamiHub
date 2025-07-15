@@ -267,11 +267,6 @@ modules:
     # 在玩家加入时清空
     on-join: true
 
-  # 彩蛋功能
-  easter-egg:
-    enabled: true
-    # 详见 easter-eggs.yml
-
   # 物品栏模块
   # 绕过权限：ultimate.inventory.bypass（默认管理员拥有）
   inventory:
