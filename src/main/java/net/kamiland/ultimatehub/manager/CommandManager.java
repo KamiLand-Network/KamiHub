@@ -34,7 +34,7 @@ public class CommandManager {
     public void registerCommands() {
         liteCommands = LiteBukkitFactory.builder(plugin)
                 .commands(
-                        new AgreementCommand((AgreementModule) moduleManager.getModule("agreement")),
+                        new AgreementCommand((AgreementModule) moduleManager.getModule("agreement"), message),
                         new SpawnCommand(),
                         new UltimateHubCommand()
                 )

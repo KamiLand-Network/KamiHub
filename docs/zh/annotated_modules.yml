@@ -62,8 +62,8 @@ modules:
   # 玩家协议
   agreement:
     enabled: true
-    # 在玩家首次加入的时候打开协议
-    on-first-join: true
+    # 在玩家加入且还未同意协议的时候打开协议
+    on-join: true
     # 在玩家每次加入的时候打开协议
     on-every-join: false
     # 在协议发生更改的时候打开协议
@@ -81,20 +81,46 @@ modules:
     kick-on-reject: true
     # 如果踢出玩家，踢出的原因（信息）
     kick-message: |
-      <red>You have not agreed to the agreement.</red>
+      <red>你还没有接受玩家协议
+      <red>请阅读并接受玩家协议以继续游玩
     # 协议以书本形式展示的每一页内容
     pages:
       - |
-        114514
+        <bold><shadow:aqua:0.5><green>▄玩家协议▄</green></shadow></bold>
+        <gray>欢迎加入服务器！
+        请仔细阅读并同意：
+        -------------------
+        <white>► 遵守当地法律法规
+        ► 尊重其他玩家
+        ► 禁止作弊/外挂
+        ► 禁止恶意破坏建筑
+        ► 保持友善的交流氛围</white>
       - |
-        114514
+        <bold><shadow:aqua:0.5><green>▄条款细则▄</green></shadow></bold>
+        <gray>1. 破坏他人建筑需赔偿
+        2. 公共区域禁止占位
+        3. 交易诈骗永久封禁
+        4. 严禁种族歧视言论
+        5. 资源世界每周重置</gray>
+        -------------------
+        <red>注：违规者视情节给予
+        警告→禁言→封禁处罚</red>
+      - |
+        <bold><shadow:aqua:0.5><green>▄签署声明▄</green></shadow></bold>
+        <gray>我已阅读全部条款并承诺：
+        • 对自己的行为负责
+        • 维护服务器环境
+        • 接受管理员裁决
+
+        {0}
+        {1}
     # 拒绝按钮
     # 如你所见，这是一个典型的MiniMessage格式，详参上文
     # 你可以让玩家执行 /agreement reject 来拒绝协议，这是等效的
-    reject: '<click:run_command:"/agreement reject"><hover:show_text:"<gray>Click to reject the player agreement"><red>Reject</hover></click>'
+    reject: '<click:run_command:"/agreement reject"><hover:show_text:"<gray>点击拒绝玩家协议"><red>拒绝</hover></click>'
     # 同意按钮
-    # 你可以让玩家执行 /agreement agree 来同意协议，这是等效的
-    agree: '<click:run_command:"/agreement agree"><hover:show_text:"<gray>Click to agree to the player agreement"><green>Agree</hover></click>'
+    # 你可以让玩家执行 /agreement accept 来同意协议，这是等效的
+    accept: '<click:run_command:"/agreement accept"><hover:show_text:"<gray>点击同意玩家协议"><green>同意</hover></click>'
 
   # 防止玩家破坏方块
   # 一些写在前面的话：

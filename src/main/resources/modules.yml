@@ -62,8 +62,8 @@ modules:
   # Player agreement
   agreement:
     enabled: true
-    # Open agreement when player joins for the first time
-    on-first-join: true
+    # Open agreement when player joins and hasn't accepted yet
+    on-join: true
     # Open agreement every time player joins
     on-every-join: false
     # Open agreement when agreement changes
@@ -81,20 +81,46 @@ modules:
     kick-on-reject: true
     # Kick message if player is kicked
     kick-message: |
-      <red>You have not agreed to the agreement.</red>
+      <red>You have not accepted the agreement.
+      <red>Please read and accept it to join.
     # Agreement book page contents
     pages:
       - |
-        114514
+        <bold><shadow:aqua:0.5><green>▄ Player Agreement ▄</green></shadow></bold>
+        <gray>Welcome to the server!
+        Please read and agree:
+        -------------------
+        <white>► Obey local laws and regulations
+        ► Respect other players
+        ► No cheating/modded clients
+        ► No intentional griefing
+        ► Maintain friendly communication</white>
       - |
-        114514
+        <bold><shadow:aqua:0.5><green>▄ Terms&Details ▄</green></shadow></bold>
+        <gray>1. Compensate for damaged builds
+        2. No claiming public areas
+        3. Scamming = permanent ban
+        4. Zero tolerance for hate speech
+        5. Resource worlds reset weekly</gray>
+        -------------------
+        <red>Note: Violators face:
+        Warning→Mute→Ban progression</red>
+      - |
+        <bold><shadow:aqua:0.5><green>▄ Signature ▄</green></shadow></bold>
+        <gray>I have read all terms and agree to:
+        • Take responsibility for my actions
+        • Maintain server integrity
+        • Accept admin decisions
+        
+        {0}
+        {1}
     # Reject button
     # This is standard MiniMessage format as described above
     # Equivalent to player executing /agreement reject
     reject: '<click:run_command:"/agreement reject"><hover:show_text:"<gray>Click to reject the player agreement"><red>Reject</hover></click>'
-    # Agree button
-    # Equivalent to player executing /agreement agree
-    agree: '<click:run_command:"/agreement agree"><hover:show_text:"<gray>Click to agree to the player agreement"><green>Agree</hover></click>'
+    # Accept button
+    # Equivalent to player executing /agreement accept
+    accept: '<click:run_command:"/agreement accept"><hover:show_text:"<gray>Click to accept to the player agreement"><green>Accept</hover></click>'
 
   # Prevent block breaking
   # Foreword:

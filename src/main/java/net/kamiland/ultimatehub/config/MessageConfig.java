@@ -13,6 +13,9 @@ public class MessageConfig extends Config {
     private String reloadSuccess;
     private String unknownCommand;
     private String noConsole;
+    private String agreementAccept;
+    private String agreementReject;
+    private String agreementChange;
     private String antiAttack;
     private String antiBreak;
     private String antiDrop;
@@ -38,6 +41,9 @@ public class MessageConfig extends Config {
         noConsole = config.getString("general.no-console");
 
         // 加载模块消息
+        agreementAccept = config.getString("modules.agreement.accept");
+        agreementReject = config.getString("modules.agreement.reject");
+        agreementChange = config.getString("modules.agreement.change");
         antiAttack = config.getString("modules.anti-attack");
         antiBreak = config.getString("modules.anti-break");
         antiDrop = config.getString("modules.anti-drop");
@@ -58,6 +64,9 @@ public class MessageConfig extends Config {
             case RELOAD_SUCCESS -> reloadSuccess;
             case UNKNOWN_COMMAND -> unknownCommand;
             case NO_CONSOLE -> noConsole;
+            case AGREEMENT_ACCEPT -> agreementAccept;
+            case AGREEMENT_REJECT -> agreementReject;
+            case AGREEMENT_CHANGE -> agreementChange;
             case ANTI_ATTACK -> antiAttack;
             case ANTI_BREAK -> antiBreak;
             case ANTI_DROP -> antiDrop;
@@ -75,6 +84,9 @@ public class MessageConfig extends Config {
         RELOAD_SUCCESS,
         UNKNOWN_COMMAND,
         NO_CONSOLE,
+        AGREEMENT_ACCEPT,
+        AGREEMENT_REJECT,
+        AGREEMENT_CHANGE,
         ANTI_ATTACK,
         ANTI_BREAK,
         ANTI_DROP,

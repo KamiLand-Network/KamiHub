@@ -14,6 +14,10 @@ general:
   unknown-command: '<red>Unknown command! Please use <yellow>/uh help<red> to view command usage!'
   no-console: '<red>This command can only be executed by players!'
 modules:
+  agreement:
+    accept: '<green>You have agreed to the server''s agreement!'
+    reject: '<red>You have rejected the server''s agreement!'
+    change: '<green>Reset all players'' agreement status!'
   anti-attack: '<red>You cannot attack other players!'
   anti-break: '<red>You cannot break blocks here!'
   anti-drop: '<red>You cannot drop items here!'

@@ -14,7 +14,7 @@ public class ModuleConfig extends Config {
     public Map<String, List<String>> ACTIONBAR_WORLDS;
 
     public boolean IS_AGREEMENT_ENABLED;
-    public boolean IS_AGREEMENT_ON_FIRST_JOIN;
+    public boolean IS_AGREEMENT_ON_JOIN;
     public boolean IS_AGREEMENT_ON_EVERY_JOIN;
     public boolean IS_AGREEMENT_ON_CHANGE;
     public int AGREEMENT_DELAY;
@@ -24,7 +24,7 @@ public class ModuleConfig extends Config {
     public boolean IS_AGREEMENT_KICK_ON_REJECT;
     public String AGREEMENT_KICK_MESSAGE;
     public String[] AGREEMENT_PAGES;
-    public String AGREEMENT_AGREE_BUTTON;
+    public String AGREEMENT_ACCEPT_BUTTON;
     public String AGREEMENT_REJECT_BUTTON;
 
     public boolean IS_ANTIBREAK_ENABLED;
@@ -122,7 +122,7 @@ public class ModuleConfig extends Config {
         }
 
         IS_AGREEMENT_ENABLED = config.getBoolean("modules.agreement.enabled");
-        IS_AGREEMENT_ON_FIRST_JOIN = config.getBoolean("modules.agreement.on-first-join");
+        IS_AGREEMENT_ON_JOIN = config.getBoolean("modules.agreement.on-join");
         IS_AGREEMENT_ON_EVERY_JOIN = config.getBoolean("modules.agreement.on-every-join");
         IS_AGREEMENT_ON_CHANGE = config.getBoolean("modules.agreement.on-change");
         AGREEMENT_DELAY = config.getInt("modules.agreement.delay");
@@ -132,7 +132,7 @@ public class ModuleConfig extends Config {
         IS_AGREEMENT_KICK_ON_REJECT = config.getBoolean("modules.agreement.kick-on-reject");
         AGREEMENT_KICK_MESSAGE = config.getString("modules.agreement.kick-message");
         AGREEMENT_PAGES = config.getStringList("modules.agreement.pages").toArray(new String[0]);
-        AGREEMENT_AGREE_BUTTON = config.getString("modules.agreement.agree");
+        AGREEMENT_ACCEPT_BUTTON = config.getString("modules.agreement.accept");
         AGREEMENT_REJECT_BUTTON = config.getString("modules.agreement.reject");
 
         IS_ANTIBREAK_ENABLED = config.getBoolean("modules.anti-break.enabled");
