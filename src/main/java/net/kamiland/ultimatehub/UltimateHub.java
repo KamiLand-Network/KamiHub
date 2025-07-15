@@ -34,7 +34,7 @@ public class UltimateHub extends JavaPlugin {
         cpManager.init();
         runtimePDM = new RuntimePlayerDataManager(this, configManager, cpManager);
 
-        moduleManager = new ModuleManager(this, configManager);
+        moduleManager = new ModuleManager(this, configManager, runtimePDM);
 
         commandManager = new CommandManager(this, moduleManager, configManager);
         commandManager.registerCommands();
