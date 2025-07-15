@@ -36,7 +36,7 @@ public class UltimateHub extends JavaPlugin {
 
         moduleManager = new ModuleManager(this, configManager);
 
-        commandManager = new CommandManager(this, moduleManager);
+        commandManager = new CommandManager(this, moduleManager, configManager);
         commandManager.registerCommands();
     }
 
