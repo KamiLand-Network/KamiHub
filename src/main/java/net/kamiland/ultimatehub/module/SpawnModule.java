@@ -1,11 +1,17 @@
 package net.kamiland.ultimatehub.module;
 
 import net.kamiland.ultimatehub.UltimateHub;
+import net.kamiland.ultimatehub.data.model.spawn.SpawnLocation;
 import net.kamiland.ultimatehub.manager.ConfigManager;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class SpawnModule extends Module {
+import java.util.List;
+import java.util.Random;
+
+public class SpawnModule extends EventModule {
 
     private final UltimateHub plugin;
     private final ConfigManager configManager;
@@ -14,6 +20,8 @@ public class SpawnModule extends Module {
         super(plugin, "");
         this.plugin = plugin;
         this.configManager = configManager;
+
+        setEnabled(configManager.getModuleConfig().IS_SPAWN_ENABLED);
     }
 
     @Override
@@ -24,6 +32,16 @@ public class SpawnModule extends Module {
     @Override
     protected void unload() {
 
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        if (!isEnabled()) return;
+        if (!configManager.getModuleConfig().IS_SPAWN_ON_JOIN) return;
+        List<SpawnLocation> locations = configManager.getSpawnConfig().SPAWN_LOCATIONS;
+        Random random = new Random();
+        int index = random.nextInt(locations.size());
+        event.getPlayer().teleport(locations.get(index).getLocation());
     }
 
     @Override

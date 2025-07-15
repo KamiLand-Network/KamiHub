@@ -5,13 +5,14 @@ import net.kamiland.ultimatehub.data.model.spawn.SpawnLocation;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class SpawnConfig extends Config {
 
     private final UltimateHub plugin;
-    public LinkedList<SpawnLocation> SPAWN_LOCATIONS = new LinkedList<>();
+    public List<SpawnLocation> SPAWN_LOCATIONS = new ArrayList<>();
 
     public SpawnConfig(UltimateHub plugin) {
         super(plugin, "spawns.yml");
