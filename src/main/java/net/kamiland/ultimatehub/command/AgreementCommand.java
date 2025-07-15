@@ -4,37 +4,42 @@ import dev.rollczi.litecommands.annotations.command.Command;
 import dev.rollczi.litecommands.annotations.context.Context;
 import dev.rollczi.litecommands.annotations.execute.Execute;
 import dev.rollczi.litecommands.annotations.permission.Permission;
+import net.kamiland.ultimatehub.config.MessageConfig;
 import net.kamiland.ultimatehub.module.AgreementModule;
-import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Map;
-import java.util.UUID;
+import static net.kamiland.ultimatehub.config.MessageConfig.Message.*;
 
 @Command(name = "agreement")
 public class AgreementCommand {
 
     private final AgreementModule agreementModule;
+    private final MessageConfig message;
 
-    public AgreementCommand(AgreementModule agreementModule) {
+    public AgreementCommand(AgreementModule agreementModule, MessageConfig message) {
         this.agreementModule = agreementModule;
+        this.message = message;
     }
 
-    @Execute(name = "agree")
-    void agree(@Context Player player) {
-        Map<UUID, Integer> playerTaskMap = agreementModule.playerTaskMap;
-        Bukkit.getScheduler().cancelTask(playerTaskMap.get(player.getUniqueId()));
-        playerTaskMap.remove(player.getUniqueId());
+    @Execute(name = "accept")
+    void accept(@Context Player player) {
+        agreementModule.onAccept(player);
+        player.sendMessage(message.getMessage(player, AGREEMENT_ACCEPT));
     }
 
     @Execute(name = "reject")
     void reject(@Context Player player) {
         agreementModule.onReject(player);
+        player.sendMessage(message.getMessage(player, AGREEMENT_REJECT));
     }
 
     @Execute(name = "change")
     @Permission("ultimatehub.agreement.change")
-    void change() {
-        // TODO
+    void change(@Context CommandSender sender) {
+        agreementModule.onChange();
+        Player pSender = (sender instanceof Player) ? (Player) sender : null;
+        sender.sendMessage(message.getMessage(pSender, AGREEMENT_CHANGE));
     }
+
 }
