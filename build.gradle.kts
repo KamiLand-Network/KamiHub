@@ -41,6 +41,8 @@ repositories {
     maven("https://repo.panda-lang.org/releases")
     // InvUI
     maven("https://repo.xenondevs.xyz/releases")
+    // Item-NBT-API
+    maven("https://repo.codemc.io/repository/maven-public/")
 
     // PlaceholderAPI
     maven("https://repo.extendedclip.com/releases")
@@ -60,6 +62,7 @@ dependencies {
     implementation("com.github.LeonMangler:SuperVanish:6.2.19") {
         exclude("com.mojang", "brigadier")
     }
+    implementation("de.tr7zw:item-nbt-api-plugin:2.15.1")
     compileOnly("me.clip:placeholderapi:2.11.6")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")
     compileOnly("net.luckperms:api:5.4")
@@ -87,12 +90,12 @@ tasks.shadowJar {
     archiveBaseName.set("UltimateHub")
     archiveClassifier.set("")
 
+    relocate("de.myzelyam", "net.kamiland.ultimatehub.lib.myzelyam")
+    relocate("de.tr7zw", "net.kamiland.ultimatehub.lib.tr7zw")
     relocate("org.jetbrains", "net.kamiland.ultimatehub.lib.jetbrains")
     relocate("org.intellij", "net.kamiland.ultimatehub.lib.intellij")
     relocate("dev.rollczi", "net.kamiland.ultimatehub.lib.rollczi")
     relocate("xyz.xenondevs", "net.kamiland.ultimatehub.lib.xenondevs")
-
-    relocate("de.myzelyam", "net.kamiland.ultimatehub.lib.myzelyam")
 
     mergeServiceFiles()
 }
