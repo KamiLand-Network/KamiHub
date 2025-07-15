@@ -1,6 +1,7 @@
 package net.kamiland.ultimatehub.config;
 
 import net.kamiland.ultimatehub.UltimateHub;
+import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -210,7 +211,8 @@ public class ModuleConfig extends Config {
         IS_POTIONEFFECT_GIVE_ON_JOIN = config.getBoolean("modules.potion-effect.give-on-join");
         POTIONEFFECT_EFFECTS = new ArrayList<>();
         for (Map<?, ?> effectMap : config.getMapList("modules.potion-effect.effects")) {
-            PotionEffectType type = PotionEffectType.getByName(((String) effectMap.get("name")).toUpperCase());
+            List<PotionEffectType> values = Arrays.stream(PotionEffectType.values()).toList();
+            PotionEffectType type = PotionEffectType.getByKey(NamespacedKey.fromString((String) effectMap.get("name")));
             if (type == null) continue;
             int duration = effectMap.get("duration").equals("infinite")
                     ? Integer.MAX_VALUE
@@ -220,7 +222,8 @@ public class ModuleConfig extends Config {
                     duration,
                     (Integer) effectMap.get("amplifier"),
                     false,
-                    (Boolean) effectMap.get("particles")
+                    (Boolean) effectMap.get("particles"),
+                    true
             );
             POTIONEFFECT_EFFECTS.add(effect);
         }
