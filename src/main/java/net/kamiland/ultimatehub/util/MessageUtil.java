@@ -55,4 +55,5 @@ public class MessageUtil {
 
         return miniMessageSerializer.deserialize(miniMessage);
     }
+
 }
