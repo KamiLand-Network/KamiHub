@@ -255,19 +255,27 @@ modules:
     give-on-join: false
 
   # Join and Quit Messages
-  # Messages can be customized per group.
+  # Some servers may display different join/quit messages based on different permission groups
   join-quit-message:
     enabled: true
-    # Configure join/quit messages for player groups
-    # Use placeholder {0} for player name.
+    # Group configuration for join and quit messages
+    # Use placeholder {0} for player name
+    # Currently only supports LuckPerms and Vault-compatible permission plugins
+    # If your permission plugin does not support Vault, add `ultimatehub.group.xxx` to declare permission groups
     groups:
-      # Default group (mandatory)
+      # Default permission group (cannot be deleted)
       default:
+        # Permission group weight
+        # If a player is in multiple groups, UltimateHub will select the one with the highest priority
+        priority: 0
+        # Join and quit messages
+        # If multiple messages are provided, one will be randomly selected
         join:
           - '<green>[+] <reset>{0}'
         quit:
           - '<gray>[-] <reset>{0}'
       vip:
+        priority: 10
         join:
           - '<rainbow>{0} joined the server!</rainbow>'
         quit:

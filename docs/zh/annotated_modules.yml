@@ -259,19 +259,27 @@ modules:
     give-on-join: false
 
   # 加入和退出消息
-  # 一些服务器可能根据不同的用户组显示不同的加入/退出消息
+  # 一些服务器可能根据不同的权限组显示不同的加入/退出消息
   join-quit-message:
     enabled: true
     # 分组配置加入和退出消息
     # 使用占位符 {0} 作为玩家名
+    # 目前仅支持LuckPerms和支持Vault的权限插件
+    # 如果您的权限插件不支持Vault，请为您的组添加 ultimatehub.group.xxx 权限来声明权限组
     groups:
-      # 默认用户组，不可删除
+      # 默认权限组，不可删除
       default:
+        # 权限组权重
+        # 当一个玩家同时处于多个用户组时，UltimateHub会选择玩家拥有的权限组中权重最大的那个
+        priority: 0
+        # 加入和退出消息
+        # 当加入和退出消息为多条时，随机选择一条
         join:
           - '<green>[+] <reset>{0}'
         quit:
           - '<gray>[-] <reset>{0}'
       vip:
+        priority: 10
         join:
           - '<rainbow>{0} joined the server!</rainbow>'
         quit:

@@ -82,6 +82,7 @@ public class ModuleConfig extends Config {
 
     public boolean IS_JQMESSAGE_ENABLED;
     public Map<String, Map<String, List<String>>> JQMESSAGE_GROUPS;
+    public Map<String, Integer> JQMESSAGE_GROUPS_PRIORITY;
 
     public boolean IS_POTIONEFFECT_ENABLED;
     public boolean IS_POTIONEFFECT_CLEAR_ON_JOIN;
@@ -194,11 +195,13 @@ public class ModuleConfig extends Config {
         IS_JQMESSAGE_ENABLED = config.getBoolean("modules.join-quit-message.enabled");
         section = Objects.requireNonNull(config.getConfigurationSection("modules.join-quit-message.groups"));
         JQMESSAGE_GROUPS = new HashMap<>();
+        JQMESSAGE_GROUPS_PRIORITY = new HashMap<>();
         for (String group : section.getKeys(false)) {
             Map<String, List<String>> groupData = new HashMap<>();
             groupData.put("join", config.getStringList("modules.join-quit-message.groups." + group + ".join"));
             groupData.put("quit", config.getStringList("modules.join-quit-message.groups." + group + ".quit"));
             JQMESSAGE_GROUPS.put(group, groupData);
+            JQMESSAGE_GROUPS_PRIORITY.put(group, config.getInt("modules.join-quit-message.groups." + group + ".priority"));
         }
 
         IS_POTIONEFFECT_ENABLED = config.getBoolean("modules.potion-effect.enabled");
