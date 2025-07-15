@@ -1,23 +1,81 @@
 package net.kamiland.ultimatehub.module;
 
 import net.kamiland.ultimatehub.UltimateHub;
+import net.kamiland.ultimatehub.config.ModuleConfig;
 import net.kamiland.ultimatehub.manager.ConfigManager;
+import net.kamiland.ultimatehub.manager.ServerManager;
+import net.kamiland.ultimatehub.util.MessageUtil;
+import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.model.user.UserManager;
+import net.milkbowl.vault.permission.Permission;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class JQMessageModule extends EventModule {
 
+    private final UltimateHub plugin;
+    private final ConfigManager configManager;
+    private Map<String, Map<String, List<String>>> groupMessages;
+    private Map<String, Integer> groupPriority;
+    private UserManager lpUserManager;
+    private Permission vaultPermission;
+
     public JQMessageModule(UltimateHub plugin, ConfigManager configManager) {
         super(plugin, "jq-message");
+        this.plugin = plugin;
+        this.configManager = configManager;
+
+        setEnabled(configManager.getModuleConfig().IS_JQMESSAGE_ENABLED);
     }
 
     @Override
     protected void load() {
+        ModuleConfig config = configManager.getModuleConfig();
+        groupMessages = config.JQMESSAGE_GROUPS;
+        groupPriority = config.JQMESSAGE_GROUPS_PRIORITY;
 
+        if (ServerManager.LUCKPERMS) {
+            lpUserManager = LuckPermsProvider.get().getUserManager();
+        } else if (ServerManager.VAULT) {
+            RegisteredServiceProvider<Permission> rsp = plugin.getServer().getServicesManager().getRegistration(Permission.class);
+            if (rsp != null) vaultPermission = rsp.getProvider();
+        }
     }
 
     @Override
     protected void unload() {
 
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        if (! isEnabled()) return;
+        Player player = event.getPlayer();
+        List<String> messages = groupMessages.get(getGroup(player)).get("join");
+        if (messages != null && ! messages.isEmpty()) {
+            event.joinMessage(MessageUtil.getMessage(player, messages.get(new Random().nextInt(messages.size())), player.getName()));
+        }
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        if (! isEnabled()) return;
+        Player player = event.getPlayer();
+        List<String> messages = groupMessages.get(getGroup(player)).get("quit");
+        if (messages != null && ! messages.isEmpty()) {
+            event.quitMessage(MessageUtil.getMessage(player, messages.get(new Random().nextInt(messages.size())), player.getName()));
+        }
     }
 
     @Override
@@ -30,6 +88,24 @@ public class JQMessageModule extends EventModule {
     @Nullable
     public String getBypassPermission() {
         return null;
+    }
+
+    private String getGroup(Player player) {
+        AtomicReference<String> group = new AtomicReference<>("default");
+        if (ServerManager.LUCKPERMS) {
+            group.set(Objects.requireNonNull(lpUserManager.getUser(player.getUniqueId())).getPrimaryGroup());
+        } else if (ServerManager.VAULT) {
+            group.set(vaultPermission.getPrimaryGroup(player));
+        } else {
+            AtomicInteger priority = new AtomicInteger();
+            groupPriority.forEach((g, p) -> {
+                if (player.hasPermission("ultimatehub.group." + g) && p > priority.get()) {
+                    group.set(g);
+                    priority.set(p);
+                }
+            });
+        }
+        return group.get();
     }
 
 }

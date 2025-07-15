@@ -27,6 +27,7 @@ public class ModuleManager {
         put(new BossBarModule(plugin, configManager));
         put(new BroadcastModule(plugin, configManager));
         put(new ClearChatModule(plugin, configManager));
+        put(new JQMessageModule(plugin, configManager));
     }
 
     @Nullable

@@ -24,6 +24,17 @@ public class ServerManager {
     public static boolean PLACEHOLDER_API;
 
     /**
+     * Status flag for LuckPerms availability
+     */
+    public static boolean LUCKPERMS;
+
+
+    /**
+     * Status flag for Vault availability
+     */
+    public static boolean VAULT;
+
+    /**
      * Constructs server manager with plugin instance
      * @param plugin Main plugin instance for server access
      */
@@ -42,6 +53,8 @@ public class ServerManager {
      */
     public void load() {
         PLACEHOLDER_API = checkPlugin("PlaceholderAPI");
+        LUCKPERMS = checkPlugin("LuckPerms");
+        VAULT = checkPlugin("Vault");
     }
 
     /**
