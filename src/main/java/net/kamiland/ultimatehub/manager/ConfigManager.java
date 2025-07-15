@@ -2,6 +2,7 @@ package net.kamiland.ultimatehub.manager;
 
 import lombok.Getter;
 import net.kamiland.ultimatehub.UltimateHub;
+import net.kamiland.ultimatehub.config.MessageConfig;
 import net.kamiland.ultimatehub.config.ModuleConfig;
 import net.kamiland.ultimatehub.config.PluginConfig;
 import net.kamiland.ultimatehub.config.SpawnConfig;
@@ -43,6 +44,12 @@ public class ConfigManager {
     private SpawnConfig spawnConfig;
 
     /**
+     * Messages configuration handler
+     */
+    @Getter
+    private MessageConfig messageConfig;
+
+    /**
      * Creates configuration manager instance
      * @param plugin Main plugin instance for file access
      */
@@ -67,6 +74,8 @@ public class ConfigManager {
         moduleConfig.load();
         spawnConfig = new SpawnConfig(plugin);
         spawnConfig.load();
+        messageConfig = new MessageConfig(plugin);
+        messageConfig.load();
     }
 
 }
