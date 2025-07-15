@@ -6,214 +6,198 @@ import net.kamiland.ultimatehub.data.manager.player.PlayerDataManager;
 import net.kamiland.ultimatehub.data.model.player.PlayerData;
 import net.kamiland.ultimatehub.manager.ConfigManager;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 /**
- * RuntimePlayerDataManager is an in-memory manager for player data during a player's online session.
- * It serves as a bridge between the runtime environment and the persistent storage implementation,
- * enabling efficient access and modification of player data while they are online.
- * <p>
- * Responsibilities:<br>
- * - Load and cache player data into memory upon login.<br>
- * - Provide fast access to Player and PlayerData instances.<br>
- * - Persist updated player data to storage.<br>
- * - Clean up data upon player logout.<br>
- * - Support managing data through UUIDs, player names, and Player instances.
- * </p>
+ * Handles player data during their online session. Provides a fast-access, in-memory cache
+ * that synchronizes with persistent storage (e.g. MySQL).
  */
 public class RuntimePlayerDataManager implements PlayerDataManager, Listener {
 
     private final UltimateHub plugin;
     private final PlayerDataManager storagePDM;
-    private final Map<UUID, Player> uuidPlayerMap = new HashMap<>();
-    private final Map<String, Player> namePlayerMap = new HashMap<>();
-    private final Map<Player, PlayerData> playerDataMap = new HashMap<>();
+    private final Map<UUID, PlayerData> playerDataMap = new HashMap<>();
 
     /**
-     * Constructor that initializes the in-memory manager and registers event listeners.
-     *
-     * @param plugin         UltimateHub plugin instance
-     * @param configManager  Configuration manager
-     * @param cpManager      SQL connection pool manager
+     * Initializes the runtime manager and preloads data for currently online players.
      */
     public RuntimePlayerDataManager(UltimateHub plugin, ConfigManager configManager, ConnectionPoolManager cpManager) {
         this.plugin = plugin;
         this.storagePDM = new MySQLPlayerDataManager(plugin.getSLF4JLogger(), configManager, cpManager);
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
+
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, this::loadOnlinePlayers);
     }
 
     /**
-     * Get the Player instance by UUID from memory.
-     */
-    public @Nullable Player getPlayer(UUID uuid) {
-        return uuidPlayerMap.get(uuid);
-    }
-
-    /**
-     * Get the Player instance by name from memory.
-     */
-    public @Nullable Player getPlayer(String name) {
-        return namePlayerMap.get(name);
-    }
-
-    /**
-     * Event listener to handle player joining. Loads player data.
+     * Handles pre-login event to load or create player data.
      */
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-            loadPlayer(event.getPlayer());
-            PlayerData playerData = playerDataMap.get(event.getPlayer());
-            if (playerData != null) {
-                playerData.setLoginTimes(playerData.getLoginTimes() + 1);
-                savePlayer(event.getPlayer(), playerData);
-                savePlayerToStorage(event.getPlayer());
-            }
-        });
+    public void onAsyncPlayerPreLogin(AsyncPlayerPreLoginEvent event) {
+        if (isPlayerExistFromStorage(event.getUniqueId()))
+            loadPlayer(event.getUniqueId());
+        else
+            putNewPlayer(event.getUniqueId(), event.getName());
     }
 
     /**
-     * Event listener to handle player quitting. Unloads player data.
+     * Unloads player data when the player quits.
      */
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerQuit(PlayerQuitEvent event) {
-        unloadPlayer(event.getPlayer());
+        unloadPlayer(event.getPlayer().getUniqueId());
     }
 
     /**
-     * Load player data from storage and cache in memory.
+     * Loads player data from storage into memory.
      */
     @Override
-    public void loadPlayer(Player player) {
-        if (getPlayerDataFromStorage(player) != null) {
-            uuidPlayerMap.put(player.getUniqueId(), player);
-            namePlayerMap.put(player.getName(), player);
-            playerDataMap.put(player, getPlayerDataFromStorage(player));
-        } else {
-            putNewPlayer(player);
+    public void loadPlayer(UUID uuid) {
+        PlayerData data = getPlayerDataFromStorage(uuid);
+        if (data != null) {
+            playerDataMap.put(uuid, data);
         }
     }
 
     /**
-     * Save (cache) player data to memory.
+     * Saves player data to memory (cache only).
      */
     @Override
-    public void savePlayer(Player player, PlayerData playerData) {
-        playerDataMap.put(player, playerData);
+    public void savePlayer(UUID uuid, PlayerData playerData) {
+        playerDataMap.put(uuid, playerData);
     }
 
     /**
-     * Save cached player data to persistent storage.
+     * Persists cached player data to storage.
      */
-    public void savePlayerToStorage(Player player) {
-        storagePDM.savePlayer(player, playerDataMap.get(player));
+    public void savePlayerToStorage(UUID uuid) {
+        storagePDM.savePlayer(uuid, playerDataMap.get(uuid));
     }
 
     /**
-     * Save specified player data to persistent storage.
+     * Persists specified player data directly to storage.
      */
-    public void savePlayerToStorage(Player player, PlayerData playerData) {
-        storagePDM.savePlayer(player, playerData);
+    public void savePlayerToStorage(UUID uuid, PlayerData playerData) {
+        storagePDM.savePlayer(uuid, playerData);
     }
 
     /**
-     * Add new player data to storage and load into memory.
-     */
-    @Override
-    public void putNewPlayer(Player player) {
-        storagePDM.putNewPlayer(player);
-        loadPlayer(player);
-    }
-
-    /**
-     * Remove player data from both memory and storage.
+     * Creates a new player record in storage and loads it.
      */
     @Override
-    public void removePlayer(Player player) {
-        uuidPlayerMap.remove(player.getUniqueId());
-        namePlayerMap.remove(player.getName());
-        playerDataMap.remove(player);
-        storagePDM.removePlayer(player);
+    public void putNewPlayer(UUID uuid, String name) {
+        storagePDM.putNewPlayer(uuid, name);
+        loadPlayer(uuid);
     }
 
     /**
-     * Get player data from memory.
+     * Removes player data from both memory and storage.
      */
     @Override
-    public @Nullable PlayerData getPlayerData(Player player) {
-        return playerDataMap.get(player);
+    public void removePlayer(UUID uuid) {
+        playerDataMap.remove(uuid);
+        storagePDM.removePlayer(uuid);
     }
 
     /**
-     * Get player data from storage.
+     * Clears agreement status for all cached players.
      */
-    public @Nullable PlayerData getPlayerDataFromStorage(Player player) {
-        return storagePDM.getPlayerData(player);
+    @Override
+    public void clearAllAgreementStatus() {
+        playerDataMap.values().stream()
+                .filter(PlayerData::isAgreement)
+                .forEach(p -> p.setAgreement(false));
     }
 
     /**
-     * Get player data by UUID from memory.
+     * Clears agreement status for all players in storage.
+     */
+    public void clearAllAgreementStatusFromStorage() {
+        storagePDM.clearAllAgreementStatus();
+    }
+
+    /**
+     * Gets cached player data by UUID.
      */
     @Override
     public @Nullable PlayerData getPlayerData(UUID uuid) {
-        return playerDataMap.get(uuidPlayerMap.get(uuid));
+        return playerDataMap.get(uuid);
     }
 
     /**
-     * Get player data by UUID from storage.
+     * Gets player data from persistent storage by UUID.
      */
     public @Nullable PlayerData getPlayerDataFromStorage(UUID uuid) {
         return storagePDM.getPlayerData(uuid);
     }
 
     /**
-     * Get player data by name from memory.
+     * Gets player UUID from cache by player name.
      */
     @Override
-    public @Nullable PlayerData getPlayerData(String name) {
-        return playerDataMap.get(getPlayer(name));
+    public @Nullable UUID getPlayerUniqueIdByName(String name) {
+        try {
+            return playerDataMap.entrySet().stream()
+                    .filter(entry -> entry.getValue().getName().equals(name))
+                    .findFirst()
+                    .orElseThrow()
+                    .getKey();
+        } catch (NoSuchElementException ignore) {
+            return null;
+        }
     }
 
     /**
-     * Get player data by name from storage.
+     * Gets player UUID from storage by player name.
      */
-    public @Nullable PlayerData getPlayerDataFromStorage(String name) {
-        return storagePDM.getPlayerData(name);
+    public @Nullable UUID getPlayerUniqueIdByNameFromStorage(String name) {
+        return storagePDM.getPlayerUniqueIdByName(name);
     }
 
     /**
-     * Load all currently online players' data into memory.
+     * Checks if player data exists in memory.
+     */
+    @Override
+    public boolean isPlayerExist(UUID uuid) {
+        return playerDataMap.containsKey(uuid);
+    }
+
+    /**
+     * Checks if player data exists in persistent storage.
+     */
+    public boolean isPlayerExistFromStorage(UUID uuid) {
+        return storagePDM.isPlayerExist(uuid);
+    }
+
+    /**
+     * Loads data for all currently online players.
      */
     public void loadOnlinePlayers() {
-        plugin.getServer().getOnlinePlayers().forEach(this::loadPlayer);
+        plugin.getServer().getOnlinePlayers().forEach(p -> loadPlayer(p.getUniqueId()));
     }
 
     /**
-     * Unload all online players' data from memory.
-     * Note: This does not automatically save the data. Call savePlayerToStorage() manually if needed.
+     * Unloads all online players' data from memory.
      */
     public void unloadAllPlayers() {
-        plugin.getServer().getOnlinePlayers().forEach(this::unloadPlayer);
+        plugin.getServer().getOnlinePlayers().forEach(p -> unloadPlayer(p.getUniqueId()));
     }
 
     /**
-     * Unload a single player's data from memory.
-     * Note: This does not automatically save the data. Call savePlayerToStorage() manually if needed.
+     * Unloads a single player's data from memory.
      */
-    public void unloadPlayer(Player player) {
-        uuidPlayerMap.remove(player.getUniqueId());
-        namePlayerMap.remove(player.getName());
-        playerDataMap.remove(player);
+    public void unloadPlayer(UUID uuid) {
+        playerDataMap.remove(uuid);
     }
 
 }

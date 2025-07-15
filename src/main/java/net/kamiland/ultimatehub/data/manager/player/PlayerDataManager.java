@@ -1,7 +1,6 @@
 package net.kamiland.ultimatehub.data.manager.player;
 
 import net.kamiland.ultimatehub.data.model.player.PlayerData;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
@@ -22,51 +21,60 @@ import java.util.UUID;
 public interface PlayerDataManager {
 
     /**
-     * Loads player data into memory from storage.
-     * @param player Target player to load data for
+     * Loads player data into memory.
+     * @param uuid Target player to load data for
      */
-    void loadPlayer(Player player);
+    void loadPlayer(UUID uuid);
 
     /**
      * Persists player data to storage.
-     * @param player Target player to save data for
+     * @param uuid Unique identifier of the target player
+     * @param playerData Player data object to be saved
      */
-    void savePlayer(Player player, PlayerData playerData);
+    void savePlayer(UUID uuid, PlayerData playerData);
 
     /**
-     * Creates and caches new player data entry.
-     * @param player New player to initialize data for
+     * Creates new player data entry in the system.
+     * @param uuid Unique identifier for the new player
+     * @param name Player's display name
      */
-    void putNewPlayer(Player player);
+    void putNewPlayer(UUID uuid, String name);
 
     /**
-     * Removes player data from memory cache.
-     * @param player Player to remove from cache
+     * Removes player data from cache.
+     * @param uuid Player to remove from cache
      */
-    void removePlayer(Player player);
+    void removePlayer(UUID uuid);
 
     /**
-     * Retrieves cached player data by Player instance.
-     * @param player Player to get data for
-     * @return PlayerData instance or null if not cached
+     * Resets agreement status for all registered players.
+     * <p>This operation will set agreement status to false in persistent storage.
      */
-    @Nullable
-    PlayerData getPlayerData(Player player);
+    void clearAllAgreementStatus();
 
     /**
      * Retrieves cached player data by UUID.
      * @param uuid Unique player identifier
-     * @return PlayerData instance or null if not found
+     * @return PlayerData instance if found, null otherwise
      */
     @Nullable
     PlayerData getPlayerData(UUID uuid);
 
     /**
-     * Retrieves cached player data by exact name match.
-     * @param name Case-sensitive player name
-     * @return PlayerData instance or null if not found
+     * Looks up player's UUID by their display name.
+     * @param name Player's display name
+     * @return Associated UUID if exists, null if not found
      */
     @Nullable
-    PlayerData getPlayerData(String name);
+    UUID getPlayerUniqueIdByName(String name);
+
+    /**
+     * Checks if player data exists for the specified UUID
+     * <p>Verifies both in-memory cache and persistent storage</p>
+     *
+     * @param uuid Unique player identifier
+     * @return true if the player data exists, false otherwise
+     */
+    boolean isPlayerExist(UUID uuid);
 
 }

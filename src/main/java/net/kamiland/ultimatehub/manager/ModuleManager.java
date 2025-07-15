@@ -1,6 +1,7 @@
 package net.kamiland.ultimatehub.manager;
 
 import net.kamiland.ultimatehub.UltimateHub;
+import net.kamiland.ultimatehub.data.impl.player.RuntimePlayerDataManager;
 import net.kamiland.ultimatehub.module.*;
 import net.kamiland.ultimatehub.module.Module;
 import org.jetbrains.annotations.Nullable;
@@ -12,9 +13,9 @@ public class ModuleManager {
 
     private final HashMap<String, Module> modules = new HashMap<>();
 
-    public ModuleManager(UltimateHub plugin, ConfigManager configManager) {
+    public ModuleManager(UltimateHub plugin, ConfigManager configManager, RuntimePlayerDataManager runtimePDM) {
         put(new ActionBarModule(plugin, configManager));
-        put(new AgreementModule(plugin, configManager));
+        put(new AgreementModule(plugin, configManager, runtimePDM));
         put(new AntiAttackModule(plugin, configManager));
         put(new AntiBreakModule(plugin, configManager));
         put(new AntiDamageModule(plugin, configManager));

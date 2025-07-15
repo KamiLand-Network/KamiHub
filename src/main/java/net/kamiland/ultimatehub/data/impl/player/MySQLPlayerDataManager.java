@@ -4,7 +4,6 @@ import net.kamiland.ultimatehub.data.manager.cp.ConnectionPoolManager;
 import net.kamiland.ultimatehub.data.manager.player.PlayerDataManager;
 import net.kamiland.ultimatehub.data.model.player.PlayerData;
 import net.kamiland.ultimatehub.manager.ConfigManager;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
@@ -54,12 +53,7 @@ public class MySQLPlayerDataManager implements PlayerDataManager {
     }
 
     @Override
-    public void loadPlayer(Player player) {
-
-    }
-
-    @Override
-    public void savePlayer(Player player, PlayerData playerData) {
+    public void savePlayer(UUID uuid, PlayerData playerData) {
         String sql = String.format(
                 "UPDATE %splayerdata SET name=?, login_times=?, agreement=? WHERE uuid=?;",
                 tablePrefix);
@@ -69,7 +63,7 @@ public class MySQLPlayerDataManager implements PlayerDataManager {
                 stmt.setString(1, playerData.getName());
                 stmt.setInt(2, playerData.getLoginTimes());
                 stmt.setBoolean(3, playerData.isAgreement());
-                stmt.setString(4, player.getUniqueId().toString());
+                stmt.setString(4, uuid.toString());
                 stmt.executeUpdate();
                 conn.commit();
             } catch (SQLException e) {
@@ -82,13 +76,13 @@ public class MySQLPlayerDataManager implements PlayerDataManager {
     }
 
     @Override
-    public void putNewPlayer(Player player) {
+    public void putNewPlayer(UUID uuid, String name) {
         String sql = String.format("INSERT INTO %splayerdata (uuid, name) VALUES (?, ?);", tablePrefix);
         try (var conn = cpManager.getConnection();
              var stmt = conn.prepareStatement(sql)) {
             try {
-                stmt.setString(1, player.getUniqueId().toString());
-                stmt.setString(2, player.getName());
+                stmt.setString(1, uuid.toString());
+                stmt.setString(2, name);
                 stmt.executeUpdate();
                 conn.commit();
             } catch (SQLException e) {
@@ -101,12 +95,12 @@ public class MySQLPlayerDataManager implements PlayerDataManager {
     }
 
     @Override
-    public void removePlayer(Player player) {
+    public void removePlayer(UUID uuid) {
         String sql = String.format("DELETE FROM %splayerdata WHERE uuid=?;", tablePrefix);
         try (var conn = cpManager.getConnection();
              var stmt = conn.prepareStatement(sql)) {
             try {
-                stmt.setString(1, player.getUniqueId().toString());
+                stmt.setString(1, uuid.toString());
                 stmt.executeUpdate();
                 conn.commit();
             } catch (SQLException e) {
@@ -119,8 +113,29 @@ public class MySQLPlayerDataManager implements PlayerDataManager {
     }
 
     @Override
-    public @Nullable PlayerData getPlayerData(Player player) {
-        return getPlayerData(player.getUniqueId());
+    public void loadPlayer(UUID uuid) {
+
+    }
+
+    @Override
+    public void clearAllAgreementStatus() {
+        String sql = String.format(
+                "UPDATE %splayerdata SET agreement=? WHERE agreement=?;",
+                tablePrefix);
+        try (var conn = cpManager.getConnection();
+             var stmt = conn.prepareStatement(sql)) {
+            try {
+                stmt.setBoolean(1, false);
+                stmt.setBoolean(2, true);
+                stmt.executeUpdate();
+                conn.commit();
+            } catch (SQLException e) {
+                putError(e);
+                conn.rollback();
+            }
+        } catch (SQLException e) {
+            putError(e);
+        }
     }
 
     @Override
@@ -152,20 +167,17 @@ public class MySQLPlayerDataManager implements PlayerDataManager {
     }
 
     @Override
-    public @Nullable PlayerData getPlayerData(String name) {
-        String sql = String.format("SELECT * FROM %splayerdata WHERE name=?;", tablePrefix);
+    public @Nullable UUID getPlayerUniqueIdByName(String name) {
+        String sql = String.format("SELECT uuid FROM %splayerdata WHERE name=?;", tablePrefix);
         try (var conn = cpManager.getConnection();
              var stmt = conn.prepareStatement(sql)) {
             try {
                 stmt.setString(1, name);
                 try (var rs = stmt.executeQuery()) {
                     if (rs.next()) {
-                        PlayerData playerData = new PlayerData(UUID.fromString(rs.getString("uuid")));
-                        playerData.setName(rs.getString("name"));
-                        playerData.setLoginTimes(rs.getInt("login_times"));
-                        playerData.setAgreement(rs.getBoolean("agreement"));
+                        UUID uuid = UUID.fromString(rs.getString("uuid"));
                         conn.commit();
-                        return playerData;
+                        return uuid;
                     }
                     conn.commit();
                 }
@@ -179,8 +191,32 @@ public class MySQLPlayerDataManager implements PlayerDataManager {
         return null;
     }
 
+    @Override
+    public boolean isPlayerExist(UUID uuid) {
+        String sql = String.format("SELECT 1 FROM %splayerdata WHERE uuid=?;", tablePrefix);
+        try (var conn = cpManager.getConnection();
+             var stmt = conn.prepareStatement(sql)) {
+            try {
+                stmt.setString(1, uuid.toString());
+                try (var rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        conn.commit();
+                        return true;
+                    }
+                    conn.commit();
+                }
+            } catch (SQLException e) {
+                putError(e);
+                conn.rollback();
+            }
+        } catch (SQLException e) {
+            putError(e);
+        }
+        return false;
+    }
+
     private void putError(SQLException e) {
-        logger.error("Error while executing SQL query", e);
+        logger.error("Error while executing SQL statement: {}", e.getMessage());
     }
 
 }
