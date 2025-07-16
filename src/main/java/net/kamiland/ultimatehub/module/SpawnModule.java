@@ -17,7 +17,7 @@ public class SpawnModule extends EventModule {
     private final ConfigManager configManager;
 
     public SpawnModule(UltimateHub plugin, ConfigManager configManager) {
-        super(plugin, "");
+        super(plugin, "spawn");
         this.plugin = plugin;
         this.configManager = configManager;
 
@@ -47,7 +47,7 @@ public class SpawnModule extends EventModule {
     @Override
     @NotNull
     public String getPermission() {
-        return "ultimatehub.void-tp";
+        return "ultimatehub.spawn";
     }
 
     @Override

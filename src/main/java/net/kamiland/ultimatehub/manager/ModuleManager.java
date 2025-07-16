@@ -30,6 +30,7 @@ public class ModuleManager {
         put(new ClearChatModule(plugin, configManager));
         put(new JQMessageModule(plugin, configManager));
         put(new PotionEffectModule(plugin, configManager));
+        put(new SpawnModule(plugin, configManager));
     }
 
     @Nullable
