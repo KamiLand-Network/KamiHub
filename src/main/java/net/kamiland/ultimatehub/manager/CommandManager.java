@@ -3,6 +3,8 @@ package net.kamiland.ultimatehub.manager;
 import dev.rollczi.litecommands.LiteCommands;
 import dev.rollczi.litecommands.bukkit.LiteBukkitFactory;
 import dev.rollczi.litecommands.handler.result.ResultHandlerChain;
+import dev.rollczi.litecommands.invalidusage.InvalidUsage;
+import dev.rollczi.litecommands.invalidusage.InvalidUsageHandler;
 import dev.rollczi.litecommands.invocation.Invocation;
 import dev.rollczi.litecommands.permission.MissingPermissions;
 import dev.rollczi.litecommands.permission.MissingPermissionsHandler;
@@ -16,6 +18,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import static net.kamiland.ultimatehub.config.MessageConfig.Message.NO_PERMISSION;
+import static net.kamiland.ultimatehub.config.MessageConfig.Message.UNKNOWN_COMMAND;
 
 public class CommandManager {
 
@@ -39,6 +42,7 @@ public class CommandManager {
                         new UltimateHubCommand()
                 )
                 .missingPermission(new PermissionsHandler())
+                .invalidUsage(new UsageHandler())
                 .build();
     }
 
@@ -55,6 +59,18 @@ public class CommandManager {
                 player.sendMessage(message.getMessage(player, NO_PERMISSION, permissions));
             else
                 invocation.sender().sendMessage(message.getMessage(null, NO_PERMISSION, permissions));
+        }
+
+    }
+
+    class UsageHandler implements InvalidUsageHandler<CommandSender> {
+
+        @Override
+        public void handle(Invocation<CommandSender> invocation, InvalidUsage<CommandSender> result, ResultHandlerChain<CommandSender> chain) {
+            if (invocation.sender() instanceof Player player)
+                player.sendMessage(message.getMessage(player, UNKNOWN_COMMAND));
+            else
+                invocation.sender().sendMessage(message.getMessage(null, UNKNOWN_COMMAND));
         }
 
     }
