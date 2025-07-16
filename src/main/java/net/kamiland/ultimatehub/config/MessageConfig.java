@@ -23,6 +23,9 @@ public class MessageConfig extends Config {
     private String antiPlace;
     private String antiProjectile;
     private String spawnTeleport;
+    private String spawnAdd;
+    private String spawnRemove;
+    private String spawnList;
     private String voidTp;
 
     public MessageConfig(UltimateHub plugin) {
@@ -50,7 +53,10 @@ public class MessageConfig extends Config {
         antiInteract = config.getString("modules.anti-interact");
         antiPlace = config.getString("modules.anti-place");
         antiProjectile = config.getString("modules.anti-projectile");
-        spawnTeleport = config.getString("modules.spawn-teleport");
+        spawnTeleport = config.getString("modules.spawn.teleport");
+        spawnAdd = config.getString("modules.spawn.add");
+        spawnRemove = config.getString("modules.spawn.remove");
+        spawnList = config.getString("modules.spawn.list");
         voidTp = config.getString("modules.void-tp");
     }
 
@@ -74,6 +80,9 @@ public class MessageConfig extends Config {
             case ANTI_PLACE -> antiPlace;
             case ANTI_PROJECTILE -> antiProjectile;
             case SPAWN_TELEPORT -> spawnTeleport;
+            case SPAWN_ADD -> spawnAdd;
+            case SPAWN_REMOVE -> spawnRemove;
+            case SPAWN_LIST -> spawnList;
             case VOID_TP -> voidTp;
         };
         return MessageUtil.getMessage(player, msg, replacements);
@@ -94,6 +103,9 @@ public class MessageConfig extends Config {
         ANTI_PLACE,
         ANTI_PROJECTILE,
         SPAWN_TELEPORT,
+        SPAWN_ADD,
+        SPAWN_REMOVE,
+        SPAWN_LIST,
         VOID_TP
     }
 

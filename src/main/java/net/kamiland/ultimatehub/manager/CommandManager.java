@@ -14,6 +14,7 @@ import net.kamiland.ultimatehub.command.SpawnCommand;
 import net.kamiland.ultimatehub.command.UltimateHubCommand;
 import net.kamiland.ultimatehub.config.MessageConfig;
 import net.kamiland.ultimatehub.module.AgreementModule;
+import net.kamiland.ultimatehub.module.SpawnModule;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -24,6 +25,7 @@ public class CommandManager {
 
     private final UltimateHub plugin;
     private final ModuleManager moduleManager;
+    private final ConfigManager configManager;
     private final MessageConfig message;
     private LiteCommands<CommandSender> liteCommands;
 
@@ -31,6 +33,7 @@ public class CommandManager {
     public CommandManager(UltimateHub plugin, ModuleManager moduleManager, ConfigManager configManager) {
         this.plugin = plugin;
         this.moduleManager = moduleManager;
+        this.configManager = configManager;
         this.message = configManager.getMessageConfig();
     }
 
@@ -38,7 +41,7 @@ public class CommandManager {
         liteCommands = LiteBukkitFactory.builder(plugin)
                 .commands(
                         new AgreementCommand((AgreementModule) moduleManager.getModule("agreement"), message),
-                        new SpawnCommand(),
+                        new SpawnCommand(configManager, (SpawnModule) moduleManager.getModule("spawn")),
                         new UltimateHubCommand()
                 )
                 .missingPermission(new PermissionsHandler())
