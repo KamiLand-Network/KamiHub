@@ -1,0 +1,116 @@
+package net.kamiland.kamihub.config;
+
+import net.kamiland.kamihub.KamiHub;
+import net.kamiland.kamihub.util.MessageUtil;
+import net.kyori.adventure.text.Component;
+import org.bukkit.entity.Player;
+
+public class MessageConfig extends Config {
+
+    public boolean IS_PREFIX_ENABLED;
+    public Component PREFIX;
+    private String noPermission;
+    private String reloadSuccess;
+    private String unknownCommand;
+    private String noConsole;
+    private String agreementAccept;
+    private String agreementReject;
+    private String agreementChange;
+    private String antiAttack;
+    private String antiBreak;
+    private String antiDrop;
+    private String antiInteract;
+    private String antiPlace;
+    private String antiProjectile;
+    private String spawnTeleport;
+    private String spawnAdd;
+    private String spawnSet;
+    private String spawnRemove;
+    private String spawnList;
+    private String voidTp;
+
+    public MessageConfig(KamiHub plugin) {
+        super(plugin, "messages.yml");
+    }
+
+    @Override
+    public void load() {
+        super.load();
+
+        IS_PREFIX_ENABLED = config.getBoolean("prefix.enabled");
+        PREFIX = MessageUtil.getMessage(config.getString("prefix.text"));
+        noPermission = config.getString("general.no-permission");
+        reloadSuccess = config.getString("general.reload-success");
+        unknownCommand = config.getString("general.unknown-command");
+        noConsole = config.getString("general.no-console");
+
+        // 加载模块消息
+        agreementAccept = config.getString("modules.agreement.accept");
+        agreementReject = config.getString("modules.agreement.reject");
+        agreementChange = config.getString("modules.agreement.change");
+        antiAttack = config.getString("modules.anti-attack");
+        antiBreak = config.getString("modules.anti-break");
+        antiDrop = config.getString("modules.anti-drop");
+        antiInteract = config.getString("modules.anti-interact");
+        antiPlace = config.getString("modules.anti-place");
+        antiProjectile = config.getString("modules.anti-projectile");
+        spawnTeleport = config.getString("modules.spawn.teleport");
+        spawnAdd = config.getString("modules.spawn.add");
+        spawnSet = config.getString("modules.spawn.set");
+        spawnRemove = config.getString("modules.spawn.remove");
+        spawnList = config.getString("modules.spawn.list");
+        voidTp = config.getString("modules.void-tp");
+    }
+
+    public Component getMessage(Message type) {
+        return getMessage(null, type);
+    }
+
+    public Component getMessage(Player player, Message type, String... replacements) {
+        String msg = switch (type) {
+            case NO_PERMISSION -> noPermission;
+            case RELOAD_SUCCESS -> reloadSuccess;
+            case UNKNOWN_COMMAND -> unknownCommand;
+            case NO_CONSOLE -> noConsole;
+            case AGREEMENT_ACCEPT -> agreementAccept;
+            case AGREEMENT_REJECT -> agreementReject;
+            case AGREEMENT_CHANGE -> agreementChange;
+            case ANTI_ATTACK -> antiAttack;
+            case ANTI_BREAK -> antiBreak;
+            case ANTI_DROP -> antiDrop;
+            case ANTI_INTERACT -> antiInteract;
+            case ANTI_PLACE -> antiPlace;
+            case ANTI_PROJECTILE -> antiProjectile;
+            case SPAWN_TELEPORT -> spawnTeleport;
+            case SPAWN_ADD -> spawnAdd;
+            case SPAWN_SET -> spawnSet;
+            case SPAWN_REMOVE -> spawnRemove;
+            case SPAWN_LIST -> spawnList;
+            case VOID_TP -> voidTp;
+        };
+        return MessageUtil.getMessage(player, msg, replacements);
+    }
+
+    public enum Message {
+        NO_PERMISSION,
+        RELOAD_SUCCESS,
+        UNKNOWN_COMMAND,
+        NO_CONSOLE,
+        AGREEMENT_ACCEPT,
+        AGREEMENT_REJECT,
+        AGREEMENT_CHANGE,
+        ANTI_ATTACK,
+        ANTI_BREAK,
+        ANTI_DROP,
+        ANTI_INTERACT,
+        ANTI_PLACE,
+        ANTI_PROJECTILE,
+        SPAWN_TELEPORT,
+        SPAWN_ADD,
+        SPAWN_SET,
+        SPAWN_REMOVE,
+        SPAWN_LIST,
+        VOID_TP
+    }
+
+}
