@@ -211,7 +211,6 @@ public class ModuleConfig extends Config {
         IS_POTIONEFFECT_GIVE_ON_JOIN = config.getBoolean("modules.potion-effect.give-on-join");
         POTIONEFFECT_EFFECTS = new ArrayList<>();
         for (Map<?, ?> effectMap : config.getMapList("modules.potion-effect.effects")) {
-            List<PotionEffectType> values = Arrays.stream(PotionEffectType.values()).toList();
             PotionEffectType type = PotionEffectType.getByKey(NamespacedKey.fromString((String) effectMap.get("name")));
             if (type == null) continue;
             int duration = effectMap.get("duration").equals("infinite")

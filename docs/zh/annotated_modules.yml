@@ -255,7 +255,6 @@ modules:
         
         <red>Good luck!</red>
         <green>Have fun!</green>
-        
 
   # 清空玩家聊天栏
   # 该模块的原理是在玩家进入服务器时发送100条空消息，强制玩家看不见以前的消息

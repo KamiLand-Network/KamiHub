@@ -24,6 +24,7 @@ public class MessageConfig extends Config {
     private String antiProjectile;
     private String spawnTeleport;
     private String spawnAdd;
+    private String spawnSet;
     private String spawnRemove;
     private String spawnList;
     private String voidTp;
@@ -55,6 +56,7 @@ public class MessageConfig extends Config {
         antiProjectile = config.getString("modules.anti-projectile");
         spawnTeleport = config.getString("modules.spawn.teleport");
         spawnAdd = config.getString("modules.spawn.add");
+        spawnSet = config.getString("modules.spawn.set");
         spawnRemove = config.getString("modules.spawn.remove");
         spawnList = config.getString("modules.spawn.list");
         voidTp = config.getString("modules.void-tp");
@@ -81,6 +83,7 @@ public class MessageConfig extends Config {
             case ANTI_PROJECTILE -> antiProjectile;
             case SPAWN_TELEPORT -> spawnTeleport;
             case SPAWN_ADD -> spawnAdd;
+            case SPAWN_SET -> spawnSet;
             case SPAWN_REMOVE -> spawnRemove;
             case SPAWN_LIST -> spawnList;
             case VOID_TP -> voidTp;
@@ -104,6 +107,7 @@ public class MessageConfig extends Config {
         ANTI_PROJECTILE,
         SPAWN_TELEPORT,
         SPAWN_ADD,
+        SPAWN_SET,
         SPAWN_REMOVE,
         SPAWN_LIST,
         VOID_TP

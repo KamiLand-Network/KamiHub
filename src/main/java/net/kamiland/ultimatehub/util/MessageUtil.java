@@ -47,7 +47,6 @@ public class MessageUtil {
         for (int i = 0; i < replacements.length; i ++) {
             miniMessage = miniMessage.replaceAll("\\{" + i + "}", replacements[i]);
         }
-        miniMessage = miniMessage.stripTrailing();
 
         /* Auto-handles PlaceholderAPI integration when available */
         if (ServerManager.PLACEHOLDER_API)

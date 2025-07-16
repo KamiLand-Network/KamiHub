@@ -12,6 +12,8 @@ import net.kamiland.ultimatehub.manager.ConfigManager;
 import net.kamiland.ultimatehub.module.SpawnModule;
 import org.bukkit.entity.Player;
 
+import static net.kamiland.ultimatehub.config.MessageConfig.Message.*;
+
 @Command(name = "spawn")
 public class SpawnCommand {
 
@@ -36,6 +38,7 @@ public class SpawnCommand {
     public void executeSpawnAdd(@Context Player sender, @Arg("name") String name) {
         spawn.SPAWN_LOCATIONS.add(new SpawnLocation(name, sender.getLocation()));
         spawn.save();
+        sender.sendMessage(message.getMessage(sender, SPAWN_ADD));
     }
 
     @Execute
@@ -44,6 +47,7 @@ public class SpawnCommand {
         spawn.SPAWN_LOCATIONS.removeIf(sp -> sp.getName().equals(name));
         spawn.SPAWN_LOCATIONS.add(new SpawnLocation(name, sender.getLocation()));
         spawn.save();
+        sender.sendMessage(message.getMessage(sender, SPAWN_SET));
     }
 
     @Execute
@@ -51,6 +55,13 @@ public class SpawnCommand {
     public void executeSpawnRemove(@Context Player sender, @Arg("name") String name) {
         spawn.SPAWN_LOCATIONS.removeIf(sp -> sp.getName().equals(name));
         spawn.save();
+        sender.sendMessage(message.getMessage(sender, SPAWN_REMOVE));
+    }
+
+    @Execute
+    @Permission("ultimatehub.spawn.list")
+    public void executeSpawnList(@Context Player sender) {
+        sender.sendMessage(message.getMessage(sender, SPAWN_LIST, spawn.SPAWN_LOCATIONS.toString()));
     }
 
 }

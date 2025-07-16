@@ -27,6 +27,7 @@ modules:
   spawn:
     teleport: '<green>你已传送到出生点！'
     add: '<green>已添加出生点！'
+    set: '<green>已设置出生点！'
     remove: '<green>已移除出生点！'
-    list: '<green>当前所有的出生点：'
+    list: '<green>当前所有的出生点：{0}'
   void-tp: '<green>虚空保护已生效！'

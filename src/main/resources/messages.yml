@@ -30,6 +30,7 @@ modules:
   spawn:
     teleport: '<green>You have been teleported to the spawn point!'
     add: '<green>Spawn point has been added!'
+    set: '<green>Spawn point has been set!'
     remove: '<green>Spawn point has been removed!'
-    list: '<green>Current spawn points:'
+    list: '<green>Current spawn points: {0}'
   void-tp: '<green>Void protection activated!'
