@@ -2,6 +2,7 @@ package net.kamiland.ultimatehub.config;
 
 import lombok.Getter;
 import net.kamiland.ultimatehub.UltimateHub;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.Nullable;
@@ -32,11 +33,13 @@ public abstract class Config {
     }
 
     public void save() {
-        try {
-            config.save(this.file);
-        } catch (IOException e) {
-            plugin.getSLF4JLogger().error(e.getLocalizedMessage());
-        }
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            try {
+                config.save(this.file);
+            } catch (IOException e) {
+                plugin.getSLF4JLogger().error(e.getLocalizedMessage());
+            }
+        });
     }
 
 }
