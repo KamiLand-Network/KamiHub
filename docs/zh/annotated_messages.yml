@@ -24,5 +24,9 @@ modules:
   anti-interact: '<red>你不能在这里交互！'
   anti-place: '<red>你不能在这里放置方块！'
   anti-projectile: '<red>你不能发射投掷物！'
-  spawn-teleport: '<green>你已传送到出生点！'
+  spawn:
+    teleport: '<green>你已传送到出生点！'
+    add: '<green>已添加出生点！'
+    remove: '<green>已移除出生点！'
+    list: '<green>当前所有的出生点：'
   void-tp: '<green>虚空保护已生效！'

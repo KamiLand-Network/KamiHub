@@ -80,12 +80,12 @@ modules:
     # Kick player if they disagree with agreement
     kick-on-reject: true
     # Kick message if player is kicked
-    kick-message: |
+    kick-message: |-
       <red>You have not accepted the agreement.
       <red>Please read and accept it to join.
     # Agreement book page contents
     pages:
-      - |
+      - |-
         <bold><shadow:aqua:0.5><green>▄ Player Agreement ▄</green></shadow></bold>
         <gray>Welcome to the server!
         Please read and agree:
@@ -95,7 +95,7 @@ modules:
         ► No cheating/modded clients
         ► No intentional griefing
         ► Maintain friendly communication</white>
-      - |
+      - |-
         <bold><shadow:aqua:0.5><green>▄ Terms&Details ▄</green></shadow></bold>
         <gray>1. Compensate for damaged builds
         2. No claiming public areas
@@ -105,7 +105,7 @@ modules:
         -------------------
         <red>Note: Violators face:
         Warning→Mute→Ban progression</red>
-      - |
+      - |-
         <bold><shadow:aqua:0.5><green>▄ Signature ▄</green></shadow></bold>
         <gray>I have read all terms and agree to:
         • Take responsibility for my actions
@@ -247,10 +247,13 @@ modules:
     interval: 1800
     # Using MiniMessage properly can implement complex click/hover effects
     messages:
-      - |
+      - |+
+        
         <red>Welcome to the server!</red>
         <green>Enjoy your stay!</green>
-      - |
+
+      - |+
+        
         <red>Good luck!</red>
         <green>Have fun!</green>
 

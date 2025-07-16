@@ -13,6 +13,9 @@ general:
   reload-success: '<green>Plugin reloaded successfully!'
   unknown-command: '<red>Unknown command! Please use <yellow>/uh help<red> to view command usage!'
   no-console: '<red>This command can only be executed by players!'
+command-help:
+  uh-1: |
+
 modules:
   agreement:
     accept: '<green>You have agreed to the server''s agreement!'
@@ -24,5 +27,9 @@ modules:
   anti-interact: '<red>You cannot interact here!'
   anti-place: '<red>You cannot place blocks here!'
   anti-projectile: '<red>You cannot launch projectiles here!'
-  spawn-teleport: '<green>You have been teleported to spawn!'
+  spawn:
+    teleport: '<green>You have been teleported to the spawn point!'
+    add: '<green>Spawn point has been added!'
+    remove: '<green>Spawn point has been removed!'
+    list: '<green>Current spawn points:'
   void-tp: '<green>Void protection activated!'

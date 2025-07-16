@@ -80,12 +80,12 @@ modules:
     # 如果玩家拒绝协议，是否踢出
     kick-on-reject: true
     # 如果踢出玩家，踢出的原因（信息）
-    kick-message: |
+    kick-message: |-
       <red>你还没有接受玩家协议
       <red>请阅读并接受玩家协议以继续游玩
     # 协议以书本形式展示的每一页内容
     pages:
-      - |
+      - |-
         <bold><shadow:aqua:0.5><green>▄玩家协议▄</green></shadow></bold>
         <gray>欢迎加入服务器！
         请仔细阅读并同意：
@@ -95,7 +95,7 @@ modules:
         ► 禁止作弊/外挂
         ► 禁止恶意破坏建筑
         ► 保持友善的交流氛围</white>
-      - |
+      - |-
         <bold><shadow:aqua:0.5><green>▄条款细则▄</green></shadow></bold>
         <gray>1. 破坏他人建筑需赔偿
         2. 公共区域禁止占位
@@ -105,7 +105,7 @@ modules:
         -------------------
         <red>注：违规者视情节给予
         警告→禁言→封禁处罚</red>
-      - |
+      - |-
         <bold><shadow:aqua:0.5><green>▄签署声明▄</green></shadow></bold>
         <gray>我已阅读全部条款并承诺：
         • 对自己的行为负责
@@ -246,12 +246,12 @@ modules:
     interval: 1800
     # 如果您合理的使用MiniMessage，完全可以实现拥有复杂点击和显示效果的广播
     messages:
-      - |
+      - |+
         
         <red>Welcome to the server!</red>
         <green>Enjoy your stay!</green>
 
-      - |
+      - |+
         
         <red>Good luck!</red>
         <green>Have fun!</green>
