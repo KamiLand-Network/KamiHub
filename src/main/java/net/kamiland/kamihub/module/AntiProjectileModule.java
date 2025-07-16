@@ -10,13 +10,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class AntiProjectileModule extends EventModule {
 
-    private final KamiHub plugin;
     private final ConfigManager configManager;
 
-    public AntiProjectileModule(KamiHub plugin, ConfigManager configManager) {
+    public AntiProjectileModule(KamiHub plugin) {
         super(plugin, "anti-projectile");
-        this.plugin = plugin;
-        this.configManager = configManager;
+        this.configManager = plugin.getConfigManager();
 
         setEnabled(configManager.getModuleConfig().IS_ANTIPROJECTILE_ENABLED);
     }
@@ -50,7 +48,7 @@ public class AntiProjectileModule extends EventModule {
     @Override
     @NotNull
     public String getBypassPermission() {
-        return "ultimatehub.anti-projectile.bypass";
+        return "kamihub.anti-projectile.bypass";
     }
 
 }

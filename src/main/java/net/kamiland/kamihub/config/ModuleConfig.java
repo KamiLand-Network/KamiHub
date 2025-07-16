@@ -2,6 +2,7 @@ package net.kamiland.kamihub.config;
 
 import net.kamiland.kamihub.KamiHub;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -93,13 +94,6 @@ public class ModuleConfig extends Config {
 
     public boolean IS_SPAWN_ENABLED;
     public boolean IS_SPAWN_ON_JOIN;
-    public boolean IS_SPAWN_ON_COMMAND;
-
-    public boolean IS_TIMECHANGER_ENABLED;
-    public Map<String, Integer> TIMECHANGER_WORLDS;
-
-    public boolean IS_WEATHERCHANGER_ENABLED;
-    public Map<String, String> WEATHERCHANGER_WORLDS;
 
     public boolean IS_VOIDTELEPORT_ENABLED;
     public int VOIDTELEPORT_LEVEL;
@@ -211,10 +205,10 @@ public class ModuleConfig extends Config {
         IS_POTIONEFFECT_GIVE_ON_JOIN = config.getBoolean("modules.potion-effect.give-on-join");
         POTIONEFFECT_EFFECTS = new ArrayList<>();
         for (Map<?, ?> effectMap : config.getMapList("modules.potion-effect.effects")) {
-            PotionEffectType type = PotionEffectType.getByKey(NamespacedKey.fromString((String) effectMap.get("name")));
+            PotionEffectType type = Registry.POTION_EFFECT_TYPE.get(Objects.requireNonNull(NamespacedKey.fromString((String) effectMap.get("type")), "Unknown potion effect type!"));
             if (type == null) continue;
             int duration = effectMap.get("duration").equals("infinite")
-                    ? Integer.MAX_VALUE
+                    ? -1
                     : Integer.parseInt((String) effectMap.get("duration")) * 20;
             PotionEffect effect = new PotionEffect(
                     type,
@@ -229,21 +223,6 @@ public class ModuleConfig extends Config {
 
         IS_SPAWN_ENABLED = config.getBoolean("modules.spawn.enabled");
         IS_SPAWN_ON_JOIN = config.getBoolean("modules.spawn.on-join");
-        IS_SPAWN_ON_COMMAND = config.getBoolean("modules.spawn.on-command");
-
-        IS_TIMECHANGER_ENABLED = config.getBoolean("modules.time-changer.enabled");
-        section = Objects.requireNonNull(config.getConfigurationSection("modules.time-changer.worlds"));
-        TIMECHANGER_WORLDS = new HashMap<>();
-        for (String world : section.getKeys(false)) {
-            TIMECHANGER_WORLDS.put(world, config.getInt("modules.time-changer.worlds." + world));
-        }
-
-        IS_WEATHERCHANGER_ENABLED = config.getBoolean("modules.weather-changer.enabled");
-        section = Objects.requireNonNull(config.getConfigurationSection("modules.weather-changer.worlds"));
-        WEATHERCHANGER_WORLDS = new HashMap<>();
-        for (String world : section.getKeys(false)) {
-            WEATHERCHANGER_WORLDS.put(world, config.getString("modules.weather-changer.worlds." + world));
-        }
 
         IS_VOIDTELEPORT_ENABLED = config.getBoolean("modules.void-teleport.enabled");
         VOIDTELEPORT_LEVEL = config.getInt("modules.void-teleport.level");

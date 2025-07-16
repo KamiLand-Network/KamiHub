@@ -10,13 +10,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class AntiAttackModule extends EventModule {
 
-    private final KamiHub plugin;
     private final ConfigManager configManager;
 
-    public AntiAttackModule(KamiHub plugin, ConfigManager configManager) {
+    public AntiAttackModule(KamiHub plugin) {
         super(plugin, "anti-attack");
-        this.plugin = plugin;
-        this.configManager = configManager;
+        this.configManager = plugin.getConfigManager();
 
         setEnabled(configManager.getModuleConfig().IS_ANTIATTACK_ENABLED);
     }
@@ -56,7 +54,7 @@ public class AntiAttackModule extends EventModule {
     @Override
     @NotNull
     public String getBypassPermission() {
-        return "ultimatehub.anti-attack";
+        return "kamihub.anti-attack";
     }
 
 }

@@ -10,13 +10,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class AntiBreakModule extends EventModule {
 
-    private final KamiHub plugin;
     private final ConfigManager configManager;
 
-    public AntiBreakModule(KamiHub plugin, ConfigManager configManager) {
+    public AntiBreakModule(KamiHub plugin) {
         super(plugin, "anti-break");
-        this.plugin = plugin;
-        this.configManager = configManager;
+        this.configManager = plugin.getConfigManager();
 
         setEnabled(configManager.getModuleConfig().IS_ANTIBREAK_ENABLED);
     }
@@ -53,7 +51,7 @@ public class AntiBreakModule extends EventModule {
     @Override
     @NotNull
     public String getBypassPermission() {
-        return "ultimatehub.anti-break.bypass";
+        return "kamihub.anti-break.bypass";
     }
 
 }

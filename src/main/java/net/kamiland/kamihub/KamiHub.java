@@ -1,5 +1,6 @@
 package net.kamiland.kamihub;
 
+import lombok.Getter;
 import net.kamiland.kamihub.data.impl.cp.HikariManager;
 import net.kamiland.kamihub.data.impl.player.RuntimePlayerDataManager;
 import net.kamiland.kamihub.data.manager.cp.ConnectionPoolManager;
@@ -13,11 +14,17 @@ import org.slf4j.Logger;
 public class KamiHub extends JavaPlugin {
 
     private Logger logger;
+    @Getter
     private ServerManager serverManager;
+    @Getter
     private ConfigManager configManager;
-    private ConnectionPoolManager cpManager;
+    @Getter
+    private ConnectionPoolManager connectionPoolManager;
+    @Getter
     private RuntimePlayerDataManager runtimePDM;
+    @Getter
     private ModuleManager moduleManager;
+    @Getter
     private CommandManager commandManager;
 
     @Override
@@ -30,13 +37,13 @@ public class KamiHub extends JavaPlugin {
         configManager = new ConfigManager(this);
         configManager.load();
 
-        cpManager = new HikariManager(this, configManager);
-        cpManager.init();
-        runtimePDM = new RuntimePlayerDataManager(this, configManager, cpManager);
+        connectionPoolManager = new HikariManager(this);
+        connectionPoolManager.init();
+        runtimePDM = new RuntimePlayerDataManager(this);
 
-        moduleManager = new ModuleManager(this, configManager, runtimePDM);
+        moduleManager = new ModuleManager(this);
 
-        commandManager = new CommandManager(this, moduleManager, configManager);
+        commandManager = new CommandManager(this);
         commandManager.registerCommands();
     }
 
@@ -44,7 +51,7 @@ public class KamiHub extends JavaPlugin {
     public void onDisable() {
         if (commandManager != null) commandManager.unRegisterCommands();
         if (moduleManager != null) moduleManager.disableAll();
-        if (cpManager != null) cpManager.close();
+        if (connectionPoolManager != null) connectionPoolManager.close();
     }
 
 }

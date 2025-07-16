@@ -11,38 +11,29 @@ import dev.rollczi.litecommands.permission.MissingPermissionsHandler;
 import net.kamiland.kamihub.KamiHub;
 import net.kamiland.kamihub.command.AgreementCommand;
 import net.kamiland.kamihub.command.SpawnCommand;
-import net.kamiland.kamihub.command.UltimateHubCommand;
+import net.kamiland.kamihub.command.KamiHubCommand;
 import net.kamiland.kamihub.config.MessageConfig;
-import net.kamiland.kamihub.module.AgreementModule;
-import net.kamiland.kamihub.module.SpawnModule;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import static net.kamiland.kamihub.config.MessageConfig.Message.NO_PERMISSION;
-import static net.kamiland.kamihub.config.MessageConfig.Message.UNKNOWN_COMMAND;
 
 public class CommandManager {
 
     private final KamiHub plugin;
-    private final ModuleManager moduleManager;
-    private final ConfigManager configManager;
-    private final MessageConfig message;
+    private final MessageConfig messages;
     private LiteCommands<CommandSender> liteCommands;
 
 
-    public CommandManager(KamiHub plugin, ModuleManager moduleManager, ConfigManager configManager) {
+    public CommandManager(KamiHub plugin) {
         this.plugin = plugin;
-        this.moduleManager = moduleManager;
-        this.configManager = configManager;
-        this.message = configManager.getMessageConfig();
+        this.messages = plugin.getConfigManager().getMessageConfig();
     }
 
     public void registerCommands() {
         liteCommands = LiteBukkitFactory.builder(plugin)
                 .commands(
-                        new AgreementCommand((AgreementModule) moduleManager.getModule("agreement"), message),
-                        new SpawnCommand(configManager, (SpawnModule) moduleManager.getModule("spawn")),
-                        new UltimateHubCommand()
+                        new AgreementCommand(plugin),
+                        new SpawnCommand(plugin),
+                        new KamiHubCommand(plugin)
                 )
                 .missingPermission(new PermissionsHandler())
                 .invalidUsage(new UsageHandler())
@@ -59,9 +50,9 @@ public class CommandManager {
         public void handle(Invocation<CommandSender> invocation, MissingPermissions missingPermissions, ResultHandlerChain<CommandSender> chain) {
             String permissions = missingPermissions.asJoinedText();
             if (invocation.sender() instanceof Player player)
-                player.sendMessage(message.getMessage(player, NO_PERMISSION, permissions));
+                player.sendMessage(messages.getMessage(player, "general.no-permission", permissions));
             else
-                invocation.sender().sendMessage(message.getMessage(null, NO_PERMISSION, permissions));
+                invocation.sender().sendMessage(messages.getMessage("general.no-permission", permissions));
         }
 
     }
@@ -71,9 +62,9 @@ public class CommandManager {
         @Override
         public void handle(Invocation<CommandSender> invocation, InvalidUsage<CommandSender> result, ResultHandlerChain<CommandSender> chain) {
             if (invocation.sender() instanceof Player player)
-                player.sendMessage(message.getMessage(player, UNKNOWN_COMMAND));
+                player.sendMessage(messages.getMessage(player, "general.invalid-usage"));
             else
-                invocation.sender().sendMessage(message.getMessage(null, UNKNOWN_COMMAND));
+                invocation.sender().sendMessage(messages.getMessage("general.invalid-usage"));
         }
 
     }

@@ -3,6 +3,7 @@ package net.kamiland.kamihub.module;
 import net.kamiland.kamihub.KamiHub;
 import net.kamiland.kamihub.data.model.spawn.SpawnLocation;
 import net.kamiland.kamihub.manager.ConfigManager;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -12,17 +13,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
-import static net.kamiland.kamihub.config.MessageConfig.Message.SPAWN_TELEPORT;
-
 public class SpawnModule extends EventModule {
 
-    private final KamiHub plugin;
     private final ConfigManager configManager;
 
-    public SpawnModule(KamiHub plugin, ConfigManager configManager) {
+    public SpawnModule(KamiHub plugin) {
         super(plugin, "spawn");
-        this.plugin = plugin;
-        this.configManager = configManager;
+        this.configManager = plugin.getConfigManager();
 
         setEnabled(configManager.getModuleConfig().IS_SPAWN_ENABLED);
     }
@@ -45,22 +42,30 @@ public class SpawnModule extends EventModule {
 
     public void spawn(Player player) {
         List<SpawnLocation> locations = configManager.getSpawnConfig().SPAWN_LOCATIONS;
-        Random random = new Random();
-        int index = random.nextInt(locations.size());
-        player.teleport(locations.get(index).getLocation());
-        player.sendMessage(configManager.getMessageConfig().getMessage(player, SPAWN_TELEPORT));
+        if (locations == null || locations.isEmpty()) {
+            if (player.getRespawnLocation() != null) {
+                player.teleport(player.getRespawnLocation());
+            } else {
+                player.teleport(player.getWorld().getSpawnLocation());
+            }
+        } else {
+            Random random = new Random();
+            int index = random.nextInt(locations.size());
+            player.teleport(locations.get(index).getLocation());
+        }
+        player.sendMessage(configManager.getMessageConfig().getMessage(player, "modules.spawn.teleport"));
     }
 
     @Override
     @NotNull
     public String getPermission() {
-        return "ultimatehub.spawn";
+        return "kamihub.spawn";
     }
 
     @Override
     @Nullable
     public String getBypassPermission() {
-        return "";
+        return null;
     }
 
 }

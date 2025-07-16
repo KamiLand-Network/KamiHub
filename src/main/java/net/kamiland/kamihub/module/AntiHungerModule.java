@@ -10,13 +10,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class AntiHungerModule extends EventModule {
 
-    private final KamiHub plugin;
     private final ConfigManager configManager;
 
-    public AntiHungerModule(KamiHub plugin, ConfigManager configManager) {
-        super(plugin, "");
-        this.plugin = plugin;
-        this.configManager = configManager;
+    public AntiHungerModule(KamiHub plugin) {
+        super(plugin, "anti-hunger");
+        this.configManager = plugin.getConfigManager();
 
         setEnabled(configManager.getModuleConfig().IS_ANTIHUNGER_ENABLED);
     }
@@ -42,7 +40,7 @@ public class AntiHungerModule extends EventModule {
     @Override
     @NotNull
     public String getPermission() {
-        return "ultimatehub.anti-hunger";
+        return "kamihub.anti-hunger";
     }
 
     @Override

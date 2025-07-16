@@ -10,13 +10,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class AntiInteractModule extends EventModule {
 
-    private final KamiHub plugin;
     private final ConfigManager configManager;
 
-    public AntiInteractModule(KamiHub plugin, ConfigManager configManager) {
+    public AntiInteractModule(KamiHub plugin) {
         super(plugin, "anti-interact");
-        this.plugin = plugin;
-        this.configManager = configManager;
+        this.configManager = plugin.getConfigManager();
 
         setEnabled(configManager.getModuleConfig().IS_ANTIINTERACT_ENABLED);
     }
@@ -53,7 +51,7 @@ public class AntiInteractModule extends EventModule {
     @Override
     @NotNull
     public String getBypassPermission() {
-        return "ultimatehub.anti-interact.bypass";
+        return "kamihub.anti-interact.bypass";
     }
 
 }

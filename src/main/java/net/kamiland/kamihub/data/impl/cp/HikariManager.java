@@ -11,13 +11,11 @@ import java.util.Locale;
 
 public class HikariManager implements ConnectionPoolManager {
 
-    private final KamiHub plugin;
     private final ConfigManager configManager;
     private final HikariDataSource dataSource;
 
-    public HikariManager(KamiHub plugin, ConfigManager configManager) {
-        this.plugin = plugin;
-        this.configManager = configManager;
+    public HikariManager(KamiHub plugin) {
+        this.configManager = plugin.getConfigManager();
         this.dataSource = new HikariDataSource();
     }
 

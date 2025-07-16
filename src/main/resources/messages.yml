@@ -1,36 +1,50 @@
-# All text formats in this plugin use MiniMessage, see https://docs.advntr.dev/minimessage/format.html
-# Or our brief documentation: https://www.kamiland.net/plugins/ultimatehub/mini-message
-# You can edit and preview MiniMessage text online here: https://webui.advntr.dev
-
-# This plugin supports PlaceholderAPI! Provided you have it installed on your server
-# Details: https://www.kamiland.net/plugins/ultimatehub/papi
-
 prefix:
   enabled: true
-  text: '<aqua>[UH]</aqua> '
+  text: '<aqua>[KamiHub]</aqua> '
 general:
-  no-permission: '<red>You don''t have permission to do this: <yellow>{0}'
+  no-permission: '<red>You don''t have permission to use this command: <yellow>{0}'
   reload-success: '<green>Plugin reloaded successfully!'
-  unknown-command: '<red>Unknown command! Please use <yellow>/uh help<red> to view command usage!'
-  no-console: '<red>This command can only be executed by players!'
+  invalid-usage: '<red>Unknown command! Use <yellow>/kh help <red>to view command usage!'
+  no-console: '<red>This command can only be executed by a player!'
 command-help:
-  uh-1: |
-
+  kamihub:
+    - |-
+      <white>------------ <aqua>KamiHub Command Help <white>------------
+      <green>/kh help [page] <gray>View help page
+      <green>/kh reload <gray>Reload plugin configuration
+      <green>/kh module list <gray>List all module states
+      <green>/kh module enable <name> <gray>Enable a module
+      <green>/kh module disable <name> <gray>Disable a module
+      <green>/kh info <gray>Display plugin information
+      <green>/kh update <gray>Check for plugin updates
+      <green>/spawn <gray>Teleport to spawn
+      <hover:show_text:'<gray>Previous Page'><gray>◀</hover>        <gray>1<white>/<green>2        <click:run_command:'/kh help 2'><hover:show_text:'<green>Next Page'><green>▶</hover></click>
+    - |-
+      <white>------------ <aqua>KamiHub Command Help <white>------------
+      <green>/spawn list <gray>List all spawn points
+      <green>/spawn add <gray>Add current location as spawn
+      <green>/spawn set <gray>Set spawn point for current world
+      <green>/spawn remove <gray>Remove a spawn point
+      <green>/agreement accept <gray>Accept player agreement
+      <green>/agreement reject <gray>Reject player agreement
+      <green>/agreement change <gray>Mark agreement as changed
+      
+      <click:run_command:'/kh help 1'><hover:show_text:'<green>Previous Page'><green>◀</hover></click>        <green>2<white>/<gray>2        <hover:show_text:'<gray>Next Page'><gray>▶</hover>
 modules:
   agreement:
-    accept: '<green>You have agreed to the server''s agreement!'
-    reject: '<red>You have rejected the server''s agreement!'
-    change: '<green>Reset all players'' agreement status!'
+    accept: '<green>You have accepted the server agreement!'
+    reject: '<red>You have rejected the server agreement!'
+    change: '<green>Reset agreement status for all players!'
   anti-attack: '<red>You cannot attack other players!'
-  anti-break: '<red>You cannot break blocks here!'
-  anti-drop: '<red>You cannot drop items here!'
+  anti-break: '<red>You cannot break blocks!'
+  anti-drop: '<red>You cannot drop items!'
   anti-interact: '<red>You cannot interact here!'
   anti-place: '<red>You cannot place blocks here!'
-  anti-projectile: '<red>You cannot launch projectiles here!'
+  anti-projectile: '<red>You cannot shoot projectiles!'
   spawn:
-    teleport: '<green>You have been teleported to the spawn point!'
-    add: '<green>Spawn point has been added!'
-    set: '<green>Spawn point has been set!'
-    remove: '<green>Spawn point has been removed!'
+    teleport: '<green>You have been teleported to spawn!'
+    add: '<green>Spawn point added!'
+    set: '<green>Spawn point set!'
+    remove: '<green>Spawn point removed!'
     list: '<green>Current spawn points: {0}'
-  void-tp: '<green>Void protection activated!'
+  void-tp: '<green>Void protection triggered!'

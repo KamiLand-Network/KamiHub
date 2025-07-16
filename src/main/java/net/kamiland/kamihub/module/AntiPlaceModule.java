@@ -10,13 +10,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class AntiPlaceModule extends EventModule {
 
-    private final KamiHub plugin;
     private final ConfigManager configManager;
 
-    public AntiPlaceModule(KamiHub plugin, ConfigManager configManager) {
+    public AntiPlaceModule(KamiHub plugin) {
         super(plugin, "anti-place");
-        this.plugin = plugin;
-        this.configManager = configManager;
+        this.configManager = plugin.getConfigManager();
 
         setEnabled(configManager.getModuleConfig().IS_ANTIPLACE_ENABLED);
     }
@@ -53,7 +51,7 @@ public class AntiPlaceModule extends EventModule {
     @Override
     @NotNull
     public String getBypassPermission() {
-        return "ultimatehub.anti-place.bypass";
+        return "kamihub.anti-place.bypass";
     }
 
 }

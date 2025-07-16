@@ -14,10 +14,10 @@ public class BroadcastModule extends Module {
     private final ConfigManager configManager;
     private BukkitTask broadcastTimerTask;
 
-    public BroadcastModule(KamiHub plugin, ConfigManager configManager) {
+    public BroadcastModule(KamiHub plugin) {
         super(plugin, "broadcast");
         this.plugin = plugin;
-        this.configManager = configManager;
+        this.configManager = plugin.getConfigManager();
 
         setEnabled(configManager.getModuleConfig().IS_BROADCAST_ENABLED);
     }
@@ -53,7 +53,7 @@ public class BroadcastModule extends Module {
     @Override
     @NotNull
     public String getPermission() {
-        return "ultimatehub.broadcast.notify";
+        return "kamihub.broadcast.notify";
     }
 
     @Override

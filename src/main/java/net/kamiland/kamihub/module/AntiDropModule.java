@@ -9,13 +9,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class AntiDropModule extends EventModule {
 
-    private final KamiHub plugin;
     private final ConfigManager configManager;
 
-    public AntiDropModule(KamiHub plugin, ConfigManager configManager) {
+    public AntiDropModule(KamiHub plugin) {
         super(plugin, "anti-drop");
-        this.plugin = plugin;
-        this.configManager = configManager;
+        this.configManager = plugin.getConfigManager();
 
         setEnabled(configManager.getModuleConfig().IS_ANTIDROP_ENABLED);
     }
@@ -46,7 +44,7 @@ public class AntiDropModule extends EventModule {
     @Override
     @NotNull
     public String getBypassPermission() {
-        return "ultimatehub.anti-drop.bypass";
+        return "kamihub.anti-drop.bypass";
     }
 
 }

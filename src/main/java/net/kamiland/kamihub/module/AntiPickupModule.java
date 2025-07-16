@@ -9,13 +9,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class AntiPickupModule extends EventModule {
 
-    private final KamiHub plugin;
     private final ConfigManager configManager;
 
-    public AntiPickupModule(KamiHub plugin, ConfigManager configManager) {
+    public AntiPickupModule(KamiHub plugin) {
         super(plugin, "anti-drop");
-        this.plugin = plugin;
-        this.configManager = configManager;
+        this.configManager = plugin.getConfigManager();
 
         setEnabled(configManager.getModuleConfig().IS_ANTIPICKUP_ENABLED);
     }
@@ -46,7 +44,7 @@ public class AntiPickupModule extends EventModule {
     @Override
     @NotNull
     public String getBypassPermission() {
-        return "ultimatehub.anti-pickup.bypass";
+        return "kamihub.anti-pickup.bypass";
     }
 
 }

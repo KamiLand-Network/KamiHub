@@ -21,10 +21,10 @@ public class ActionBarModule extends Module {
     private final ConfigManager configManager;
     private BukkitTask actionBarTimerTask;
 
-    public ActionBarModule(KamiHub plugin, ConfigManager configManager) {
+    public ActionBarModule(KamiHub plugin) {
         super(plugin, "action-bar");
         this.plugin = plugin;
-        this.configManager = configManager;
+        this.configManager = plugin.getConfigManager();
 
         setEnabled(configManager.getModuleConfig().IS_ACTIONBAR_ENABLED);
     }
@@ -80,7 +80,7 @@ public class ActionBarModule extends Module {
     @Override
     @NotNull
     public String getPermission() {
-        return "ultimatehub.action-bar";
+        return "kamihub.action-bar";
     }
 
     @Override

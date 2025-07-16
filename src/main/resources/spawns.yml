@@ -1,9 +1,17 @@
 spawns:
   main-spawn:
-    name: "Main Spawn"
+    name: 'Main'
     x: 0.0
     y: 64.0
     z: 0.0
+    yaw: 0.0
+    pitch: 0.0
+    world: 'world'
+  example:
+    name: 'Example'
+    x: 5.0
+    y: 64.0
+    z: 5.0
     yaw: 0.0
     pitch: 0.0
     world: "world"

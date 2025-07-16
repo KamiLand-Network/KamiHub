@@ -1,18 +1,10 @@
 # Module configurations
 modules:
   # Action bar messages
-  # Requires permission: ultimatehub.action-bar (enabled by default)
+  # Permission required: kamihub.action-bar (granted by default)
   action-bar:
-    # Whether enabled (applies to all below)
     enabled: true
-    # Refresh interval in ticks
-    # In Minecraft, 1 second = 20 ticks
-    # Therefore 1 tick = 0.05 seconds
     interval: 2
-    # Text displayed in action bar, shown in sequence
-    # All text formats in this plugin use MiniMessage, see https://docs.advntr.dev/minimessage/format.html
-    # Or our brief documentation: https://www.kamiland.net/plugins/ultimatehub/mini-message
-    # You can edit and preview MiniMessage text online here: https://webui.advntr.dev
     worlds:
       world:
         - ''
@@ -59,165 +51,132 @@ modules:
         - '<rainbow>m'
         - ''
 
-  # Player agreement
+  # Player Agreement
   agreement:
     enabled: true
-    # Open agreement when player joins and hasn't accepted yet
     on-join: true
-    # Open agreement every time player joins
     on-every-join: false
-    # Open agreement when agreement changes
-    # Requires privileged player/console to use command /agreement change
     on-change: true
-    # Delay between player joining and opening agreement (in ticks)
     delay: 100
-    # Prevent players from closing agreement book
     prevent-close: true
-    # Kick player if agreement signing times out
     kick-on-timeout: true
-    # Agreement timeout duration (in ticks)
     timeout: 1200
-    # Kick player if they disagree with agreement
     kick-on-reject: true
-    # Kick message if player is kicked
     kick-message: |-
-      <red>You have not accepted the agreement.
-      <red>Please read and accept it to join.
-    # Agreement book page contents
+      <red>You haven’t accepted the agreement
+      <red>Please read and accept to continue
     pages:
       - |-
-        <bold><shadow:aqua:0.5><green>▄ Player Agreement ▄</green></shadow></bold>
+        <bold><shadow:aqua:0.5><blue>▄ Player Agreement ▄</blue></shadow></bold>
         <gray>Welcome to the server!
         Please read and agree:
         -------------------
-        <white>► Obey local laws and regulations
+        <white>► Obey local laws
         ► Respect other players
-        ► No cheating/modded clients
-        ► No intentional griefing
-        ► Maintain friendly communication</white>
+        ► No cheating/hacks
+        ► No griefing
+        ► Maintain a friendly atmosphere</white>
       - |-
-        <bold><shadow:aqua:0.5><green>▄ Terms&Details ▄</green></shadow></bold>
-        <gray>1. Compensate for damaged builds
-        2. No claiming public areas
+        <bold><shadow:aqua:0.5><blue>▄ Terms&Rules ▄</blue></shadow></bold>
+        <gray>1. Compensate for griefing
+        2. No claiming public spaces
         3. Scamming = permanent ban
-        4. Zero tolerance for hate speech
-        5. Resource worlds reset weekly</gray>
+        4. No hate speech or racism
+        5. Resource world resets weekly</gray>
         -------------------
-        <red>Note: Violators face:
-        Warning→Mute→Ban progression</red>
+        <red>Note: Violators will be
+        Warned → Muted → Banned</red>
       - |-
-        <bold><shadow:aqua:0.5><green>▄ Signature ▄</green></shadow></bold>
-        <gray>I have read all terms and agree to:
-        • Take responsibility for my actions
-        • Maintain server integrity
-        • Accept admin decisions
-        
+        <bold><shadow:aqua:0.5><blue>▄ Declaration ▄</blue></shadow></bold>
+        <gray>I have read all rules and I pledge:
+        • To be responsible
+        • To protect the server environment
+        • To accept admin judgment</gray>
+
         {0}
         {1}
-    # Reject button
-    # This is standard MiniMessage format as described above
-    # Equivalent to player executing /agreement reject
-    reject: '<click:run_command:"/agreement reject"><hover:show_text:"<gray>Click to reject the player agreement"><red>Reject</hover></click>'
-    # Accept button
-    # Equivalent to player executing /agreement accept
-    accept: '<click:run_command:"/agreement accept"><hover:show_text:"<gray>Click to accept to the player agreement"><green>Accept</hover></click>'
+    reject: '<click:run_command:"/agreement reject"><hover:show_text:"<gray>Click to reject the agreement"><red>Reject</hover></click>'
+    accept: '<click:run_command:"/agreement accept"><hover:show_text:"<gray>Click to accept the agreement"><green>Accept</hover></click>'
 
-  # Prevent block breaking
-  # Foreword:
-  # UltimateHub is not a professional world protection plugin and lacks comprehensive protection features
-  # Developer's limited understanding of game mechanics may allow bypasses in certain scenarios
-  # Therefore, we recommend using professional world protection plugins like WorldGuard: https://modrinth.com/plugin/worldguard
-  # Bypass permission: ultimatehub.anti-break.bypass (admins have by default)
+  # Block Breaking Protection
+  # Note: KamiHub is not a full-featured protection plugin.
+  # You are advised to use a professional plugin like WorldGuard: https://modrinth.com/plugin/worldguard
+  # Bypass permission: kamihub.anti-break.bypass (granted to admins by default)
   anti-break:
     enabled: true
-    # Only allow creative mode players to break blocks
-    # If enabled, even players with bypass permission cannot break blocks in non-creative mode
-    # Without bypass permission, creative players still cannot break blocks
-    # (Same applies below)
     break-creative-only: true
     worlds:
       - world
 
-  # Prevent player interactions
-  # Bypass permission: ultimatehub.anti-interact.bypass (admins have by default)
+  # Interaction Protection
+  # Bypass permission: kamihub.anti-interact.bypass (granted to admins by default)
   anti-interact:
     enabled: true
     creative-only: true
     worlds:
       - world
 
-  # Prevent block placing
-  # Bypass permission: ultimatehub.anti-place.bypass (admins have by default)
+  # Block Placement Protection
+  # Bypass permission: kamihub.anti-place.bypass (granted to admins by default)
   anti-place:
     enabled: true
     creative-only: true
     worlds:
       - world
 
-  # Prevent item dropping
-  # Bypass permission: ultimatehub.anti-drop.bypass (admins have by default)
+  # Item Dropping Protection
+  # Bypass permission: kamihub.anti-drop.bypass (granted to admins by default)
   anti-drop:
     enabled: true
     creative-only: true
     worlds:
       - world
 
-  # Prevent item picking up
-  # Bypass permission: ultimatehub.anti-pickup.bypass (admins have by default)
+  # Item Pickup Protection
+  # Bypass permission: kamihub.anti-pickup.bypass (granted to admins by default)
   anti-pickup:
     enabled: true
     worlds:
       - world
 
-  # Prevent hunger
-  # Requires permission: ultimatehub.anti-hunger (enabled by default)
+  # Hunger Prevention
+  # Permission required: kamihub.anti-hunger (granted by default)
   anti-hunger:
     enabled: true
     worlds:
       - world
 
-  # Prevent player damage
-  # Requires permission: ultimatehub.anti-damage (enabled by default)
+  # Damage Prevention
+  # Permission required: kamihub.anti-damage (granted by default)
   anti-damage:
     enabled: true
     worlds:
       - world
 
-  # Prevent projectiles
-  # Bypass permission: ultimatehub.anti-projectile.bypass (admins have by default)
+  # Projectile Prevention
+  # Bypass permission: kamihub.anti-projectile.bypass (granted to admins by default)
   anti-projectile:
     enabled: true
-    # Prevent players from shooting projectiles
     anti-player: false
-    # Prevent entities from shooting projectiles
     anti-entity: false
     worlds:
       - world
 
-  # Prevent player attacks
-  # Bypass permission: ultimatehub.anti-attack.bypass (admins have by default)
+  # Attack Prevention
+  # Bypass permission: kamihub.anti-attack.bypass (granted to admins by default)
   anti-attack:
     enabled: true
-    # Prevent PVP (player vs player)
     anti-attack-player: true
-    # Prevent PVE (player vs entity)
     anti-attack-entity: true
     worlds:
       - world
 
-  # Boss health bar
-  # For more information: https://minecraft.wiki/w/Bossbar
-  # Requires permission: ultimatehub.boss-bar (enabled by default)
+  # Boss Bar
+  # See more about BossBar at: https://minecraft.wiki/w/Bossbar
+  # Permission required: kamihub.boss-bar (granted by default)
   boss-bar:
     enabled: true
     interval: 5
-    # Boss bar display names
-    # Format per line: <PROGRESS>:<COLOR>:<OVERLAY>:<NAME>
-    # PROGRESS: Bar progress (0-1)
-    # COLOR: Bar color (see wiki)
-    # OVERLAY: Bar style
-    # Ensure each line has exactly 3 colons dividing the 4 parts.
-    # Use placeholder {0} if colons are needed within the NAME.
     worlds:
       world:
         - '0.1:RED:NOTCHED_10:<#000080>www.example.com'
@@ -240,61 +199,46 @@ modules:
         - '0.2:RED:NOTCHED_10:<#13188B>www.example.com'
         - '0.1:RED:NOTCHED_10:<#000080>www.example.com'
 
-  # Broadcast messages
-  # Receive permission: ultimatehub.broadcast.notify (enabled by default)
+  # Broadcast Messages
+  # Permission to receive: kamihub.broadcast.notify (granted by default)
   broadcast:
     enabled: true
     interval: 1800
-    # Using MiniMessage properly can implement complex click/hover effects
     messages:
-      - |+
-        
+      - |-
         <red>Welcome to the server!</red>
         <green>Enjoy your stay!</green>
-
-      - |+
-        
+      - |-
         <red>Good luck!</red>
         <green>Have fun!</green>
 
-  # Clear player chat
-  # Works by sending 100 empty messages when player joins
-  # Note: May not work if players use mods with Chat Filter or Infinite Chat History
-  # For reliable chat clearing, use F3+D (official Minecraft shortcut)
-  # Bypass permission: ultimatehub.clear-chat.bypass (admins have by default)
+  # Chat Clearing
+  # This module sends 100 blank messages to push chat out of view
+  # Note: players with client mods like Infinite Chat History may bypass this
+  # Use F3+D in-game for guaranteed clear (vanilla feature)
+  # Bypass permission: kamihub.clear-chat.bypass (granted to admins by default)
   clear-chat:
     enabled: true
-    # Clear on player join
     on-join: true
 
-  # Inventory module
-  # Bypass permission: ultimate.inventory.bypass (admins have by default)
+  # Inventory Module
+  # Bypass permission: ultimate.inventory.bypass (granted to admins by default)
   inventory:
     enabled: true
-    # Clear inventory on join
-    # Disabled by default to prevent accidental item loss
     clear-on-join: false
-    # Clear inventory on quit
     clear-on-quit: false
-    # Give defined items on join (see items.yml)
     give-on-join: false
 
-  # Join and Quit Messages
-  # Some servers may display different join/quit messages based on different permission groups
+  # Join & Quit Messages
+  # Group-based join/quit messages
+  # Use {0} as placeholder for player name
+  # Supports LuckPerms and Vault-compatible permission plugins
+  # Alternatively, use permission kamihub.group.xxx to declare group
   join-quit-message:
     enabled: true
-    # Group configuration for join and quit messages
-    # Use placeholder {0} for player name
-    # Currently only supports LuckPerms and Vault-compatible permission plugins
-    # If your permission plugin does not support Vault, add `ultimatehub.group.xxx` to declare permission groups
     groups:
-      # Default permission group (cannot be deleted)
       default:
-        # Permission group weight
-        # If a player is in multiple groups, UltimateHub will select the one with the highest priority
         priority: 0
-        # Join and quit messages
-        # If multiple messages are provided, one will be randomly selected
         join:
           - '<green>[+] <reset>{0}'
         quit:
@@ -306,63 +250,33 @@ modules:
         quit:
           - '<rainbow:!>{0} left the server.</rainbow>'
 
-  # Potion effects
-  # Requires permission: ultimatehub.potion-effect (not enabled by default)
+  # Potion Effects
+  # Permission required: kamihub.potion-effect (granted by default)
   potion-effect:
     enabled: true
-    # Clear effects on player join
     clear-on-join: true
-    # Clear effects on player quit
     clear-on-quit: true
-    # Apply effects on player join
     give-on-join: true
-    # Potion effect list
-    # For effect names, see: https://minecraft.wiki/w/Effect#Effect_list
-    # Use effect identifiers from wiki
     effects:
-      - name: SPEED
-        # Effect duration in seconds. Use 'infinite' for permanent
+      - type: speed
         duration: 'infinite'
-        # Effect amplifier (level - 1). Speed II requires amplifier: 1.
         amplifier: 1
-        # Show particles
         particles: false
-      - name: JUMP_BOOST
-        duration: '20'
+      - type: jump_boost
+        duration: '60'
         amplifier: 0
         particles: true
 
-  # Spawn point
-  # Requires permission: ultimatehub.spawn
-  # Settings: see spawns.yml
+  # Spawn Settings
+  # Permission required: kamihub.spawn (granted by default)
   spawn:
     enabled: true
-    # Teleport to spawn on join
     on-join: true
-    # Teleport to spawn on /spawn command
-    on-command: true
 
-  # Time changer
-  # Lock time to specific value
-  time-changer:
-    enabled: false
-    worlds:
-      world: 6000
-
-  # Weather changer
-  # Lock weather
-  weather-changer:
-    enabled: false
-    worlds:
-      world: clear
-
-  # Void protection
+  # Void Protection
+  # Permission required: kamihub.void-tp (granted by default)
   void-teleport:
     enabled: true
-    # Protection level - players below this Y level get teleported
-    # Players teleport to spawn point (if set)
-    # Players teleport to bed/respawn anchor (if set)
-    # Players teleport to world spawn (if neither set)
     level: -64
     worlds:
       - world

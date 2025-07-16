@@ -29,8 +29,6 @@ repositories {
 
     // Panda (LiteCommands)
     maven("https://repo.panda-lang.org/releases")
-    // InvUI
-    maven("https://repo.xenondevs.xyz/releases")
     // Item-NBT-API
     maven("https://repo.codemc.io/repository/maven-public/")
 
@@ -47,7 +45,6 @@ dependencies {
 
     paperLibrary("com.zaxxer:HikariCP:6.3.0")
     paperLibrary("dev.rollczi:litecommands-bukkit:3.10.0")
-    paperLibrary("xyz.xenondevs.invui:invui:1.46")
     paperLibrary("com.github.LeonMangler:SuperVanish:6.2.19")
     paperLibrary("de.tr7zw:item-nbt-api-plugin:2.15.1")
     paperLibrary("com.mysql:mysql-connector-j:9.3.0")
@@ -95,11 +92,77 @@ paper {
 
     permissions {
         register("kamihub.*") {
-            children = listOf("kamihub.test")
+            children = listOf(
+                "kamihub.action-bar", "kamihub.anti-break.bypass", "kamihub.anti-interact.bypass",
+                "kamihub.anti-place.bypass", "kamihub.anti-drop.bypass", "kamihub.anti-pickup.bypass",
+                "kamihub.anti-hunger", "kamihub.anti-damage", "kamihub.anti-projectile.bypass",
+                "kamihub.anti-attack.bypass", "kamihub.boss-bar", "kamihub.broadcast.notify",
+                "kamihub.clear-chat.bypass", "kamihub.inventory.bypass", "kamihub.potion-effect",
+                "kamihub.spawn", "kamihub.spawn.add", "kamihub.spawn.set",
+                "kamihub.spawn.remove", "kamihub.spawn.list", "kamihub.void-tp")
         }
-        register("kamihub.test") {
-            description = "Allows you to run the test command"
+        register("kamihub.action-bar") {
+            default = BukkitPluginDescription.Permission.Default.TRUE
+        }
+        register("kamihub.anti-break.bypass") {
             default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.anti-interact.bypass") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.anti-place.bypass") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.anti-drop.bypass") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.anti-pickup.bypass") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.anti-hunger") {
+            default = BukkitPluginDescription.Permission.Default.TRUE
+        }
+        register("kamihub.anti-damage") {
+            default = BukkitPluginDescription.Permission.Default.TRUE
+        }
+        register("kamihub.anti-projectile.bypass") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.anti-attack.bypass") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.boss-bar") {
+            default = BukkitPluginDescription.Permission.Default.TRUE
+        }
+        register("kamihub.broadcast.notify") {
+            default = BukkitPluginDescription.Permission.Default.TRUE
+        }
+        register("kamihub.clear-chat.bypass") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.inventory.bypass") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.potion-effect") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.spawn") {
+            default = BukkitPluginDescription.Permission.Default.TRUE
+        }
+        register("kamihub.spawn.add") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.spawn.set") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.spawn.remove") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.spawn.list") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.void-tp") {
+            default = BukkitPluginDescription.Permission.Default.TRUE
         }
     }
 }

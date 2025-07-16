@@ -10,13 +10,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class AntiDamageModule extends EventModule {
 
-    private final KamiHub plugin;
     private final ConfigManager configManager;
 
-    public AntiDamageModule(KamiHub plugin, ConfigManager configManager) {
+    public AntiDamageModule(KamiHub plugin) {
         super(plugin, "anti-damage");
-        this.plugin = plugin;
-        this.configManager = configManager;
+        this.configManager = plugin.getConfigManager();
 
         setEnabled(configManager.getModuleConfig().IS_ANTIDAMAGE_ENABLED);
     }
@@ -45,7 +43,7 @@ public class AntiDamageModule extends EventModule {
     @Override
     @NotNull
     public String getPermission() {
-        return "ultimatehub.anti-damage";
+        return "kamihub.anti-damage";
     }
 
     @Override

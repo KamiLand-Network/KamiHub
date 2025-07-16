@@ -1,10 +1,8 @@
 package net.kamiland.kamihub.data.impl.player;
 
 import net.kamiland.kamihub.KamiHub;
-import net.kamiland.kamihub.data.manager.cp.ConnectionPoolManager;
 import net.kamiland.kamihub.data.manager.player.PlayerDataManager;
 import net.kamiland.kamihub.data.model.player.PlayerData;
-import net.kamiland.kamihub.manager.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -31,9 +29,9 @@ public class RuntimePlayerDataManager implements PlayerDataManager, Listener {
     /**
      * Initializes the runtime manager and preloads data for currently online players.
      */
-    public RuntimePlayerDataManager(KamiHub plugin, ConfigManager configManager, ConnectionPoolManager cpManager) {
+    public RuntimePlayerDataManager(KamiHub plugin) {
         this.plugin = plugin;
-        this.storagePDM = new MySQLPlayerDataManager(plugin.getSLF4JLogger(), configManager, cpManager);
+        this.storagePDM = new MySQLPlayerDataManager(plugin);
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, this::loadOnlinePlayers);

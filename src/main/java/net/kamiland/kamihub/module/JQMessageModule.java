@@ -31,10 +31,10 @@ public class JQMessageModule extends EventModule {
     private UserManager lpUserManager;
     private Permission vaultPermission;
 
-    public JQMessageModule(KamiHub plugin, ConfigManager configManager) {
+    public JQMessageModule(KamiHub plugin) {
         super(plugin, "jq-message");
         this.plugin = plugin;
-        this.configManager = configManager;
+        this.configManager = plugin.getConfigManager();
 
         setEnabled(configManager.getModuleConfig().IS_JQMESSAGE_ENABLED);
     }
@@ -99,7 +99,7 @@ public class JQMessageModule extends EventModule {
         } else {
             AtomicInteger priority = new AtomicInteger();
             groupPriority.forEach((g, p) -> {
-                if (player.hasPermission("ultimatehub.group." + g) && p > priority.get()) {
+                if (player.hasPermission("kamihub.group." + g) && p > priority.get()) {
                     group.set(g);
                     priority.set(p);
                 }

@@ -1,9 +1,9 @@
 package net.kamiland.kamihub.data.impl.player;
 
+import net.kamiland.kamihub.KamiHub;
 import net.kamiland.kamihub.data.manager.cp.ConnectionPoolManager;
 import net.kamiland.kamihub.data.manager.player.PlayerDataManager;
 import net.kamiland.kamihub.data.model.player.PlayerData;
-import net.kamiland.kamihub.manager.ConfigManager;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
@@ -16,10 +16,10 @@ public class MySQLPlayerDataManager implements PlayerDataManager {
     private final ConnectionPoolManager cpManager;
     private final String tablePrefix;
 
-    public MySQLPlayerDataManager(Logger logger, ConfigManager configManager, ConnectionPoolManager cpManager) {
-        this.logger = logger;
-        this.cpManager = cpManager;
-        this.tablePrefix = configManager.getPluginConfig().DATASOURCE_TABLE_PREFIX;
+    public MySQLPlayerDataManager(KamiHub plugin) {
+        this.logger = plugin.getSLF4JLogger();
+        this.cpManager = plugin.getConnectionPoolManager();
+        this.tablePrefix = plugin.getConfigManager().getPluginConfig().DATASOURCE_TABLE_PREFIX;
 
         String testQuery = "SELECT 1;";
         try (var conn = cpManager.getConnection();

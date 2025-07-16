@@ -1,7 +1,6 @@
 package net.kamiland.kamihub.manager;
 
 import net.kamiland.kamihub.KamiHub;
-import net.kamiland.kamihub.data.impl.player.RuntimePlayerDataManager;
 import net.kamiland.kamihub.module.*;
 import net.kamiland.kamihub.module.Module;
 import org.jetbrains.annotations.Nullable;
@@ -13,24 +12,24 @@ public class ModuleManager {
 
     private final HashMap<String, Module> modules = new HashMap<>();
 
-    public ModuleManager(KamiHub plugin, ConfigManager configManager, RuntimePlayerDataManager runtimePDM) {
-        put(new ActionBarModule(plugin, configManager));
-        put(new AgreementModule(plugin, configManager, runtimePDM));
-        put(new AntiAttackModule(plugin, configManager));
-        put(new AntiBreakModule(plugin, configManager));
-        put(new AntiDamageModule(plugin, configManager));
-        put(new AntiDropModule(plugin, configManager));
-        put(new AntiHungerModule(plugin, configManager));
-        put(new AntiInteractModule(plugin, configManager));
-        put(new AntiPickupModule(plugin, configManager));
-        put(new AntiPlaceModule(plugin, configManager));
-        put(new AntiProjectileModule(plugin, configManager));
-        put(new BossBarModule(plugin, configManager));
-        put(new BroadcastModule(plugin, configManager));
-        put(new ClearChatModule(plugin, configManager));
-        put(new JQMessageModule(plugin, configManager));
-        put(new PotionEffectModule(plugin, configManager));
-        put(new SpawnModule(plugin, configManager));
+    public ModuleManager(KamiHub plugin) {
+        put(new ActionBarModule(plugin));
+        put(new AgreementModule(plugin));
+        put(new AntiAttackModule(plugin));
+        put(new AntiBreakModule(plugin));
+        put(new AntiDamageModule(plugin));
+        put(new AntiDropModule(plugin));
+        put(new AntiHungerModule(plugin));
+        put(new AntiInteractModule(plugin));
+        put(new AntiPickupModule(plugin));
+        put(new AntiPlaceModule(plugin));
+        put(new AntiProjectileModule(plugin));
+        put(new BossBarModule(plugin));
+        put(new BroadcastModule(plugin));
+        put(new ClearChatModule(plugin));
+        put(new JQMessageModule(plugin));
+        put(new PotionEffectModule(plugin));
+        put(new SpawnModule(plugin));
     }
 
     @Nullable

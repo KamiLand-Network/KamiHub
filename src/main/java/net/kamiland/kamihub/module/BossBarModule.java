@@ -28,10 +28,10 @@ public class BossBarModule extends EventModule {
     private final Map<World, Integer> worldsMap = new HashMap<>();
     private final Map<Player, BossBar> playerBossBarMap = new HashMap<>();
 
-    public BossBarModule(KamiHub plugin, ConfigManager configManager) {
+    public BossBarModule(KamiHub plugin) {
         super(plugin, "boss-bar");
         this.plugin = plugin;
-        this.configManager = configManager;
+        this.configManager = plugin.getConfigManager();
 
         setEnabled(configManager.getModuleConfig().IS_BOSSBAR_ENABLED);
     }
@@ -116,7 +116,7 @@ public class BossBarModule extends EventModule {
     @Override
     @NotNull
     public String getPermission() {
-        return "ultimatehub.boss-bar";
+        return "kamihub.boss-bar";
     }
 
     @Override

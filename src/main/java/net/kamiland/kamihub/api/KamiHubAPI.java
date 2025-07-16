@@ -1,4 +1,4 @@
 package net.kamiland.kamihub.api;
 
-public class UltimateHubAPI {
+public class KamiHubAPI {
 }

@@ -4,113 +4,84 @@ import net.kamiland.kamihub.KamiHub;
 import net.kamiland.kamihub.util.MessageUtil;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.*;
 
 public class MessageConfig extends Config {
 
-    public boolean IS_PREFIX_ENABLED;
-    public Component PREFIX;
-    private String noPermission;
-    private String reloadSuccess;
-    private String unknownCommand;
-    private String noConsole;
-    private String agreementAccept;
-    private String agreementReject;
-    private String agreementChange;
-    private String antiAttack;
-    private String antiBreak;
-    private String antiDrop;
-    private String antiInteract;
-    private String antiPlace;
-    private String antiProjectile;
-    private String spawnTeleport;
-    private String spawnAdd;
-    private String spawnSet;
-    private String spawnRemove;
-    private String spawnList;
-    private String voidTp;
+    private final String[] keys;
+    private final Map<String, String> keyMsgMap = new HashMap<>();
+    private final List<String> cmdHelp = new ArrayList<>();
+    public boolean prefixEnabled;
+    public Component prefix;
 
     public MessageConfig(KamiHub plugin) {
         super(plugin, "messages.yml");
+        keys = new String[]{
+                "general.no-permission",
+                "general.reload-success",
+                "general.invalid-usage",
+                "general.no-console",
+
+                "modules.agreement.accept",
+                "modules.agreement.reject",
+                "modules.agreement.change",
+
+                "modules.anti-attack",
+                "modules.anti-break",
+                "modules.anti-drop",
+                "modules.anti-interact",
+                "modules.anti-place",
+                "modules.anti-projectile",
+
+                "modules.spawn.teleport",
+                "modules.spawn.add",
+                "modules.spawn.set",
+                "modules.spawn.remove",
+                "modules.spawn.list",
+
+                "modules.void-tp"
+        };
     }
 
     @Override
     public void load() {
         super.load();
+        prefixEnabled = config.getBoolean("general.prefix.enabled");
+        prefix = MessageUtil.getMessage(config.getString("general.prefix.text", "<aqua>[KamiHub]</aqua> "));
 
-        IS_PREFIX_ENABLED = config.getBoolean("prefix.enabled");
-        PREFIX = MessageUtil.getMessage(config.getString("prefix.text"));
-        noPermission = config.getString("general.no-permission");
-        reloadSuccess = config.getString("general.reload-success");
-        unknownCommand = config.getString("general.unknown-command");
-        noConsole = config.getString("general.no-console");
+        cmdHelp.addAll(config.getStringList("command-help"));
 
-        // 加载模块消息
-        agreementAccept = config.getString("modules.agreement.accept");
-        agreementReject = config.getString("modules.agreement.reject");
-        agreementChange = config.getString("modules.agreement.change");
-        antiAttack = config.getString("modules.anti-attack");
-        antiBreak = config.getString("modules.anti-break");
-        antiDrop = config.getString("modules.anti-drop");
-        antiInteract = config.getString("modules.anti-interact");
-        antiPlace = config.getString("modules.anti-place");
-        antiProjectile = config.getString("modules.anti-projectile");
-        spawnTeleport = config.getString("modules.spawn.teleport");
-        spawnAdd = config.getString("modules.spawn.add");
-        spawnSet = config.getString("modules.spawn.set");
-        spawnRemove = config.getString("modules.spawn.remove");
-        spawnList = config.getString("modules.spawn.list");
-        voidTp = config.getString("modules.void-tp");
+        Arrays.stream(keys).forEach(key -> keyMsgMap.put(key, config.getString(key)));
     }
 
-    public Component getMessage(Message type) {
-        return getMessage(null, type);
+    @Nullable
+    public Component getCommandHelpMessage(int index) {
+        return getCommandHelpMessage(null, index);
     }
 
-    public Component getMessage(Player player, Message type, String... replacements) {
-        String msg = switch (type) {
-            case NO_PERMISSION -> noPermission;
-            case RELOAD_SUCCESS -> reloadSuccess;
-            case UNKNOWN_COMMAND -> unknownCommand;
-            case NO_CONSOLE -> noConsole;
-            case AGREEMENT_ACCEPT -> agreementAccept;
-            case AGREEMENT_REJECT -> agreementReject;
-            case AGREEMENT_CHANGE -> agreementChange;
-            case ANTI_ATTACK -> antiAttack;
-            case ANTI_BREAK -> antiBreak;
-            case ANTI_DROP -> antiDrop;
-            case ANTI_INTERACT -> antiInteract;
-            case ANTI_PLACE -> antiPlace;
-            case ANTI_PROJECTILE -> antiProjectile;
-            case SPAWN_TELEPORT -> spawnTeleport;
-            case SPAWN_ADD -> spawnAdd;
-            case SPAWN_SET -> spawnSet;
-            case SPAWN_REMOVE -> spawnRemove;
-            case SPAWN_LIST -> spawnList;
-            case VOID_TP -> voidTp;
-        };
-        return MessageUtil.getMessage(player, msg, replacements);
+    @Nullable
+    public Component getCommandHelpMessage(Player player, int index) {
+        if (index < cmdHelp.size())
+            return MessageUtil.getMessage(player, cmdHelp.get(index - 1));
+        else
+            return null;
     }
 
-    public enum Message {
-        NO_PERMISSION,
-        RELOAD_SUCCESS,
-        UNKNOWN_COMMAND,
-        NO_CONSOLE,
-        AGREEMENT_ACCEPT,
-        AGREEMENT_REJECT,
-        AGREEMENT_CHANGE,
-        ANTI_ATTACK,
-        ANTI_BREAK,
-        ANTI_DROP,
-        ANTI_INTERACT,
-        ANTI_PLACE,
-        ANTI_PROJECTILE,
-        SPAWN_TELEPORT,
-        SPAWN_ADD,
-        SPAWN_SET,
-        SPAWN_REMOVE,
-        SPAWN_LIST,
-        VOID_TP
+    public Component getMessage(@NotNull String key, String... replacements) {
+        return getMessage(null, key, replacements);
+    }
+
+    public Component getMessage(@Nullable Player player, @NotNull String key, String... replacements) {
+        String message = keyMsgMap.get(key);
+        if (message == null) {
+            plugin.getSLF4JLogger().warn("Missing message key: {}", key);
+            message = "Undefined";
+        }
+        if (prefixEnabled) return prefix.append(MessageUtil.getMessage(player, message, replacements));
+        else return MessageUtil.getMessage(player, message, replacements);
     }
 
 }

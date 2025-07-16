@@ -1,24 +1,20 @@
-#   __  ______  _                 __       __  __      __
-#  / / / / / /_(_)___ ___  ____ _/ /____  / / / /_  __/ /_
-# / / / / / __/ / __ `__ \/ __ `/ __/ _ \/ /_/ / / / / __ \
-#/ /_/ / / /_/ / / / / / / /_/ / /_/  __/ __  / /_/ / /_/ /
-#\____/_/\__/_/_/ /_/ /_/\__,_/\__/\___/_/ /_/\__,_/_.___/
+#    __ __                _ __  __      __  
+#   / //_/___ _____ ___  (_) / / /_  __/ /_ 
+#  / ,< / __ `/ __ `__ \/ / /_/ / / / / __ \
+# / /| / /_/ / / / / / / / __  / /_/ / /_/ /
+#/_/ |_\__,_/_/ /_/ /_/_/_/ /_/\__,_/_.___/ 
+                                           
+
 # v1.0                                powered by KamiLand
-# https://www.kamiland.net/plugins/ultimatehub
-# https://github.com/KamiLand-Network/UltimateHub
-# DeepWiki: https://deepwiki.com/KamiLand-Network/UltimateHub
+# https://www.kamiland.net/plugins/kamihub
+# https://github.com/KamiLand-Network/KamiHub
+# DeepWiki: https://deepwiki.com/KamiLand-Network/KamiHub
 
 # Discord: https://discord.gg/7nN4pVZV4f
 # Kook: https://kook.vip/BdvsCF
 
 # 该插件支持 PlaceholderAPI！前提是您把它安装进服务器内
-# 详情请参阅：https://www.kamiland.net/plugins/ultimatehub/papi
-
-# 写在前面的话：
-# 开发者认为该插件部分功能（如 time-changer，weather-changer）
-# 完全可以由Minecraft原版的 gamerule 实现
-# 因此，这些选项默认关闭，并标注：原版可实现
-# 我们建议使用者优先选择Minecraft原版方式实现，减轻服务器负担
+# 详情请参阅：https://www.kamiland.net/plugins/kamihub/papi
 
 # 配置文件版本号，并不等于插件版本
 # 请不要更改此项，插件会自动检测并更新配置文件版本
@@ -30,18 +26,18 @@ datasource:
   # 数据驱动类型
   # 目前支持：MySQL，H2
   storage: H2
-  table-prefix: 'uh_'
+  table-prefix: 'kh_'
   mysql:
     host: 'localhost'
     port: 3306
     database: 'minecraft'
-    username: 'ultimatehub'
+    username: 'kamihub'
     password: 'UrPasswdHere'
     params: '?useSSL=false&useUnicode=true&characterEncoding=UTF-8'
   h2:
     # H2连接（文件模式）
-    file: './plugins/UltimateHub/data/storage'
-    username: 'ultimatehub'
+    file: './plugins/KamiHub/data/storage'
+    username: 'kamihub'
     # H2模式允许（默认）不设置密码
     # 如果您希望启用密码以提升安全性，请在params值后面添加：;CIPHER=AES;IFEXISTS=TRUE
     password: ''

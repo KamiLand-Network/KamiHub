@@ -1,68 +1,66 @@
-#   __  ______  _                 __       __  __      __
-#  / / / / / /_(_)___ ___  ____ _/ /____  / / / /_  __/ /_
-# / / / / / __/ / __ `__ \/ __ `/ __/ _ \/ /_/ / / / / __ \
-#/ /_/ / / /_/ / / / / / / /_/ / /_/  __/ __  / /_/ / /_/ /
-#\____/_/\__/_/_/ /_/ /_/\__,_/\__/\___/_/ /_/\__,_/_.___/
+#    __ __                _ __  __      __
+#   / //_/___ _____ ___  (_) / / /_  __/ /_
+#  / ,< / __ `/ __ `__ \/ / /_/ / / / / __ \
+# / /| / /_/ / / / / / / / __  / /_/ / /_/ /
+#/_/ |_\__,_/_/ /_/ /_/_/_/ /_/\__,_/_.___/
+
+
 # v1.0                                powered by KamiLand
-# https://www.kamiland.net/plugins/ultimatehub
-# https://github.com/KamiLand-Network/UltimateHub
-# DeepWiki: https://deepwiki.com/KamiLand-Network/UltimateHub
+# https://www.kamiland.net/plugins/kamihub
+# https://github.com/KamiLand-Network/KamiHub
+# DeepWiki: https://deepwiki.com/KamiLand-Network/KamiHub
 
 # Discord: https://discord.gg/7nN4pVZV4f
 # Kook: https://kook.vip/BdvsCF
 
-# This plugin supports PlaceholderAPI! Provided you have it installed on your server
-# Details: https://www.kamiland.net/plugins/ultimatehub/papi
+# This plugin supports PlaceholderAPI! Make sure it is installed on your server.
+# See: https://www.kamiland.net/plugins/kamihub/papi
 
-# Foreword:
-# The developer believes that some features (like time-changer, weather-changer)
-# can be fully implemented using Minecraft's native gamerule
-# Therefore, these options are disabled by default and marked: Native Implementation Available
-# We recommend users prioritize native Minecraft solutions to reduce server load
-
-# Configuration file version, not equal to plugin version
-# DO NOT change this, the plugin will automatically detect and update configuration versions
-# If you change this, the plugin may malfunction
+# Configuration file version (not the same as plugin version)
+# Do NOT change this value manually.
+# The plugin uses it to detect and upgrade configuration format.
+# Modifying this value may cause the plugin to malfunction.
 config-version: 1.0
 
-# Data Storage Configuration
+# Data source settings
 datasource:
-  # Data storage driver type
+  # Storage driver type
   # Currently supported: MySQL, H2
   storage: H2
-  table-prefix: 'uh_'
+  table-prefix: 'kh_'
   mysql:
     host: 'localhost'
     port: 3306
     database: 'minecraft'
-    username: 'ultimatehub'
+    username: 'kamihub'
     password: 'UrPasswdHere'
     params: '?useSSL=false&useUnicode=true&characterEncoding=UTF-8'
   h2:
     # H2 connection (file mode)
-    file: './plugins/UltimateHub/data/storage'
-    username: 'ultimatehub'
-    # H2 mode allows (by default) no password
-    # If you want to enable password protection for better security,
-    # add: ;CIPHER=AES;IFEXISTS=TRUE to the end of the params value
+    file: './plugins/KamiHub/data/storage'
+    username: 'kamihub'
+    # H2 mode allows empty password by default.
+    # If you want to enable password protection for security,
+    # append this to the params value:
+    # ;CIPHER=AES;IFEXISTS=TRUE
     password: ''
     params: ';MODE=MySQL;FILE_LOCK=SOCKET;TRACE_LEVEL_FILE=0;DATABASE_TO_UPPER=FALSE'
   connection-pool:
     # Connection pool settings
-    # Maximum number of connections (recommended formula: CPU cores * 2 + number of disks)
+    # Maximum pool size (recommended: CPU cores * 2 + disk count)
     maximum-pool-size: 20
-    # Minimum idle connections (recommended: 1/4 of max-pool-size)
+    # Minimum idle connections (recommended: 1/4 of max pool size)
     minimum-idle: 5
-    # Connection timeout in milliseconds (suggested: 3000–5000)
+    # Connection timeout (ms, suggested: 3000–5000)
     connection-timeout: 3000
-    # Idle timeout in milliseconds (5 minutes)
+    # Idle timeout (ms, default: 5 minutes)
     idle-timeout: 300000
-    # Maximum connection lifetime in milliseconds (30 minutes)
+    # Maximum lifetime of a connection (ms, default: 30 minutes)
     max-lifetime: 1800000
-    # Validation timeout in milliseconds
+    # Validation timeout (ms)
     validation-timeout: 1000
     # Leak detection
-    # Leak detection threshold
+    # Leak detection threshold (ms)
     leak-detection-threshold: 30000
-    # Auto-commit (recommended: false)
+    # Recommended to disable auto-commit
     auto-commit: false
