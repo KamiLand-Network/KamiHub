@@ -27,8 +27,7 @@ repositories {
     // Sonatype
     maven("https://oss.sonatype.org/content/groups/public/")
 
-    // Panda (LiteCommands)
-    maven("https://repo.panda-lang.org/releases")
+    // LiteCommands
     maven("https://repo.eternalcode.pl/releases")
     // Item-NBT-API
     maven("https://repo.codemc.io/repository/maven-public/")

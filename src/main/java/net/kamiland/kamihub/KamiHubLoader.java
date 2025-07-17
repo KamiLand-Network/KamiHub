@@ -28,11 +28,6 @@ public class KamiHubLoader implements PluginLoader {
                 "https://repo.codemc.io/repository/maven-public/")
                 .build());
         resolver.addRepository(new RemoteRepository.Builder(
-                "panda",
-                "default",
-                "https://repo.panda-lang.org/releases")
-                .build());
-        resolver.addRepository(new RemoteRepository.Builder(
                 "eternalcode",
                 "default",
                 "https://repo.eternalcode.pl/releases")
