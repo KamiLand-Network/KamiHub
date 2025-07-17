@@ -50,7 +50,7 @@ dependencies {
     compileOnly("de.tr7zw:item-nbt-api-plugin:2.15.1")
     compileOnly("com.mysql:mysql-connector-j:9.3.0")
     compileOnly("com.h2database:h2:2.3.232")
-    compileOnly("org.bstats:bstats-bukkit:3.0.2")
+    implementation("org.bstats:bstats-bukkit:3.0.2")
 
     compileOnly("me.clip:placeholderapi:2.11.6")
     compileOnly("net.luckperms:api:5.4")
@@ -200,6 +200,8 @@ tasks.build {
 tasks.shadowJar {
     archiveBaseName.set("KamiHub")
     archiveClassifier.set("")
+
+    relocate("org.bstats", "net.kamiland.kamihub.bstats")
 
     mergeServiceFiles()
 }

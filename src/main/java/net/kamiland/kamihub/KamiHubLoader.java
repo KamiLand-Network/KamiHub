@@ -39,7 +39,6 @@ public class KamiHubLoader implements PluginLoader {
         resolver.addDependency(new Dependency(new DefaultArtifact("de.tr7zw:item-nbt-api-plugin:2.15.1"), null));
         resolver.addDependency(new Dependency(new DefaultArtifact("com.mysql:mysql-connector-j:9.3.0"), null));
         resolver.addDependency(new Dependency(new DefaultArtifact("com.h2database:h2:2.3.232"), null));
-        resolver.addDependency(new Dependency(new DefaultArtifact("org.bstats:bstats-bukkit:3.0.2"), null));
 
         classpathBuilder.addLibrary(resolver);
     }
