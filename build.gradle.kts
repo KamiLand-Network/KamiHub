@@ -29,7 +29,7 @@ repositories {
 
     // Panda (LiteCommands)
     // maven("https://repo.panda-lang.org/releases")
-    maven("https://repo.eternalcode.pl/#/releases/dev/rollczi/litecommands-bukkit")
+    maven("https://repo.eternalcode.pl/releases")
     // Item-NBT-API
     maven("https://repo.codemc.io/repository/maven-public/")
 
