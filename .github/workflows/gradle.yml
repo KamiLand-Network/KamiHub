@@ -47,6 +47,13 @@ jobs:
 
       - name: Build with Gradle Wrapper
         run: ./gradlew build --no-daemon --stacktrace
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: KamiHub-dev-${{ github.run_number }}
+          path: build/libs/*.jar
+
   release:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/release/')
     runs-on: ubuntu-latest
