@@ -25,8 +25,6 @@ public class ActionBarModule extends Module {
         super(plugin, "action-bar");
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
-
-        setEnabled(configManager.getModuleConfig().IS_ACTIONBAR_ENABLED);
     }
 
     @Override

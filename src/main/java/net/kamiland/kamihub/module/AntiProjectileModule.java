@@ -15,8 +15,6 @@ public class AntiProjectileModule extends EventModule {
     public AntiProjectileModule(KamiHub plugin) {
         super(plugin, "anti-projectile");
         this.configManager = plugin.getConfigManager();
-
-        setEnabled(configManager.getModuleConfig().IS_ANTIPROJECTILE_ENABLED);
     }
 
     @Override

@@ -20,8 +20,6 @@ public class PotionEffectModule extends EventModule {
     public PotionEffectModule(KamiHub plugin) {
         super(plugin, "potion-effect");
         this.config = plugin.getConfigManager().getModuleConfig();
-
-        setEnabled(config.IS_POTIONEFFECT_ENABLED);
     }
 
     @EventHandler

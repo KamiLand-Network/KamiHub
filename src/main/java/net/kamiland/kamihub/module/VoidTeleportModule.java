@@ -18,6 +18,8 @@ public class VoidTeleportModule extends EventModule {
         super(plugin, "void-tp");
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
+
+        setEnabled(configManager.getModuleConfig().IS_VOIDTELEPORT_ENABLED);
     }
 
     @Override

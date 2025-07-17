@@ -37,8 +37,12 @@ public class AgreementCommand {
     @Permission("kamihub.agreement.change")
     void change(@Context CommandSender sender) {
         agreementModule.onChange();
-        Player pSender = (sender instanceof Player) ? (Player) sender : null;
-        sender.sendMessage(messages.getMessage(pSender, "modules.agreement.change"));
+        if (sender instanceof Player pSender) {
+            sender.sendMessage(messages.getMessage(pSender, "modules.agreement.change"));
+        } else {
+            sender.sendMessage(messages.getMessage("modules.agreement.change"));
+        }
+
     }
 
 }

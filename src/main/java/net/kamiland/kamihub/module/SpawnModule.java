@@ -20,8 +20,6 @@ public class SpawnModule extends EventModule {
     public SpawnModule(KamiHub plugin) {
         super(plugin, "spawn");
         this.configManager = plugin.getConfigManager();
-
-        setEnabled(configManager.getModuleConfig().IS_SPAWN_ENABLED);
     }
 
     @Override

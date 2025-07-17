@@ -15,8 +15,6 @@ public class AntiBreakModule extends EventModule {
     public AntiBreakModule(KamiHub plugin) {
         super(plugin, "anti-break");
         this.configManager = plugin.getConfigManager();
-
-        setEnabled(configManager.getModuleConfig().IS_ANTIBREAK_ENABLED);
     }
 
     @Override

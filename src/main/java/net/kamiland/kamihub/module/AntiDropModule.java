@@ -14,8 +14,6 @@ public class AntiDropModule extends EventModule {
     public AntiDropModule(KamiHub plugin) {
         super(plugin, "anti-drop");
         this.configManager = plugin.getConfigManager();
-
-        setEnabled(configManager.getModuleConfig().IS_ANTIDROP_ENABLED);
     }
 
     @Override

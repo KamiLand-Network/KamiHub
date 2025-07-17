@@ -35,8 +35,6 @@ public class JQMessageModule extends EventModule {
         super(plugin, "jq-message");
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
-
-        setEnabled(configManager.getModuleConfig().IS_JQMESSAGE_ENABLED);
     }
 
     @Override

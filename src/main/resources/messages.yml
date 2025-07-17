@@ -6,6 +6,7 @@ general:
   reload-success: '<green>Plugin reloaded successfully!'
   invalid-usage: '<red>Unknown command! Use <yellow>/kh help <red>to view command usage!'
   no-console: '<red>This command can only be executed by a player!'
+  unknown-command-help: '<red>Unknown command help page!'
 command-help:
   kamihub:
     - |-
@@ -42,6 +43,7 @@ modules:
   anti-place: '<red>You cannot place blocks here!'
   anti-projectile: '<red>You cannot shoot projectiles!'
   spawn:
+    not-found: '<red>Spawn point not found!'
     teleport: '<green>You have been teleported to spawn!'
     add: '<green>Spawn point added!'
     set: '<green>Spawn point set!'

@@ -18,8 +18,6 @@ public class BroadcastModule extends Module {
         super(plugin, "broadcast");
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
-
-        setEnabled(configManager.getModuleConfig().IS_BROADCAST_ENABLED);
     }
 
     @Override

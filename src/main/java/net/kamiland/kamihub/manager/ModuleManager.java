@@ -1,6 +1,7 @@
 package net.kamiland.kamihub.manager;
 
 import net.kamiland.kamihub.KamiHub;
+import net.kamiland.kamihub.config.ModuleConfig;
 import net.kamiland.kamihub.module.*;
 import net.kamiland.kamihub.module.Module;
 import org.jetbrains.annotations.Nullable;
@@ -11,25 +12,35 @@ import java.util.Objects;
 public class ModuleManager {
 
     private final HashMap<String, Module> modules = new HashMap<>();
+    private final HashMap<Module, Boolean> moduleEnabled = new HashMap<>();
 
     public ModuleManager(KamiHub plugin) {
-        put(new ActionBarModule(plugin));
-        put(new AgreementModule(plugin));
-        put(new AntiAttackModule(plugin));
-        put(new AntiBreakModule(plugin));
-        put(new AntiDamageModule(plugin));
-        put(new AntiDropModule(plugin));
-        put(new AntiHungerModule(plugin));
-        put(new AntiInteractModule(plugin));
-        put(new AntiPickupModule(plugin));
-        put(new AntiPlaceModule(plugin));
-        put(new AntiProjectileModule(plugin));
-        put(new BossBarModule(plugin));
-        put(new BroadcastModule(plugin));
-        put(new ClearChatModule(plugin));
-        put(new JQMessageModule(plugin));
-        put(new PotionEffectModule(plugin));
-        put(new SpawnModule(plugin));
+        ModuleConfig config = plugin.getConfigManager().getModuleConfig();
+        put(new ActionBarModule(plugin), config.IS_ACTIONBAR_ENABLED);
+        put(new AgreementModule(plugin), config.IS_AGREEMENT_ENABLED);
+        put(new AntiAttackModule(plugin), config.IS_ANTIATTACK_ENABLED);
+        put(new AntiBreakModule(plugin), config.IS_ANTIBREAK_ENABLED);
+        put(new AntiDamageModule(plugin), config.IS_ANTIDAMAGE_ENABLED);
+        put(new AntiDropModule(plugin), config.IS_ANTIDROP_ENABLED);
+        put(new AntiHungerModule(plugin), config.IS_ANTIHUNGER_ENABLED);
+        put(new AntiInteractModule(plugin), config.IS_ANTIINTERACT_ENABLED);
+        put(new AntiPickupModule(plugin), config.IS_ANTIPICKUP_ENABLED);
+        put(new AntiPlaceModule(plugin), config.IS_ANTIPLACE_ENABLED);
+        put(new AntiProjectileModule(plugin), config.IS_ANTIPROJECTILE_ENABLED);
+        put(new BossBarModule(plugin), config.IS_BOSSBAR_ENABLED);
+        put(new BroadcastModule(plugin), config.IS_BROADCAST_ENABLED);
+        put(new ClearChatModule(plugin), config.IS_CLEARCHAT_ENABLED);
+        put(new InventoryModule(plugin), config.IS_INVENTORY_ENABLED);
+        put(new JQMessageModule(plugin), config.IS_JQMESSAGE_ENABLED);
+        put(new PotionEffectModule(plugin), config.IS_POTIONEFFECT_ENABLED);
+        put(new SpawnModule(plugin), config.IS_SPAWN_ENABLED);
+        put(new VoidTeleportModule(plugin), config.IS_VOIDTELEPORT_ENABLED);
+    }
+
+    public void load() {
+        moduleEnabled.forEach((module, enabled) -> {
+            if (enabled) module.setEnabled(true);
+        });
     }
 
     @Nullable
@@ -56,8 +67,9 @@ public class ModuleManager {
         return module != null && module.isEnabled();
     }
 
-    private void put(Module module) {
+    private void put(Module module, boolean enabled) {
         modules.put(module.getName(), module);
+        moduleEnabled.put(module, enabled);
     }
 
 }

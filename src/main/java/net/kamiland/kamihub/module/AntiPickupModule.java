@@ -14,8 +14,6 @@ public class AntiPickupModule extends EventModule {
     public AntiPickupModule(KamiHub plugin) {
         super(plugin, "anti-drop");
         this.configManager = plugin.getConfigManager();
-
-        setEnabled(configManager.getModuleConfig().IS_ANTIPICKUP_ENABLED);
     }
 
     @Override

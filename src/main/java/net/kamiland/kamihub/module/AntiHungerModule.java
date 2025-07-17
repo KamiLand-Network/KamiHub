@@ -15,8 +15,6 @@ public class AntiHungerModule extends EventModule {
     public AntiHungerModule(KamiHub plugin) {
         super(plugin, "anti-hunger");
         this.configManager = plugin.getConfigManager();
-
-        setEnabled(configManager.getModuleConfig().IS_ANTIHUNGER_ENABLED);
     }
 
     @Override

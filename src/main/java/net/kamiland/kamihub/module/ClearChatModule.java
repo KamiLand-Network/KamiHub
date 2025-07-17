@@ -11,8 +11,6 @@ public class ClearChatModule extends EventModule {
 
     public ClearChatModule(KamiHub plugin) {
         super(plugin, "clear-chat");
-
-        setEnabled(plugin.getConfigManager().getModuleConfig().IS_CLEARCHAT_ENABLED);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

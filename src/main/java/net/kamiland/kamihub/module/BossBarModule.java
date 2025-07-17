@@ -32,8 +32,6 @@ public class BossBarModule extends EventModule {
         super(plugin, "boss-bar");
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
-
-        setEnabled(configManager.getModuleConfig().IS_BOSSBAR_ENABLED);
     }
 
     @Override

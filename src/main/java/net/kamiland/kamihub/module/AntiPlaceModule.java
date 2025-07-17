@@ -15,8 +15,6 @@ public class AntiPlaceModule extends EventModule {
     public AntiPlaceModule(KamiHub plugin) {
         super(plugin, "anti-place");
         this.configManager = plugin.getConfigManager();
-
-        setEnabled(configManager.getModuleConfig().IS_ANTIPLACE_ENABLED);
     }
 
     @Override

@@ -3,11 +3,13 @@ package net.kamiland.kamihub.config;
 import net.kamiland.kamihub.KamiHub;
 import net.kamiland.kamihub.util.MessageUtil;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class MessageConfig extends Config {
 
@@ -24,6 +26,7 @@ public class MessageConfig extends Config {
                 "general.reload-success",
                 "general.invalid-usage",
                 "general.no-console",
+                "general.unknown-command-help",
 
                 "modules.agreement.accept",
                 "modules.agreement.reject",
@@ -49,8 +52,8 @@ public class MessageConfig extends Config {
     @Override
     public void load() {
         super.load();
-        prefixEnabled = config.getBoolean("general.prefix.enabled");
-        prefix = MessageUtil.getMessage(config.getString("general.prefix.text", "<aqua>[KamiHub]</aqua> "));
+        prefixEnabled = config.getBoolean("prefix.enabled");
+        prefix = MessageUtil.getMessage(config.getString("prefix.text", "<aqua>[KamiHub]</aqua> "));
 
         cmdHelp.addAll(config.getStringList("command-help"));
 
@@ -64,7 +67,7 @@ public class MessageConfig extends Config {
 
     @Nullable
     public Component getCommandHelpMessage(Player player, int index) {
-        if (index < cmdHelp.size())
+        if (0 < index && index <= cmdHelp.size())
             return MessageUtil.getMessage(player, cmdHelp.get(index - 1));
         else
             return null;
@@ -82,6 +85,14 @@ public class MessageConfig extends Config {
         }
         if (prefixEnabled) return prefix.append(MessageUtil.getMessage(player, message, replacements));
         else return MessageUtil.getMessage(player, message, replacements);
+    }
+
+    public Component getMessageWithComponentReplacements(@Nullable Player player, @NotNull String key, Component... replacements) {
+        return getMessage(player, key).replaceText(builder -> {
+            for (int i = 0; i < replacements.length; i ++) {
+                builder.matchLiteral("{" + i + "}").replacement(replacements[i]);
+            }
+        });
     }
 
 }

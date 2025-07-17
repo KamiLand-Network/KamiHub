@@ -31,8 +31,6 @@ public class AgreementModule extends EventModule {
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
         this.runtimePDM = plugin.getRuntimePDM();
-
-        setEnabled(configManager.getModuleConfig().IS_AGREEMENT_ENABLED);
     }
 
     @Override

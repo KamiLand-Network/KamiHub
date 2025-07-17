@@ -15,8 +15,6 @@ public class AntiAttackModule extends EventModule {
     public AntiAttackModule(KamiHub plugin) {
         super(plugin, "anti-attack");
         this.configManager = plugin.getConfigManager();
-
-        setEnabled(configManager.getModuleConfig().IS_ANTIATTACK_ENABLED);
     }
 
     @Override

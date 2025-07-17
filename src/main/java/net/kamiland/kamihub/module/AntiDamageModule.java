@@ -15,8 +15,6 @@ public class AntiDamageModule extends EventModule {
     public AntiDamageModule(KamiHub plugin) {
         super(plugin, "anti-damage");
         this.configManager = plugin.getConfigManager();
-
-        setEnabled(configManager.getModuleConfig().IS_ANTIDAMAGE_ENABLED);
     }
 
     @Override

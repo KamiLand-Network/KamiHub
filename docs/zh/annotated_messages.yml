@@ -13,6 +13,7 @@ general:
   reload-success: '<green>插件重载成功！'
   invalid-usage: '<red>未知的命令！请使用 <yellow>/kh help <red>查看命令用法！'
   no-console: '<red>该命令只能由玩家执行！'
+  unknown-command-help: '<red>未知的命令！'
 command-help:
   - |-
     <white>------------ <aqua>KamiHub 命令帮助 <white>------------
@@ -48,6 +49,7 @@ modules:
   anti-place: '<red>你不能在这里放置方块！'
   anti-projectile: '<red>你不能发射投掷物！'
   spawn:
+    not-found: '<red>'
     teleport: '<green>你已传送到出生点！'
     add: '<green>已添加出生点！'
     set: '<green>已设置出生点！'

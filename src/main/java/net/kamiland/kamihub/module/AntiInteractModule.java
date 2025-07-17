@@ -15,8 +15,6 @@ public class AntiInteractModule extends EventModule {
     public AntiInteractModule(KamiHub plugin) {
         super(plugin, "anti-interact");
         this.configManager = plugin.getConfigManager();
-
-        setEnabled(configManager.getModuleConfig().IS_ANTIINTERACT_ENABLED);
     }
 
     @Override
