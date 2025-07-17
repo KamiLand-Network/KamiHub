@@ -32,6 +32,11 @@ public class KamiHubLoader implements PluginLoader {
                 "default",
                 "https://repo.panda-lang.org/releases")
                 .build());
+        resolver.addRepository(new RemoteRepository.Builder(
+                "eternalcode",
+                "default",
+                "https://repo.eternalcode.pl/releases")
+                .build());
 
         resolver.addDependency(new Dependency(new DefaultArtifact("com.zaxxer:HikariCP:6.3.0"), null));
         resolver.addDependency(new Dependency(new DefaultArtifact("dev.rollczi:litecommands-bukkit:3.10.0"), null));
