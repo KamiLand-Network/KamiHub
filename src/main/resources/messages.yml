@@ -32,6 +32,7 @@ command-help:
       
       <click:run_command:'/kh help 1'><hover:show_text:'<green>Previous Page'><green>◀</hover></click>        <green>2<white>/<gray>2        <hover:show_text:'<gray>Next Page'><gray>▶</hover>
 modules:
+  not-found: '<red>Module not found!'
   agreement:
     accept: '<green>You have accepted the server agreement!'
     reject: '<red>You have rejected the server agreement!'

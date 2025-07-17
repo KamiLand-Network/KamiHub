@@ -28,6 +28,8 @@ public class MessageConfig extends Config {
                 "general.no-console",
                 "general.unknown-command-help",
 
+                "modules.not-found",
+
                 "modules.agreement.accept",
                 "modules.agreement.reject",
                 "modules.agreement.change",

@@ -38,6 +38,7 @@ command-help:
     
     <click:run_command:'/kh help 1'><hover:show_text:'<green>上一页'><green>◀</hover></click>        <green>2<white>/<gray>2        <hover:show_text:'<gray>下一页'><gray>▶</hover>
 modules:
+  not-found: '<red>未找到该模块！'
   agreement:
     accept: '<green>你已同意本服务器的协议！'
     reject: '<red>你已拒绝本服务器的协议！'
@@ -49,7 +50,7 @@ modules:
   anti-place: '<red>你不能在这里放置方块！'
   anti-projectile: '<red>你不能发射投掷物！'
   spawn:
-    not-found: '<red>'
+    not-found: '<red>未找到该出生点！'
     teleport: '<green>你已传送到出生点！'
     add: '<green>已添加出生点！'
     set: '<green>已设置出生点！'
