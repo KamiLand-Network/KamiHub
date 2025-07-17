@@ -35,8 +35,18 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
       - name: Build with Gradle Wrapper
-        run: ./gradlew build
+        run: ./gradlew build --no-daemon --stacktrace
   release:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/release/')
     runs-on: ubuntu-latest
@@ -75,4 +85,4 @@ jobs:
           name: Release ${{ steps.vars.outputs.version }}
           draft: false
           prerelease: ${{ steps.vars.outputs.is_prerelease }}
-          assets: build/libs/KamiHub.jar
+          assets: build/libs/KamiHub-${{ steps.vars.outputs.version }}.jar
