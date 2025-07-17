@@ -29,6 +29,7 @@ repositories {
 
     // Panda (LiteCommands)
     maven("https://repo.panda-lang.org/releases")
+    maven("https://repo.eternalcode.pl/#/releases/dev/rollczi/litecommands-bukkit")
     // Item-NBT-API
     maven("https://repo.codemc.io/repository/maven-public/")
 
@@ -43,13 +44,13 @@ dependencies {
 
     compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
 
-    paperLibrary("com.zaxxer:HikariCP:6.3.0")
-    paperLibrary("dev.rollczi:litecommands-bukkit:3.10.0")
-    paperLibrary("com.github.LeonMangler:SuperVanish:6.2.19")
-    paperLibrary("de.tr7zw:item-nbt-api-plugin:2.15.1")
-    paperLibrary("com.mysql:mysql-connector-j:9.3.0")
-    paperLibrary("com.h2database:h2:2.3.232")
-    paperLibrary("org.bstats:bstats-bukkit:3.0.2")
+    compileOnly("com.zaxxer:HikariCP:6.3.0")
+    compileOnly("dev.rollczi:litecommands-bukkit:3.10.0")
+    compileOnly("com.github.LeonMangler:SuperVanish:6.2.19")
+    compileOnly("de.tr7zw:item-nbt-api-plugin:2.15.1")
+    compileOnly("com.mysql:mysql-connector-j:9.3.0")
+    compileOnly("com.h2database:h2:2.3.232")
+    compileOnly("org.bstats:bstats-bukkit:3.0.2")
 
     compileOnly("me.clip:placeholderapi:2.11.6")
     compileOnly("net.luckperms:api:5.4")
@@ -65,7 +66,7 @@ paper {
     loader = "net.kamiland.kamihub.KamiHubLoader"
     hasOpenClassloader = false
 
-    generateLibrariesJson = true
+    generateLibrariesJson = false
 
     // foliaSupported = true
 
