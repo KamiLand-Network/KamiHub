@@ -8,31 +8,31 @@ general:
   no-console: '<red>This command can only be executed by a player!'
   unknown-command-help: '<red>Unknown command help page!'
 command-help:
-  kamihub:
-    - |-
-      <white>------------ <aqua>KamiHub Command Help <white>------------
-      <green>/kh help [page] <gray>View help page
-      <green>/kh reload <gray>Reload plugin configuration
-      <green>/kh module list <gray>List all module states
-      <green>/kh module enable <name> <gray>Enable a module
-      <green>/kh module disable <name> <gray>Disable a module
-      <green>/kh info <gray>Display plugin information
-      <green>/kh update <gray>Check for plugin updates
-      <green>/spawn <gray>Teleport to spawn
-      <hover:show_text:'<gray>Previous Page'><gray>◀</hover>        <gray>1<white>/<green>2        <click:run_command:'/kh help 2'><hover:show_text:'<green>Next Page'><green>▶</hover></click>
-    - |-
-      <white>------------ <aqua>KamiHub Command Help <white>------------
-      <green>/spawn list <gray>List all spawn points
-      <green>/spawn add <gray>Add current location as spawn
-      <green>/spawn set <gray>Set spawn point for current world
-      <green>/spawn remove <gray>Remove a spawn point
-      <green>/agreement accept <gray>Accept player agreement
-      <green>/agreement reject <gray>Reject player agreement
-      <green>/agreement change <gray>Mark agreement as changed
-      
-      <click:run_command:'/kh help 1'><hover:show_text:'<green>Previous Page'><green>◀</hover></click>        <green>2<white>/<gray>2        <hover:show_text:'<gray>Next Page'><gray>▶</hover>
+  - |-
+    <white>------------ <aqua>KamiHub Command Help <white>------------
+    <green>/kh help [page] <gray>View help page
+    <green>/kh reload <gray>Reload plugin configuration
+    <green>/kh module list <gray>List all module states
+    <green>/kh info <gray>Display plugin information
+    <green>/kh update <gray>Check for plugin updates
+    <green>/spawn <gray>Teleport to spawn
+    <green>/spawn list <gray>List all spawn points
+    
+    <hover:show_text:'<gray>Previous Page'><gray>◀</hover>                <gray>1<white>/<green>2                <click:run_command:'/kh help 2'><hover:show_text:'<green>Next Page'><green>▶</hover></click>
+  - |-
+    <white>------------ <aqua>KamiHub Command Help <white>------------
+    <green>/spawn add <gray>Add current location as spawn
+    <green>/spawn set <gray>Set spawn point for current world
+    <green>/spawn remove <gray>Remove a spawn point
+    <green>/agreement accept <gray>Accept player agreement
+    <green>/agreement reject <gray>Reject player agreement
+    <green>/agreement change <gray>Mark agreement as changed
+    
+    
+    <click:run_command:'/kh help 1'><hover:show_text:'<green>Previous Page'><green>◀</hover></click>                <green>2<white>/<gray>2                <hover:show_text:'<gray>Next Page'><gray>▶</hover>
 modules:
   not-found: '<red>Module not found!'
+  list: '<green>Module states: {0}'
   agreement:
     accept: '<green>You have accepted the server agreement!'
     reject: '<red>You have rejected the server agreement!'

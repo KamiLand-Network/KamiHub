@@ -24,8 +24,9 @@ public class SpawnConfig extends Config {
     public void load() {
         super.load();
 
-        ConfigurationSection section = Objects.requireNonNull(config.getConfigurationSection("spawns"), "The 'spawns' section in spawns.yml must not be null");
         SPAWN_LOCATIONS.clear();
+        ConfigurationSection section = config.getConfigurationSection("spawns");
+        if (section == null) return;
         for (String key : section.getKeys(false)) {
             ConfigurationSection subSection = Objects.requireNonNull(section.getConfigurationSection(key));
             SpawnLocation var = new SpawnLocation(

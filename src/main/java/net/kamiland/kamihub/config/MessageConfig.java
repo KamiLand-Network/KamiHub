@@ -3,13 +3,11 @@ package net.kamiland.kamihub.config;
 import net.kamiland.kamihub.KamiHub;
 import net.kamiland.kamihub.util.MessageUtil;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextReplacementConfig;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.function.Consumer;
 
 public class MessageConfig extends Config {
 
@@ -29,6 +27,7 @@ public class MessageConfig extends Config {
                 "general.unknown-command-help",
 
                 "modules.not-found",
+                "modules.list",
 
                 "modules.agreement.accept",
                 "modules.agreement.reject",
@@ -41,6 +40,7 @@ public class MessageConfig extends Config {
                 "modules.anti-place",
                 "modules.anti-projectile",
 
+                "modules.spawn.not-found",
                 "modules.spawn.teleport",
                 "modules.spawn.add",
                 "modules.spawn.set",

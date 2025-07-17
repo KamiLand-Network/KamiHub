@@ -20,15 +20,14 @@ command-help:
     <green>/kh help [页数] <gray>查看帮助页
     <green>/kh reload <gray>重载插件配置
     <green>/kh module list <gray>列出所有模块状态
-    <green>/kh module enable <name> <gray>启用模块
-    <green>/kh module disable <name> <gray>禁用模块
     <green>/kh info <gray>显示插件信息
     <green>/kh update <gray>检查插件更新
     <green>/spawn <gray>传送至出生点
-    <hover:show_text:'<gray>上一页'><gray>◀</hover>        <gray>1<white>/<green>2        <click:run_command:'/kh help 2'><hover:show_text:'<green>下一页'><green>▶</hover></click>
+    <green>/spawn list <gray>列出出生点
+    
+    <hover:show_text:'<gray>上一页'><gray>◀</hover>                <gray>1<white>/<green>2                <click:run_command:'/kh help 2'><hover:show_text:'<green>下一页'><green>▶</hover></click>
   - |-
     <white>------------ <aqua>KamiHub 命令帮助 <white>------------
-    <green>/spawn list <gray>列出出生点
     <green>/spawn add <gray>添加当前位置为出生点
     <green>/spawn set <gray>设置当前世界出生点
     <green>/spawn remove <gray>移除出生点
@@ -36,9 +35,13 @@ command-help:
     <green>/agreement reject <gray>拒绝玩家协议
     <green>/agreement change <gray>标记协议已更改
     
-    <click:run_command:'/kh help 1'><hover:show_text:'<green>上一页'><green>◀</hover></click>        <green>2<white>/<gray>2        <hover:show_text:'<gray>下一页'><gray>▶</hover>
+    
+    <click:run_command:'/kh help 1'><hover:show_text:'<green>上一页'><green>◀</hover></click>                <green>2<white>/<gray>2                <hover:show_text:'<gray>下一页'><gray>▶</hover>
 modules:
   not-found: '<red>未找到该模块！'
+  list: '<green>当前所有的模块：{0}'
+  enabled: '<yellow>{0} 模块已启用！'
+  disabled: '<yellow>{0} 模块已禁用！'
   agreement:
     accept: '<green>你已同意本服务器的协议！'
     reject: '<red>你已拒绝本服务器的协议！'

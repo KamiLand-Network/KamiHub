@@ -49,6 +49,7 @@ dependencies {
     paperLibrary("de.tr7zw:item-nbt-api-plugin:2.15.1")
     paperLibrary("com.mysql:mysql-connector-j:9.3.0")
     paperLibrary("com.h2database:h2:2.3.232")
+    paperLibrary("org.bstats:bstats-bukkit:3.0.2")
 
     compileOnly("me.clip:placeholderapi:2.11.6")
     compileOnly("net.luckperms:api:5.4")
@@ -99,7 +100,8 @@ paper {
                 "kamihub.anti-attack.bypass", "kamihub.boss-bar", "kamihub.broadcast.notify",
                 "kamihub.clear-chat.bypass", "kamihub.inventory.bypass", "kamihub.potion-effect",
                 "kamihub.spawn", "kamihub.spawn.add", "kamihub.spawn.set",
-                "kamihub.spawn.remove", "kamihub.spawn.list", "kamihub.void-tp")
+                "kamihub.spawn.remove", "kamihub.spawn.list", "kamihub.void-tp",
+                "kamihub.help", "kamihub.reload", "kamihub.module.list")
         }
         register("kamihub.action-bar") {
             default = BukkitPluginDescription.Permission.Default.TRUE
@@ -163,6 +165,18 @@ paper {
         }
         register("kamihub.void-tp") {
             default = BukkitPluginDescription.Permission.Default.TRUE
+        }
+        register("kamihub.help") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.reload") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.module.list") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.update") {
+            default = BukkitPluginDescription.Permission.Default.OP
         }
     }
 }

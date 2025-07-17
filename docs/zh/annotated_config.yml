@@ -21,6 +21,9 @@
 # 如果你更改了此项，插件可能无法正常工作
 config-version: 1.0
 
+# 自动检查更新
+check-for-updates: true
+
 # 数据存储设置
 datasource:
   # 数据驱动类型

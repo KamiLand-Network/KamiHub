@@ -4,14 +4,18 @@ import net.kamiland.kamihub.KamiHub;
 import net.kamiland.kamihub.config.ModuleConfig;
 import net.kamiland.kamihub.module.*;
 import net.kamiland.kamihub.module.Module;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.JoinConfiguration;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
-import java.util.Objects;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class ModuleManager {
 
-    private final HashMap<String, Module> modules = new HashMap<>();
+    private final LinkedHashMap<String, Module> modules = new LinkedHashMap<>();
     private final HashMap<Module, Boolean> moduleEnabled = new HashMap<>();
 
     public ModuleManager(KamiHub plugin) {
@@ -49,11 +53,21 @@ public class ModuleManager {
     }
 
     public void enable(String name) {
-        Objects.requireNonNull(modules.get(name), "Module does not exist").setEnabled(true);
+        Map.Entry<String, Module> entry = modules.entrySet().stream()
+                .filter(e -> e.getKey().equalsIgnoreCase(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Module \"" + name + "\" does not exist"));
+
+        entry.getValue().setEnabled(true);
     }
 
     public void disable(String name) {
-        Objects.requireNonNull(modules.get(name), "Module does not exist").setEnabled(false);
+        Map.Entry<String, Module> entry = modules.entrySet().stream()
+                .filter(e -> e.getKey().equalsIgnoreCase(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Module \"" + name + "\" does not exist"));
+
+        entry.getValue().setEnabled(false);
     }
 
     public void disableAll() {
@@ -62,9 +76,20 @@ public class ModuleManager {
         }
     }
 
+    public Component getModulesComponent() {
+        return Component.join(
+                JoinConfiguration.separator(Component.text(", ").color(NamedTextColor.GRAY)),
+                modules.values().stream().map(Module::toComponent).toList()
+        );
+    }
+
     public boolean isModuleEnabled(String name) {
         Module module = getModule(name);
         return module != null && module.isEnabled();
+    }
+
+    public boolean isModuleExist(String name) {
+        return modules.keySet().stream().anyMatch(name::equalsIgnoreCase);
     }
 
     private void put(Module module, boolean enabled) {

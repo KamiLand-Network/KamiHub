@@ -5,6 +5,7 @@ import net.kamiland.kamihub.KamiHub;
 public class PluginConfig extends Config {
 
     public String CONFIG_VERSION;
+    public boolean CHECK_FOR_UPDATES;
     public String DATASOURCE_STORAGE;
     public String DATASOURCE_MYSQL_JDBC_URL;
     public String DATASOURCE_MYSQL_USERNAME;
@@ -31,6 +32,7 @@ public class PluginConfig extends Config {
         super.load();
 
         CONFIG_VERSION = config.getString("config-version");
+        CHECK_FOR_UPDATES = config.getBoolean("check-for-updates");
 
         // Data Source
         DATASOURCE_STORAGE = config.getString("datasource.storage");

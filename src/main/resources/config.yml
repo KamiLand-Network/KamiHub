@@ -22,6 +22,9 @@
 # Modifying this value may cause the plugin to malfunction.
 config-version: 1.0
 
+# Auto check for updates
+check-for-updates: true
+
 # Data source settings
 datasource:
   # Storage driver type

@@ -3,7 +3,6 @@ package net.kamiland.kamihub.module;
 import net.kamiland.kamihub.KamiHub;
 import net.kamiland.kamihub.data.model.spawn.SpawnLocation;
 import net.kamiland.kamihub.manager.ConfigManager;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;

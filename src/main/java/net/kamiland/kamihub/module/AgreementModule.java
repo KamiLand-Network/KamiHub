@@ -1,6 +1,8 @@
 package net.kamiland.kamihub.module;
 
 import net.kamiland.kamihub.KamiHub;
+import net.kamiland.kamihub.api.event.AgreementChangeEvent;
+import net.kamiland.kamihub.api.event.PlayerAgreementEvent;
 import net.kamiland.kamihub.config.ModuleConfig;
 import net.kamiland.kamihub.data.impl.player.RuntimePlayerDataManager;
 import net.kamiland.kamihub.data.model.player.PlayerData;
@@ -106,6 +108,8 @@ public class AgreementModule extends EventModule {
         if (playerTaskMap.get(player.getUniqueId()) != null)
             Bukkit.getScheduler().cancelTask(playerTaskMap.get(player.getUniqueId()));
         playerTaskMap.remove(player.getUniqueId());
+
+        plugin.getServer().getPluginManager().callEvent(new PlayerAgreementEvent(player, true));
     }
 
     public void onReject(Player player) {
@@ -119,6 +123,8 @@ public class AgreementModule extends EventModule {
                 runtimePDM.savePlayerToStorage(player.getUniqueId(), playerData);
             }
         });
+
+        plugin.getServer().getPluginManager().callEvent(new PlayerAgreementEvent(player, false));
     }
 
     public void onChange() {
@@ -128,6 +134,8 @@ public class AgreementModule extends EventModule {
 
             Bukkit.getScheduler().runTask(plugin, () -> Bukkit.getOnlinePlayers().forEach(this::openAgreementBook));
         });
+
+        plugin.getServer().getPluginManager().callEvent(new AgreementChangeEvent());
     }
 
     @Override
