@@ -20,7 +20,6 @@ public class ModuleConfig extends Config {
     public boolean IS_AGREEMENT_ON_EVERY_JOIN;
     public boolean IS_AGREEMENT_ON_CHANGE;
     public int AGREEMENT_DELAY;
-    public boolean IS_AGREEMENT_PREVENT_CLOSE;
     public boolean IS_AGREEMENT_KICK_ON_TIMEOUT;
     public int AGREEMENT_TIMEOUT;
     public boolean IS_AGREEMENT_KICK_ON_REJECT;
@@ -28,6 +27,8 @@ public class ModuleConfig extends Config {
     public String[] AGREEMENT_PAGES;
     public String AGREEMENT_ACCEPT_BUTTON;
     public String AGREEMENT_REJECT_BUTTON;
+    public String[] AGREEMENT_ACCEPT_COMMANDS;
+    public String[] AGREEMENT_REJECT_COMMANDS;
 
     public boolean IS_ANTIBREAK_ENABLED;
     public boolean IS_ANTIBREAK_CREATIVE_ONLY;
@@ -81,6 +82,7 @@ public class ModuleConfig extends Config {
     public boolean IS_INVENTORY_CLEAR_ON_JOIN;
     public boolean IS_INVENTORY_CLEAR_ON_QUIT;
     public boolean IS_INVENTORY_GIVE_ON_JOIN;
+    public boolean IS_INVENTORY_PREVENT_MOVING;
 
     public boolean IS_JQMESSAGE_ENABLED;
     public Map<String, Map<String, List<String>>> JQMESSAGE_GROUPS;
@@ -121,7 +123,6 @@ public class ModuleConfig extends Config {
         IS_AGREEMENT_ON_EVERY_JOIN = config.getBoolean("modules.agreement.on-every-join");
         IS_AGREEMENT_ON_CHANGE = config.getBoolean("modules.agreement.on-change");
         AGREEMENT_DELAY = config.getInt("modules.agreement.delay");
-        IS_AGREEMENT_PREVENT_CLOSE = config.getBoolean("modules.agreement.prevent-close");
         IS_AGREEMENT_KICK_ON_TIMEOUT = config.getBoolean("modules.agreement.kick-on-timeout");
         AGREEMENT_TIMEOUT = config.getInt("modules.agreement.timeout");
         IS_AGREEMENT_KICK_ON_REJECT = config.getBoolean("modules.agreement.kick-on-reject");
@@ -129,6 +130,8 @@ public class ModuleConfig extends Config {
         AGREEMENT_PAGES = config.getStringList("modules.agreement.pages").toArray(new String[0]);
         AGREEMENT_ACCEPT_BUTTON = config.getString("modules.agreement.accept");
         AGREEMENT_REJECT_BUTTON = config.getString("modules.agreement.reject");
+        AGREEMENT_ACCEPT_COMMANDS = config.getStringList("modules.agreement.accept-commands").toArray(new String[0]);
+        AGREEMENT_REJECT_COMMANDS = config.getStringList("modules.agreement.reject-commands").toArray(new String[0]);
 
         IS_ANTIBREAK_ENABLED = config.getBoolean("modules.anti-break.enabled");
         IS_ANTIBREAK_CREATIVE_ONLY = config.getBoolean("modules.anti-break.break-creative-only");
@@ -186,6 +189,7 @@ public class ModuleConfig extends Config {
         IS_INVENTORY_CLEAR_ON_JOIN = config.getBoolean("modules.inventory.clear-on-join");
         IS_INVENTORY_CLEAR_ON_QUIT = config.getBoolean("modules.inventory.clear-on-quit");
         IS_INVENTORY_GIVE_ON_JOIN = config.getBoolean("modules.inventory.give-on-join");
+        IS_INVENTORY_PREVENT_MOVING = config.getBoolean("modules.inventory.prevent-moving");
 
         IS_JQMESSAGE_ENABLED = config.getBoolean("modules.join-quit-message.enabled");
         section = Objects.requireNonNull(config.getConfigurationSection("modules.join-quit-message.groups"));
