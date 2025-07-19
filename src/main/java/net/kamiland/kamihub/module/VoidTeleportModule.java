@@ -10,7 +10,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class VoidTeleportModule extends EventModule {
 
-    private final KamiHub plugin;
     private final ConfigManager configManager;
     private final MessageConfig messages;
     private SpawnModule spawnModule;
@@ -18,7 +17,6 @@ public class VoidTeleportModule extends EventModule {
 
     public VoidTeleportModule(KamiHub plugin) {
         super(plugin, "void-tp");
-        this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
         this.messages = configManager.getMessageConfig();
     }

@@ -22,7 +22,6 @@ import java.util.Map;
 
 public class BossBarModule extends EventModule {
 
-    private final KamiHub plugin;
     private final ConfigManager configManager;
     private BukkitTask bossBarTimerTask;
     private final Map<World, Integer> worldsMap = new HashMap<>();
@@ -30,7 +29,6 @@ public class BossBarModule extends EventModule {
 
     public BossBarModule(KamiHub plugin) {
         super(plugin, "boss-bar");
-        this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
     }
 
