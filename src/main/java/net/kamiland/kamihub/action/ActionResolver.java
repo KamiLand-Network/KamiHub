@@ -35,7 +35,7 @@ public class ActionResolver {
             plugin.getSLF4JLogger().warn("Unknown action: {}", action);
             return;
         }
-        act.resolve(player, action.replaceFirst(act.getPrefix(), ""));
+        act.resolve(player, action.replaceFirst(act.getPrefixRegex(), ""));
     }
 
     public void registerAction(Action action) {

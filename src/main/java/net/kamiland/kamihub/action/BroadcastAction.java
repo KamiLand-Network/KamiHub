@@ -10,7 +10,7 @@ public class BroadcastAction extends Action{
     private final KamiHub plugin;
 
     public BroadcastAction(KamiHub plugin) {
-        super("[broadcast]");
+        super("[broadcast]", "\\[broadcast]");
         this.plugin = plugin;
     }
 

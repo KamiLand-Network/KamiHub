@@ -8,9 +8,11 @@ import org.jetbrains.annotations.Nullable;
 public abstract class Action {
 
     protected final String prefix;
+    protected final String prefixRegex;
 
-    protected Action(String prefix) {
+    protected Action(String prefix, String prefixRegex) {
         this.prefix = prefix;
+        this.prefixRegex = prefixRegex;
     }
 
     public abstract void resolve(@Nullable Player player, String value);

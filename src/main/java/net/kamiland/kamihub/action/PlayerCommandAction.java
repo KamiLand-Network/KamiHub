@@ -9,7 +9,7 @@ public class PlayerCommandAction extends Action {
     private final KamiHub plugin;
 
     protected PlayerCommandAction(KamiHub plugin) {
-        super("[player]");
+        super("[player]", "\\[player]");
         this.plugin = plugin;
     }
 

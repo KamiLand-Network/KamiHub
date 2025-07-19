@@ -9,7 +9,7 @@ public class ConsoleCommandAction extends Action{
     private final KamiHub plugin;
 
     protected ConsoleCommandAction(KamiHub plugin) {
-        super("[console]");
+        super("[console]", "\\[console]");
         this.plugin = plugin;
     }
 

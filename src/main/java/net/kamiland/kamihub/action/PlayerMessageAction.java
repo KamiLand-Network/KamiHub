@@ -10,7 +10,7 @@ public class PlayerMessageAction extends Action {
     private final KamiHub plugin;
 
     protected PlayerMessageAction(KamiHub plugin) {
-        super("[message]");
+        super("[message]", "\\[message]");
         this.plugin = plugin;
     }
 
