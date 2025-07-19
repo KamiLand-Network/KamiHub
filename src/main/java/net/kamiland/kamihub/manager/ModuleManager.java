@@ -27,7 +27,7 @@ public class ModuleManager {
         put(new AntiDamageModule(plugin), config.IS_ANTIDAMAGE_ENABLED);
         put(new AntiDropModule(plugin), config.IS_ANTIDROP_ENABLED);
         put(new AntiHungerModule(plugin), config.IS_ANTIHUNGER_ENABLED);
-        put(new AntiInteractModule(plugin), config.IS_ANTIINTERACT_ENABLED);
+        put(new AntiUseModule(plugin), config.IS_ANTIUSE_ENABLED);
         put(new AntiPickupModule(plugin), config.IS_ANTIPICKUP_ENABLED);
         put(new AntiPlaceModule(plugin), config.IS_ANTIPLACE_ENABLED);
         put(new AntiProjectileModule(plugin), config.IS_ANTIPROJECTILE_ENABLED);

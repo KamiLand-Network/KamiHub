@@ -49,7 +49,7 @@ modules:
   anti-attack: '<red>你不能攻击其他玩家！'
   anti-break: '<red>你不能破坏方块！'
   anti-drop: '<red>你不能丢弃物品！'
-  anti-interact: '<red>你不能在这里交互！'
+  anti-use: '<red>你不能在这里交互！'
   anti-place: '<red>你不能在这里放置方块！'
   anti-projectile: '<red>你不能发射投掷物！'
   spawn:

@@ -36,7 +36,7 @@ public class MessageConfig extends Config {
                 "modules.anti-attack",
                 "modules.anti-break",
                 "modules.anti-drop",
-                "modules.anti-interact",
+                "modules.anti-use",
                 "modules.anti-place",
                 "modules.anti-projectile",
 
