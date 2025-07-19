@@ -17,13 +17,11 @@ import java.util.Map;
 
 public class ActionBarModule extends Module {
 
-    private final KamiHub plugin;
     private final ConfigManager configManager;
     private BukkitTask actionBarTimerTask;
 
     public ActionBarModule(KamiHub plugin) {
         super(plugin, "action-bar");
-        this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
     }
 

@@ -10,13 +10,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class BroadcastModule extends Module {
 
-    private final KamiHub plugin;
     private final ConfigManager configManager;
     private BukkitTask broadcastTimerTask;
 
     public BroadcastModule(KamiHub plugin) {
         super(plugin, "broadcast");
-        this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
     }
 

@@ -24,7 +24,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class JQMessageModule extends EventModule {
 
-    private final KamiHub plugin;
     private final ConfigManager configManager;
     private Map<String, Map<String, List<String>>> groupMessages;
     private Map<String, Integer> groupPriority;
@@ -33,7 +32,6 @@ public class JQMessageModule extends EventModule {
 
     public JQMessageModule(KamiHub plugin) {
         super(plugin, "jq-message");
-        this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
     }
 
