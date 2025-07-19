@@ -44,7 +44,7 @@ public class GitHubVersion implements Comparable<GitHubVersion> {
         if (patch != o.patch) return Integer.compare(patch, o.patch);
 
         if (Objects.equals(prerelease, o.prerelease)) return 0;
-        if (prerelease == null) return 1; // 无 pre > 有 pre
+        if (prerelease == null) return 1;
         if (o.prerelease == null) return -1;
         return prerelease.compareTo(o.prerelease);
     }
