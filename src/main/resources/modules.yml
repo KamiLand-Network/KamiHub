@@ -114,15 +114,16 @@ modules:
     # Reject button (MiniMessage)
     # You can run /agreement reject manually as well
     reject: '<click:run_command:"/agreement reject"><hover:show_text:"<gray>Click to reject"><red>Reject</hover></click>'
-    # Commands to run after rejection
+    # Actions to run after rejection
+    # More about actions: https://www.kamiland.net/plugins/kamihub/actions
     # Use {0} for player name
-    # Use [server] prefix to run as console
+    # Use [console] prefix to run as console
     # Use [player] prefix to run as player
-    reject-commands:
-      - '[server]say {0} has rejected the agreement!'
-    # Commands to run after acceptance
-    accept-commands:
-      - '[server]say {0} has accepted the agreement!'
+    reject-actions:
+      - '[console]say {0} has rejected the agreement!'
+    # Actions to run after acceptance
+    accept-actions:
+      - '[broadcast]<green>{0} has accepted the agreement!'
     # Accept button
     # Equivalent to running /agreement accept
     accept: '<click:run_command:"/agreement accept"><hover:show_text:"<gray>Click to accept"><green>Accept</hover></click>'

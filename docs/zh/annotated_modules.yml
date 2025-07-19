@@ -116,16 +116,17 @@ modules:
     # 如你所见，这是一个典型的MiniMessage格式，详参上文
     # 你可以让玩家执行 /agreement reject 来拒绝协议，这是等效的
     reject: '<click:run_command:"/agreement reject"><hover:show_text:"<gray>点击拒绝玩家协议"><red>拒绝</hover></click>'
-    # 拒绝后执行指令
+    # 拒绝后执行自定义行为
+    # 更多行为，详见：https://www.kamiland.net/plugins/kamihub/actions
     # 使用 {0} 作为玩家名称
-    # 使用 [server] 开头，以控制台身份执行指令
+    # 使用 [console] 开头，以控制台身份执行指令
     # 使用 [player] 开头，以玩家身份执行指令
-    reject-commands:
-      - '[server]say {0}已拒绝玩家协议！'
-    # 同意后执行指令
+    reject-actions:
+      - '[console]say {0}已拒绝玩家协议！'
+    # 同意后执行自定义行为
     # 使用 {0} 作为玩家名称
-    accept-commands:
-      - '[server]say {0}已同意玩家协议！'
+    accept-actions:
+      - '[broadcast]<green>{0}已同意玩家协议！'
     # 同意按钮
     # 你可以让玩家执行 /agreement accept 来同意协议，这是等效的
     accept: '<click:run_command:"/agreement accept"><hover:show_text:"<gray>点击同意玩家协议"><green>同意</hover></click>'

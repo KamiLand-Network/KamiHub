@@ -27,8 +27,8 @@ public class ModuleConfig extends Config {
     public String[] AGREEMENT_PAGES;
     public String AGREEMENT_ACCEPT_BUTTON;
     public String AGREEMENT_REJECT_BUTTON;
-    public String[] AGREEMENT_ACCEPT_COMMANDS;
-    public String[] AGREEMENT_REJECT_COMMANDS;
+    public String[] AGREEMENT_ACCEPT_ACTIONS;
+    public String[] AGREEMENT_REJECT_ACTIONS;
 
     public boolean IS_ANTIBREAK_ENABLED;
     public boolean IS_ANTIBREAK_CREATIVE_ONLY;
@@ -130,8 +130,8 @@ public class ModuleConfig extends Config {
         AGREEMENT_PAGES = config.getStringList("modules.agreement.pages").toArray(new String[0]);
         AGREEMENT_ACCEPT_BUTTON = config.getString("modules.agreement.accept");
         AGREEMENT_REJECT_BUTTON = config.getString("modules.agreement.reject");
-        AGREEMENT_ACCEPT_COMMANDS = config.getStringList("modules.agreement.accept-commands").toArray(new String[0]);
-        AGREEMENT_REJECT_COMMANDS = config.getStringList("modules.agreement.reject-commands").toArray(new String[0]);
+        AGREEMENT_ACCEPT_ACTIONS = config.getStringList("modules.agreement.accept-actions").toArray(new String[0]);
+        AGREEMENT_REJECT_ACTIONS = config.getStringList("modules.agreement.reject-actions").toArray(new String[0]);
 
         IS_ANTIBREAK_ENABLED = config.getBoolean("modules.anti-break.enabled");
         IS_ANTIBREAK_CREATIVE_ONLY = config.getBoolean("modules.anti-break.break-creative-only");
