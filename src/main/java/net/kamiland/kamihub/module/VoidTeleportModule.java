@@ -1,6 +1,7 @@
 package net.kamiland.kamihub.module;
 
 import net.kamiland.kamihub.KamiHub;
+import net.kamiland.kamihub.config.MessageConfig;
 import net.kamiland.kamihub.manager.ConfigManager;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
@@ -11,6 +12,7 @@ public class VoidTeleportModule extends EventModule {
 
     private final KamiHub plugin;
     private final ConfigManager configManager;
+    private final MessageConfig messages;
     private SpawnModule spawnModule;
     private BukkitTask voidCheckTimerTask;
 
@@ -18,6 +20,7 @@ public class VoidTeleportModule extends EventModule {
         super(plugin, "void-tp");
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
+        this.messages = configManager.getMessageConfig();
     }
 
     @Override
@@ -26,6 +29,7 @@ public class VoidTeleportModule extends EventModule {
         voidCheckTimerTask = plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, () -> {
             for (Player player : plugin.getServer().getOnlinePlayers()) {
                 if (player.getLocation().getY() < configManager.getModuleConfig().VOIDTELEPORT_LEVEL) {
+                    player.sendMessage(messages.getMessage(player, "modules.void-tp"));
                     spawnModule.spawn(player);
                 }
             }

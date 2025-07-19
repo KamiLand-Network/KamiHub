@@ -1,6 +1,7 @@
 package net.kamiland.kamihub.module;
 
 import net.kamiland.kamihub.KamiHub;
+import net.kamiland.kamihub.config.MessageConfig;
 import net.kamiland.kamihub.manager.ConfigManager;
 import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
@@ -11,10 +12,12 @@ import org.jetbrains.annotations.Nullable;
 public class AntiPlaceModule extends EventModule {
 
     private final ConfigManager configManager;
+    private final MessageConfig messages;
 
     public AntiPlaceModule(KamiHub plugin) {
         super(plugin, "anti-place");
         this.configManager = plugin.getConfigManager();
+        this.messages = configManager.getMessageConfig();
     }
 
     @Override
@@ -37,6 +40,7 @@ public class AntiPlaceModule extends EventModule {
                 } else return;
             }
             event.setCancelled(true);
+            event.getPlayer().sendMessage(messages.getMessage(event.getPlayer(), "modules.anti-place"));
         }
     }
 
