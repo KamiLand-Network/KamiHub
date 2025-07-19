@@ -42,9 +42,9 @@ public class SpawnModule extends EventModule {
         List<SpawnLocation> locations = configManager.getSpawnConfig().SPAWN_LOCATIONS;
         if (locations == null || locations.isEmpty()) {
             if (player.getRespawnLocation() != null) {
-                player.teleport(player.getRespawnLocation());
+                Bukkit.getScheduler().runTask(plugin, () -> player.teleport(player.getRespawnLocation()));
             } else {
-                player.teleport(player.getWorld().getSpawnLocation());
+                Bukkit.getScheduler().runTask(plugin, () -> player.teleport(player.getWorld().getSpawnLocation()));
             }
         } else {
             Random random = new Random();
