@@ -3,6 +3,7 @@ package net.kamiland.kamihub.module;
 import net.kamiland.kamihub.KamiHub;
 import net.kamiland.kamihub.data.model.spawn.SpawnLocation;
 import net.kamiland.kamihub.manager.ConfigManager;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -48,7 +49,7 @@ public class SpawnModule extends EventModule {
         } else {
             Random random = new Random();
             int index = random.nextInt(locations.size());
-            player.teleport(locations.get(index).getLocation());
+            Bukkit.getScheduler().runTask(plugin, () -> player.teleport(locations.get(index).getLocation()));
         }
         player.sendMessage(configManager.getMessageConfig().getMessage(player, "modules.spawn.teleport"));
     }
