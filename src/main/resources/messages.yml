@@ -37,7 +37,7 @@ modules:
     accept: '<green>You have accepted the server agreement!'
     reject: '<red>You have rejected the server agreement!'
     change: '<green>Reset agreement status for all players!'
-  anti-attack: '<red>You cannot attack other players!'
+  anti-attack: '<red>You cannot attack other entities!'
   anti-break: '<red>You cannot break blocks!'
   anti-drop: '<red>You cannot drop items!'
   anti-interact: '<red>You cannot interact here!'
