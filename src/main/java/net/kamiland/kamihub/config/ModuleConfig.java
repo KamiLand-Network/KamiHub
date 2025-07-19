@@ -34,9 +34,9 @@ public class ModuleConfig extends Config {
     public boolean IS_ANTIBREAK_CREATIVE_ONLY;
     public List<String> ANTIBREAK_WORLDS;
 
-    public boolean IS_ANTIINTERACT_ENABLED;
-    public boolean IS_ANTIINTERACT_CREATIVE_ONLY;
-    public List<String> ANTIINTERACT_WORLDS;
+    public boolean IS_ANTIUSE_ENABLED;
+    public boolean IS_ANTIUSE_CREATIVE_ONLY;
+    public List<String> ANTIUSE_WORLDS;
 
     public boolean IS_ANTIPLACE_ENABLED;
     public boolean IS_ANTIPLACE_CREATIVE_ONLY;
@@ -137,9 +137,9 @@ public class ModuleConfig extends Config {
         IS_ANTIBREAK_CREATIVE_ONLY = config.getBoolean("modules.anti-break.break-creative-only");
         ANTIBREAK_WORLDS = config.getStringList("modules.anti-break.worlds");
 
-        IS_ANTIINTERACT_ENABLED = config.getBoolean("modules.anti-interact.enabled");
-        IS_ANTIINTERACT_CREATIVE_ONLY = config.getBoolean("modules.anti-interact.creative-only");
-        ANTIINTERACT_WORLDS = config.getStringList("modules.anti-interact.worlds");
+        IS_ANTIUSE_ENABLED = config.getBoolean("modules.anti-use.enabled");
+        IS_ANTIUSE_CREATIVE_ONLY = config.getBoolean("modules.anti-use.creative-only");
+        ANTIUSE_WORLDS = config.getStringList("modules.anti-use.worlds");
 
         IS_ANTIPLACE_ENABLED = config.getBoolean("modules.anti-place.enabled");
         IS_ANTIPLACE_CREATIVE_ONLY = config.getBoolean("modules.anti-place.creative-only");

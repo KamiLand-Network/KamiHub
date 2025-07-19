@@ -94,7 +94,7 @@ paper {
     permissions {
         register("kamihub.*") {
             children = listOf(
-                "kamihub.action-bar", "kamihub.anti-break.bypass", "kamihub.anti-interact.bypass",
+                "kamihub.action-bar", "kamihub.anti-break.bypass", "kamihub.anti-use.bypass",
                 "kamihub.anti-place.bypass", "kamihub.anti-drop.bypass", "kamihub.anti-pickup.bypass",
                 "kamihub.anti-hunger", "kamihub.anti-damage", "kamihub.anti-projectile.bypass",
                 "kamihub.anti-attack.bypass", "kamihub.boss-bar", "kamihub.broadcast.notify",
@@ -109,7 +109,7 @@ paper {
         register("kamihub.anti-break.bypass") {
             default = BukkitPluginDescription.Permission.Default.OP
         }
-        register("kamihub.anti-interact.bypass") {
+        register("kamihub.anti-use.bypass") {
             default = BukkitPluginDescription.Permission.Default.OP
         }
         register("kamihub.anti-place.bypass") {

@@ -139,9 +139,9 @@ modules:
     worlds:
       - world
 
-  # Prevent interaction
-  # Bypass permission: kamihub.anti-interact.bypass (admins by default)
-  anti-interact:
+  # Prevent using blocks
+  # Bypass permission: kamihub.anti-use.bypass (admins by default)
+  anti-use:
     enabled: true
     creative-only: true
     worlds:

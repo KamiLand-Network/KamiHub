@@ -146,9 +146,9 @@ modules:
     worlds:
       - world
 
-  # 防止玩家交互
-  # 绕过权限：kamihub.anti-interact.bypass（默认管理员拥有）
-  anti-interact:
+  # 防止玩家使用方块
+  # 绕过权限：kamihub.anti-use.bypass（默认管理员拥有）
+  anti-use:
     enabled: true
     creative-only: true
     worlds:
