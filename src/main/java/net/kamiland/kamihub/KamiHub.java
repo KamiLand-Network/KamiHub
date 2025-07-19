@@ -1,6 +1,7 @@
 package net.kamiland.kamihub;
 
 import lombok.Getter;
+import net.kamiland.kamihub.action.ActionResolver;
 import net.kamiland.kamihub.data.impl.cp.HikariManager;
 import net.kamiland.kamihub.data.impl.player.RuntimePlayerDataManager;
 import net.kamiland.kamihub.data.manager.cp.ConnectionPoolManager;
@@ -33,6 +34,8 @@ public class KamiHub extends JavaPlugin {
     @Getter
     private RuntimePlayerDataManager runtimePDM;
     @Getter
+    private ActionResolver actionResolver;
+    @Getter
     private ModuleManager moduleManager;
     @Getter
     private CommandManager commandManager;
@@ -50,6 +53,8 @@ public class KamiHub extends JavaPlugin {
         connectionPoolManager = new HikariManager(this);
         connectionPoolManager.init();
         runtimePDM = new RuntimePlayerDataManager(this);
+
+        actionResolver = new ActionResolver(this);
 
         moduleManager = new ModuleManager(this);
         moduleManager.load();
