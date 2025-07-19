@@ -106,6 +106,7 @@ public class AgreementModule extends EventModule {
         if (playerTaskMap.get(player.getUniqueId()) != null)
             Bukkit.getScheduler().cancelTask(playerTaskMap.get(player.getUniqueId()));
         playerTaskMap.remove(player.getUniqueId());
+        Arrays.stream(configManager.getModuleConfig().AGREEMENT_ACCEPT_ACTIONS).forEach(action -> plugin.getActionResolver().resolve(player, action));
 
         plugin.getServer().getPluginManager().callEvent(new PlayerAgreementEvent(player, true));
     }
@@ -121,6 +122,7 @@ public class AgreementModule extends EventModule {
                 runtimePDM.savePlayerToStorage(player.getUniqueId(), playerData);
             }
         });
+        Arrays.stream(configManager.getModuleConfig().AGREEMENT_REJECT_ACTIONS).forEach(action -> plugin.getActionResolver().resolve(player, action));
 
         plugin.getServer().getPluginManager().callEvent(new PlayerAgreementEvent(player, false));
     }
