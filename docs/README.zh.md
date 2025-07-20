@@ -88,8 +88,6 @@ KamiHub采用MIT开源协议，允许自由使用、修改和分发。
 ```
 MIT License
 
-MIT License
-
 Copyright (c) 2025 KamiLand-Network
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
