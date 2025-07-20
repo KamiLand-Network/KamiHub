@@ -34,13 +34,14 @@ public class KamiHubCommand {
     @Execute
     void executeKamiHub(@Context CommandSender sender) {
         sender.sendMessage(MessageUtil.getMessage(
-                "<white>------------ <aqua>KamiHub v1.0-alpha <white>------------" +
-                        "<click:open_url:'https://www.kamiland.net/plugins/kamihub'><green>[Website]</click>    <click:open_url:'https://github.com/KamiLand-Network/KamiHub'><aqua>[GitHub]</click>" +
-                        "<green>Run <yellow>/kh help <green> for help"
+                "<white>------------ <aqua>KamiHub v1.0-alpha <white>------------<newline>" +
+                        "<click:open_url:'https://www.kamiland.net/plugins/kamihub'><green>[Website]</click>    <click:open_url:'https://github.com/KamiLand-Network/KamiHub'><aqua>[GitHub]</click><newline>" +
+                        "<green>Run <yellow>/kh help <green> for help<newline>" +
+                        "<gray>Powered by KamiLand"
         ));
     }
 
-    @Execute
+    @Execute(name = "info")
     void executeInfo(@Context CommandSender sender) {
         executeKamiHub(sender);
     }

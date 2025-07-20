@@ -2,6 +2,7 @@ package net.kamiland.kamihub;
 
 import lombok.Getter;
 import net.kamiland.kamihub.action.ActionResolver;
+import net.kamiland.kamihub.api.KamiHubAPI;
 import net.kamiland.kamihub.data.impl.cp.HikariManager;
 import net.kamiland.kamihub.data.impl.player.RuntimePlayerDataManager;
 import net.kamiland.kamihub.data.manager.cp.ConnectionPoolManager;
@@ -39,6 +40,7 @@ public class KamiHub extends JavaPlugin {
     private ModuleManager moduleManager;
     @Getter
     private CommandManager commandManager;
+    private KamiHubAPI api;
 
     @Override
     public void onEnable() {
@@ -61,6 +63,8 @@ public class KamiHub extends JavaPlugin {
 
         commandManager = new CommandManager(this);
         commandManager.registerCommands();
+
+        api = new KamiHubAPI(this);
 
         new Metrics(this, 26537);
 
