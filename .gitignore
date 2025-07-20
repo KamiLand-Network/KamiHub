@@ -4,6 +4,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 run/
+server/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -42,3 +43,4 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+/.idea

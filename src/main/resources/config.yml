@@ -1,130 +1,69 @@
+#    __ __                _ __  __      __
+#   / //_/___ _____ ___  (_) / / /_  __/ /_
+#  / ,< / __ `/ __ `__ \/ / /_/ / / / / __ \
+# / /| / /_/ / / / / / / / __  / /_/ / /_/ /
+#/_/ |_\__,_/_/ /_/ /_/_/_/ /_/\__,_/_.___/
+
+
+# v1.0                                powered by KamiLand
+# https://docs.kamiland.net/kamihub
+# https://github.com/KamiLand-Network/KamiHub
+# DeepWiki: https://deepwiki.com/KamiLand-Network/KamiHub
+
+# Discord: https://discord.gg/7nN4pVZV4f
+# Kook: https://kook.vip/BdvsCF
+
+# This plugin supports PlaceholderAPI! Make sure it is installed on your server.
+# See: https://docs.kamiland.net/kamihub/guide/papi.html
+
+# Configuration file version (not the same as plugin version)
+# Do NOT change this value manually.
+# The plugin uses it to detect and upgrade configuration format.
+# Modifying this value may cause the plugin to malfunction.
 config-version: 1.0
 
-modules:
-  action-bar:
-    enabled: true
-    interval: 2
-    messages:
-      - ''
-      - '<rainbow>V'
-      - '<rainbow>Vi'
-      - '<rainbow>Vis'
-      - '<rainbow>Visi'
-      - '<rainbow>Visit'
-      - '<rainbow>Visit '
-      - '<rainbow>Visit w'
-      - '<rainbow>Visit ww'
-      - '<rainbow>Visit www'
-      - '<rainbow>Visit www.'
-      - '<rainbow>Visit www.e'
-      - '<rainbow>Visit www.ex'
-      - '<rainbow>Visit www.exa'
-      - '<rainbow>Visit www.exam'
-      - '<rainbow>Visit www.examp'
-      - '<rainbow>Visit www.exampl'
-      - '<rainbow>Visit www.example'
-      - '<rainbow>Visit www.example.'
-      - '<rainbow>Visit www.example.c'
-      - '<rainbow>Visit www.example.co'
-      - '<rainbow>Visit www.example.com'
-      - '<rainbow>isit www.example.com'
-      - '<rainbow>sit www.example.com'
-      - '<rainbow>it www.example.com'
-      - '<rainbow>t www.example.com'
-      - '<rainbow> www.example.com'
-      - '<rainbow>www.example.com'
-      - '<rainbow>ww.example.com'
-      - '<rainbow>w.example.com'
-      - '<rainbow>.example.com'
-      - '<rainbow>example.com'
-      - '<rainbow>xample.com'
-      - '<rainbow>ample.com'
-      - '<rainbow>mple.com'
-      - '<rainbow>ple.com'
-      - '<rainbow>le.com'
-      - '<rainbow>e.com'
-      - '<rainbow>.com'
-      - '<rainbow>com'
-      - '<rainbow>om'
-      - '<rainbow>m'
-      - ''
-  agreement:
-    enabled: true
-    on-first-join: true
-    on-every-join: false
-    on-change: true
-    kick-on-disagree: true
-    kick-message: |
-      <red>You have not agreed to the agreement.</red>
-    pages:
-      - |
-        114514
-      - |
-        114514
-    agree: '<green>Agree</green>'
-    disagree: '<red>Disagree</red>'
-  anti-break:
-    enabled: true
-    break-creative-only: true
-  anti-interact:
-    enabled: true
-    creative-only: true
-  anti-place:
-    enabled: true
-    creative-only: true
-  boss-bar:
-    enabled: true
-    interval: 20
-    progress: 0.8
-    color: RED
-    overlay: NOTCHED_10
-    messages:
-      - '<red>www.example.com'
-      - '<aqua>www.example.com'
-      - '<green>www.example.com'
-      - '<yellow>www.example.com'
-  broadcast:
-    enabled: true
-    interval: 1800
-    messages:
-      - |
-        <red>Welcome to the server!</red>
-        <green>Enjoy your stay!</green>
-      - |
-        <red>Good luck!</red>
-        <green>Have fun!</green>
-  clear-chat:
-    enabled: true
-    on-join: true
-  easter-egg:
-    enabled: true
-  inventory:
-    enabled: true
-    clear-on-join: false
-    clear-on-quit: false
-    give-on-join: false
-    give-on-quit: false
-  # See items.yml
-  join&quit-message:
-    enabled: true
-    # See groups.yml
-  potion-effect:
-    enabled: true
-    clear-on-join: true
-    give-on-join: true
-    effects:
-      - name: SPEED
-        duration: 'infinite'
-        amplifier: 1
-        particles: false
-      - name: JUMP_BOOST
-        duration: '20'
-        amplifier: 0
-        particles: true
-  spawn:
-    enabled: true
-    on-join: true
-    on-command: true
-  void-teleport:
-    enabled: true
-    level: -64
+# Auto check for updates
+check-for-updates: true
+
+# Data source settings
+datasource:
+  # Storage driver type
+  # Currently supported: MySQL, H2
+  storage: H2
+  table-prefix: 'kh_'
+  mysql:
+    host: 'localhost'
+    port: 3306
+    database: 'minecraft'
+    username: 'kamihub'
+    password: 'UrPasswdHere'
+    params: '?useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+  h2:
+    # H2 connection (file mode)
+    file: './plugins/KamiHub/data/storage'
+    username: 'kamihub'
+    # H2 mode allows empty password by default.
+    # If you want to enable password protection for security,
+    # append this to the params value:
+    # ;CIPHER=AES;IFEXISTS=TRUE
+    password: ''
+    params: ';MODE=MySQL;FILE_LOCK=SOCKET;TRACE_LEVEL_FILE=0;DATABASE_TO_UPPER=FALSE'
+  connection-pool:
+    # Connection pool settings
+    # Maximum pool size (recommended: CPU cores * 2 + disk count)
+    maximum-pool-size: 20
+    # Minimum idle connections (recommended: 1/4 of max pool size)
+    minimum-idle: 5
+    # Connection timeout (ms, suggested: 3000–5000)
+    connection-timeout: 3000
+    # Idle timeout (ms, default: 5 minutes)
+    idle-timeout: 300000
+    # Maximum lifetime of a connection (ms, default: 30 minutes)
+    max-lifetime: 1800000
+    # Validation timeout (ms)
+    validation-timeout: 1000
+    # Leak detection
+    # Leak detection threshold (ms)
+    leak-detection-threshold: 30000
+    # Recommended to disable auto-commit
+    auto-commit: false

@@ -1,41 +1,36 @@
 import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
+import net.minecrell.pluginyml.paper.PaperPluginDescription
 
 plugins {
     id("java")
-    id("de.eldoria.plugin-yml.bukkit") version "0.7.1"
+    id("de.eldoria.plugin-yml.paper") version "0.7.1"
     id("com.gradleup.shadow") version "8.3.7"
 }
 
 group = "net.kamiland"
-version = "dev-0.1"
+version = "1.0-alpha"
 description = "An efficient and modern integrated server security management plugin."
-java.targetCompatibility = JavaVersion.VERSION_17
+java.sourceCompatibility = JavaVersion.VERSION_21
+java.targetCompatibility = JavaVersion.VERSION_21
 
-bukkit {
-    name = "UltimateHub"
-    main = "net.kamiland.ultimatehub.UltimateHub"
-    version = "${project.version}"
-    apiVersion = "1.13"
-    description = "${project.description}"
-    authors = listOf("KamiLand", "while1cry")
-    website = "https://www.kamiland.net/plugins/ultimatehub"
-    softDepend = listOf("PlaceholderAPI")
-
-    foliaSupported = true
-
-    load = BukkitPluginDescription.PluginLoadOrder.POSTWORLD
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 repositories {
     mavenCentral()
     maven("https://www.jitpack.io")
     // PaperMC
-    maven("https://repo.papermc.io/repository/maven-public")
+    maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://repo.papermc.io/repository/maven-snapshots/")
+    maven("https://repo.papermc.io/repository/maven-releases/")
+    // Sonatype
+    maven("https://oss.sonatype.org/content/groups/public/")
 
-    // Panda (LiteCommands)
-    maven("https://repo.panda-lang.org/releases")
-    // InvUI
-    maven("https://repo.xenondevs.xyz/releases")
+    // LiteCommands
+    maven("https://repo.eternalcode.pl/releases")
+    // Item-NBT-API
+    maven("https://repo.codemc.io/repository/maven-public/")
 
     // PlaceholderAPI
     maven("https://repo.extendedclip.com/releases")
@@ -46,22 +41,158 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.38")
     annotationProcessor("org.projectlombok:lombok:1.18.38")
 
-    compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
-    implementation("dev.rollczi:litecommands-bukkit:3.10.0")
-    implementation("xyz.xenondevs.invui:invui:1.46")
+    compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
 
-    implementation("com.github.LeonMangler:SuperVanish:6.2.19")
+    compileOnly("com.zaxxer:HikariCP:6.3.0")
+    compileOnly("dev.rollczi:litecommands-bukkit:3.10.0")
+    compileOnly("com.github.LeonMangler:SuperVanish:6.2.19")
+    compileOnly("de.tr7zw:item-nbt-api-plugin:2.15.1")
+    compileOnly("com.mysql:mysql-connector-j:9.3.0")
+    compileOnly("com.h2database:h2:2.3.232")
+    implementation("org.bstats:bstats-bukkit:3.0.2")
+
     compileOnly("me.clip:placeholderapi:2.11.6")
+    compileOnly("net.luckperms:api:5.4")
+    compileOnly("com.github.MilkBowl:VaultAPI:1.7") {
+        exclude("org.bukkit", "bukkit")
+    }
+}
+
+paper {
+    main = "net.kamiland.kamihub.KamiHub"
+
+    bootstrapper = "net.kamiland.kamihub.KamiHubBootstrapper"
+    loader = "net.kamiland.kamihub.KamiHubLoader"
+    hasOpenClassloader = false
+
+    generateLibrariesJson = false
+
+    // foliaSupported = true
+
+    apiVersion = "1.21.4"
+
+    load = BukkitPluginDescription.PluginLoadOrder.POSTWORLD
+    authors = listOf("KamiLand", "while1cry", "SuXuan_Dev")
+
+    prefix = "KamiHub"
+
+    serverDependencies {
+        register("PlaceholderAPI") {
+            required = false
+            load = PaperPluginDescription.RelativeLoadOrder.BEFORE
+        }
+        register("LuckPerms") {
+            required = false
+            load = PaperPluginDescription.RelativeLoadOrder.BEFORE
+        }
+        register("Vault") {
+            required = false
+            load = PaperPluginDescription.RelativeLoadOrder.BEFORE
+        }
+    }
+
+    permissions {
+        register("kamihub.*") {
+            children = listOf(
+                "kamihub.agreement",
+                "kamihub.action-bar", "kamihub.anti-break.bypass", "kamihub.anti-use.bypass",
+                "kamihub.anti-place.bypass", "kamihub.anti-drop.bypass", "kamihub.anti-pickup.bypass",
+                "kamihub.anti-hunger", "kamihub.anti-damage", "kamihub.anti-projectile.bypass",
+                "kamihub.anti-attack.bypass", "kamihub.boss-bar", "kamihub.broadcast.notify",
+                "kamihub.clear-chat.bypass", "kamihub.inventory.bypass", "kamihub.potion-effect",
+                "kamihub.spawn", "kamihub.spawn.add", "kamihub.spawn.set",
+                "kamihub.spawn.remove", "kamihub.spawn.list", "kamihub.void-tp",
+                "kamihub.help", "kamihub.reload", "kamihub.module.list")
+        }
+        register("kamihub.agreement") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.action-bar") {
+            default = BukkitPluginDescription.Permission.Default.TRUE
+        }
+        register("kamihub.anti-break.bypass") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.anti-use.bypass") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.anti-place.bypass") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.anti-drop.bypass") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.anti-pickup.bypass") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.anti-hunger") {
+            default = BukkitPluginDescription.Permission.Default.TRUE
+        }
+        register("kamihub.anti-damage") {
+            default = BukkitPluginDescription.Permission.Default.TRUE
+        }
+        register("kamihub.anti-projectile.bypass") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.anti-attack.bypass") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.boss-bar") {
+            default = BukkitPluginDescription.Permission.Default.TRUE
+        }
+        register("kamihub.broadcast.notify") {
+            default = BukkitPluginDescription.Permission.Default.TRUE
+        }
+        register("kamihub.clear-chat.bypass") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.inventory.bypass") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.potion-effect") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.spawn") {
+            default = BukkitPluginDescription.Permission.Default.TRUE
+        }
+        register("kamihub.spawn.add") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.spawn.set") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.spawn.remove") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.spawn.list") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.void-tp") {
+            default = BukkitPluginDescription.Permission.Default.TRUE
+        }
+        register("kamihub.help") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.reload") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.module.list") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.update") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+    }
 }
 
 val copyShadowJar by tasks.registering(Copy::class) {
     from(tasks.named("shadowJar"))
-    into("/run/plugins")
+    into("/server/plugins")
 
     dependsOn("shadowJar")
 
     doFirst {
-        file("/run/plugins").mkdirs()
+        file("/server/plugins").mkdirs()
     }
 }
 
@@ -70,17 +201,12 @@ tasks.build {
 }
 
 tasks.shadowJar {
-    archiveBaseName.set("UltimateHub")
+    archiveBaseName.set("KamiHub")
     archiveClassifier.set("")
 
-    relocate("org.jetbrains", "net.kamiland.ultimatehub.lib.jetbrains")
-    relocate("dev.rollczi", "net.kamiland.ultimatehub.lib.rollczi")
-    relocate("xyz.xenondevs", "net.kamiland.ultimatehub.lib.xenondevs")
-
-    relocate("dev.myzelyam", "net.kamiland.ultimatehub.lib.myzelyam")
+    relocate("org.bstats", "net.kamiland.kamihub.bstats")
 
     mergeServiceFiles()
-    minimize()
 }
 
 tasks.compileJava {
