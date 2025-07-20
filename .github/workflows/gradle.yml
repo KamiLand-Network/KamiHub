@@ -9,9 +9,9 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ "master", "release/*", "dev" ]
+    branches: [ "master", "dev" ]
   pull_request:
-    branches: [ "master", "release/*" ]
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -53,43 +53,3 @@ jobs:
         with:
           name: KamiHub-dev-${{ github.run_number }}
           path: build/libs/*.jar
-
-  release:
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/release/')
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Git
-        run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-
-      - name: Extract version from branch name
-        id: vars
-        run: |
-          BRANCH_NAME="${GITHUB_REF#refs/heads/release/}"
-          VERSION="${BRANCH_NAME}"
-          IS_PRERELEASE="false"
-          if [[ "$VERSION" == *"-"* ]]; then
-            IS_PRERELEASE="true"
-          fi
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "is_prerelease=$IS_PRERELEASE" >> $GITHUB_OUTPUT
-
-      - name: Create Git tag
-        run: |
-          git tag -a "${{ steps.vars.outputs.version }}" -m "Release ${{ steps.vars.outputs.version }}"
-          git push origin "${{ steps.vars.outputs.version }}"
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ steps.vars.outputs.version }}
-          name: Release ${{ steps.vars.outputs.version }}
-          draft: false
-          prerelease: ${{ steps.vars.outputs.is_prerelease }}
-          assets: build/libs/KamiHub-${{ steps.vars.outputs.version }}.jar
