@@ -6,7 +6,7 @@
 
 
 # v1.0                                powered by KamiLand
-# https://www.kamiland.net/plugins/kamihub
+# https://docs.kamiland.net/kamihub
 # https://github.com/KamiLand-Network/KamiHub
 # DeepWiki: https://deepwiki.com/KamiLand-Network/KamiHub
 
@@ -14,7 +14,7 @@
 # Kook: https://kook.vip/BdvsCF
 
 # This plugin supports PlaceholderAPI! Make sure it is installed on your server.
-# See: https://www.kamiland.net/plugins/kamihub/papi
+# See: https://docs.kamiland.net/kamihub/guide/papi.html
 
 # Configuration file version (not the same as plugin version)
 # Do NOT change this value manually.

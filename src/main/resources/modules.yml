@@ -11,7 +11,6 @@ modules:
     interval: 2
     # Texts to be shown in the action bar, displayed in order
     # All texts in this plugin use MiniMessage format. See https://docs.advntr.dev/minimessage/format.html
-    # Or see a brief plugin-specific doc: https://www.kamiland.net/plugins/kamihub/mini-message
     # You can preview and edit MiniMessage texts here: https://webui.advntr.dev
     worlds:
       world:
@@ -115,7 +114,7 @@ modules:
     # You can run /agreement reject manually as well
     reject: '<click:run_command:"/agreement reject"><hover:show_text:"<gray>Click to reject"><red>Reject</hover></click>'
     # Actions to run after rejection
-    # More about actions: https://www.kamiland.net/plugins/kamihub/actions
+    # More about actions: https://docs.kamiland.net/kamihub/actions
     # Use {0} for player name
     # Use [console] prefix to run as console
     # Use [player] prefix to run as player
