@@ -34,7 +34,7 @@ public class KamiHubCommand {
     @Execute
     void executeKamiHub(@Context CommandSender sender) {
         sender.sendMessage(MessageUtil.getMessage(
-                "<white>------------ <aqua>KamiHub v1.0-alpha <white>------------<newline>" +
+                "<white>------------ <aqua>KamiHub v1.0.1-alpha <white>------------<newline>" +
                         "<click:open_url:'https://www.kamiland.net/plugins/kamihub'><green>[Website]</click>    <click:open_url:'https://github.com/KamiLand-Network/KamiHub'><aqua>[GitHub]</click><newline>" +
                         "<green>Run <yellow>/kh help <green> for help<newline>" +
                         "<gray>Powered by KamiLand"
@@ -82,7 +82,7 @@ public class KamiHubCommand {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             sender.sendMessage(MessageUtil.getMessage("<green>Checking for updates..."));
             Optional<GitHubRelease> newVersion = new GitHubUpdateChecker("https://api.github.com/repos/KamiLand-Network/KamiHub/releases",
-                    "1.0-alpha",
+                    "1.0.1-alpha",
                     release -> !release.prerelease())
                     .fetchLatestRelease(plugin.getSLF4JLogger());
             newVersion.ifPresentOrElse(gitHubRelease -> sender.sendMessage(MessageUtil.getMessage(
