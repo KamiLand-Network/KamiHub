@@ -49,6 +49,7 @@ public class AgreementModule extends EventModule {
         Player player = event.getPlayer();
         ModuleConfig moduleConfig = configManager.getModuleConfig();
         Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
+            if (! player.isOnline()) return;
             if (moduleConfig.IS_AGREEMENT_ON_EVERY_JOIN) {
                 openAgreementBook(player);
                 if (configManager.getModuleConfig().IS_AGREEMENT_KICK_ON_TIMEOUT)
@@ -74,7 +75,14 @@ public class AgreementModule extends EventModule {
     }
 
     private Boolean checkIfPlayerAgreed(Player player) {
-        return Objects.requireNonNull(runtimePDM.getPlayerData(player.getUniqueId())).isAgreement();
+        PlayerData playerData = runtimePDM.getPlayerData(player.getUniqueId());
+        if (playerData == null) {
+            playerData = runtimePDM.getPlayerDataFromStorage(player.getUniqueId());
+        }
+        if (playerData != null)
+            return playerData.isAgreement();
+        plugin.getSLF4JLogger().error("Can't get player data for {}, is the connection pool suffering from high concurrent queries?", player.getName());
+        return false;
     }
 
     public void openAgreementBook(Player player) {
