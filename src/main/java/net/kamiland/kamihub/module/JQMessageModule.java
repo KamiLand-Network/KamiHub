@@ -15,10 +15,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -58,7 +55,7 @@ public class JQMessageModule extends EventModule {
     public void onPlayerJoin(PlayerJoinEvent event) {
         if (! isEnabled()) return;
         Player player = event.getPlayer();
-        List<String> messages = groupMessages.get(getGroup(player)).get("join");
+        List<String> messages = groupMessages.getOrDefault(getGroup(player), groupMessages.get("default")).get("join");
         if (messages != null && ! messages.isEmpty()) {
             event.joinMessage(MessageUtil.getMessage(player, messages.get(new Random().nextInt(messages.size())), player.getName()));
         }
@@ -68,7 +65,7 @@ public class JQMessageModule extends EventModule {
     public void onPlayerQuit(PlayerQuitEvent event) {
         if (! isEnabled()) return;
         Player player = event.getPlayer();
-        List<String> messages = groupMessages.get(getGroup(player)).get("quit");
+        List<String> messages = groupMessages.getOrDefault(getGroup(player), groupMessages.get("default")).get("quit");
         if (messages != null && ! messages.isEmpty()) {
             event.quitMessage(MessageUtil.getMessage(player, messages.get(new Random().nextInt(messages.size())), player.getName()));
         }
