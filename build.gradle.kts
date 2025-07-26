@@ -3,12 +3,13 @@ import net.minecrell.pluginyml.paper.PaperPluginDescription
 
 plugins {
     id("java")
+    kotlin("jvm") version "2.2.0"
     id("de.eldoria.plugin-yml.paper") version "0.7.1"
     id("com.gradleup.shadow") version "8.3.7"
 }
 
 group = "net.kamiland"
-version = "1.0.1-alpha"
+version = "1.0.2"
 description = "An efficient and modern integrated server security management plugin."
 java.sourceCompatibility = JavaVersion.VERSION_21
 java.targetCompatibility = JavaVersion.VERSION_21
