@@ -5,7 +5,7 @@
 #/_/ |_\__,_/_/ /_/ /_/_/_/ /_/\__,_/_.___/
 
 
-# v1.0                                powered by KamiLand
+# v1.1                                powered by KamiLand
 # https://docs.kamiland.net/kamihub
 # https://github.com/KamiLand-Network/KamiHub
 # DeepWiki: https://deepwiki.com/KamiLand-Network/KamiHub
@@ -20,7 +20,7 @@
 # Do NOT change this value manually.
 # The plugin uses it to detect and upgrade configuration format.
 # Modifying this value may cause the plugin to malfunction.
-config-version: 1.0
+config-version: 1.1
 
 # Auto check for updates
 check-for-updates: true

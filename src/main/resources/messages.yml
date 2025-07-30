@@ -24,10 +24,10 @@ command-help:
     <green>/spawn add <gray>Add current location as spawn
     <green>/spawn set <gray>Set spawn point for current world
     <green>/spawn remove <gray>Remove a spawn point
+    <green>/agreement <gray>Open agreement book
     <green>/agreement accept <gray>Accept player agreement
     <green>/agreement reject <gray>Reject player agreement
     <green>/agreement change <gray>Mark agreement as changed
-    
     
     <click:run_command:'/kh help 1'><hover:show_text:'<green>Previous Page'><green>◀</hover></click>                <green>2<white>/<gray>2                <hover:show_text:'<gray>Next Page'><gray>▶</hover>
 modules:

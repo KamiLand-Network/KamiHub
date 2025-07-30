@@ -68,6 +68,15 @@ modules:
     # Open agreement when it's changed
     # Requires permission or console use of /agreement change
     on-change: true
+    # Show title to players who haven't accepted the agreement
+    # Available placeholders: {0} player name, {1} remaining seconds
+    show-title: true
+    title: '<red>You have not accepted the agreement'
+    subtitle: '<gray>Please read and accept the agreement to continue'
+    # Prevent movement for players who haven't accepted the agreement
+    cancel-movement: true
+    # Reopen agreement when player moves
+    reopen-on-move: true
     # Delay (in ticks) after join before showing agreement
     delay: 100
     # Kick player if they timeout before accepting
