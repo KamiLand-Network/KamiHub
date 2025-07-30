@@ -273,6 +273,15 @@ modules:
     # Clear on player join
     on-join: true
 
+  # Lobby flight feature
+  # Requires permission: kamihub.fly
+  fly:
+    enabled: true
+    # Enable automatic flight for players when they join the server
+    auto-fly-on-join: true
+    worlds:
+      - world
+
   # Inventory control
   # Bypass permission: ultimate.inventory.bypass (admins by default)
   inventory:

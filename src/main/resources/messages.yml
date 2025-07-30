@@ -43,6 +43,9 @@ modules:
   anti-use: '<red>You cannot interact here!'
   anti-place: '<red>You cannot place blocks here!'
   anti-projectile: '<red>You cannot shoot projectiles!'
+  fly:
+    enable: '<green>You have enabled fly mode!'
+    disable: '<green>You have disabled fly mode!'
   spawn:
     not-found: '<red>Spawn point not found!'
     teleport: '<green>You have been teleported to spawn!'

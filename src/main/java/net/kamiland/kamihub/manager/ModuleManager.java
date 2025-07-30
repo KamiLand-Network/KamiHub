@@ -34,6 +34,7 @@ public class ModuleManager {
         put(new BossBarModule(plugin), config.IS_BOSSBAR_ENABLED);
         put(new BroadcastModule(plugin), config.IS_BROADCAST_ENABLED);
         put(new ClearChatModule(plugin), config.IS_CLEARCHAT_ENABLED);
+        put(new FlyModule(plugin), config.IS_FLY_ENABLED);
         put(new InventoryModule(plugin), config.IS_INVENTORY_ENABLED);
         put(new JQMessageModule(plugin), config.IS_JQMESSAGE_ENABLED);
         put(new PotionEffectModule(plugin), config.IS_POTIONEFFECT_ENABLED);

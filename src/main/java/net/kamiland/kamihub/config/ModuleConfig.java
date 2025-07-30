@@ -82,7 +82,9 @@ public class ModuleConfig extends Config {
     public boolean IS_CLEARCHAT_ENABLED;
     public boolean IS_CLEARCHAT_ON_JOIN;
 
-    public boolean IS_EASTEREGG_ENABLED;
+    public boolean IS_FLY_ENABLED;
+    public boolean IS_FLY_AUTO_FLY_ON_JOIN;
+    public List<String> FLY_WORLDS;
 
     public boolean IS_INVENTORY_ENABLED;
     public boolean IS_INVENTORY_CLEAR_ON_JOIN;
@@ -195,7 +197,9 @@ public class ModuleConfig extends Config {
         IS_CLEARCHAT_ENABLED = config.getBoolean("modules.clear-chat.enabled");
         IS_CLEARCHAT_ON_JOIN = config.getBoolean("modules.clear-chat.on-join");
 
-        IS_EASTEREGG_ENABLED = config.getBoolean("modules.easter-egg.enabled");
+        IS_FLY_ENABLED = config.getBoolean("modules.fly.enabled");
+        IS_FLY_AUTO_FLY_ON_JOIN = config.getBoolean("modules.fly.auto-fly-on-join");
+        FLY_WORLDS = config.getStringList("modules.fly.worlds");
 
         IS_INVENTORY_ENABLED = config.getBoolean("modules.inventory.enabled");
         IS_INVENTORY_CLEAR_ON_JOIN = config.getBoolean("modules.inventory.clear-on-join");
@@ -251,6 +255,10 @@ public class ModuleConfig extends Config {
             config.set("modules.agreement.title", "<red>You have not accepted the agreement");
             config.set("modules.agreement.subtitle", "<gray>Please read and accept the agreement to continue");
             config.set("modules.agreement.reopen-on-move", true);
+
+            config.set("modules.fly.enabled", true);
+            config.set("modules.fly.auto-fly-on-join", true);
+            config.set("modules.fly.worlds", List.of("world"));
             save();
         }
 

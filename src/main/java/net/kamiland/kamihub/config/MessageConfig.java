@@ -11,6 +11,7 @@ import java.util.*;
 
 public class MessageConfig extends Config {
 
+    private Version CONFIG_VERSION;
     private final String[] keys;
     private final Map<String, String> keyMsgMap = new HashMap<>();
     private final List<String> cmdHelp = new ArrayList<>();
@@ -40,6 +41,9 @@ public class MessageConfig extends Config {
                 "modules.anti-place",
                 "modules.anti-projectile",
 
+                "modules.fly.enable",
+                "modules.fly.disable",
+
                 "modules.spawn.not-found",
                 "modules.spawn.teleport",
                 "modules.spawn.add",
@@ -49,11 +53,15 @@ public class MessageConfig extends Config {
 
                 "modules.void-tp"
         };
+
+        CONFIG_VERSION = plugin.getConfigManager().getPluginConfig().CONFIG_VERSION;
     }
 
     @Override
     public void load() {
         super.load();
+        updateConfig();
+
         prefixEnabled = config.getBoolean("prefix.enabled");
         prefix = MessageUtil.getMessage(config.getString("prefix.text", "<aqua>[KamiHub]</aqua> "));
 
@@ -95,6 +103,16 @@ public class MessageConfig extends Config {
                 builder.matchLiteral("{" + i + "}").replacement(replacements[i]);
             }
         });
+    }
+
+    private void updateConfig() {
+        if (CONFIG_VERSION.compareTo(new Version("1.1")) < 0) {
+            config.set("modules.fly.enable", "<green>You have enabled fly mode!");
+            config.set("modules.fly.disable", "<green>You have disabled fly mode!");
+            save();
+        }
+
+        CONFIG_VERSION = new Version("1.1");
     }
 
 }

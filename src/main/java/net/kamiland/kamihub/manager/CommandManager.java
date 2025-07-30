@@ -10,6 +10,7 @@ import dev.rollczi.litecommands.permission.MissingPermissions;
 import dev.rollczi.litecommands.permission.MissingPermissionsHandler;
 import net.kamiland.kamihub.KamiHub;
 import net.kamiland.kamihub.command.AgreementCommand;
+import net.kamiland.kamihub.command.FlyCommand;
 import net.kamiland.kamihub.command.KamiHubCommand;
 import net.kamiland.kamihub.command.SpawnCommand;
 import net.kamiland.kamihub.config.MessageConfig;
@@ -32,6 +33,7 @@ public class CommandManager {
         liteCommands = LiteBukkitFactory.builder(plugin)
                 .commands(
                         new AgreementCommand(plugin),
+                        new FlyCommand(plugin),
                         new SpawnCommand(plugin),
                         new KamiHubCommand(plugin)
                 )
