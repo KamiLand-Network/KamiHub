@@ -55,7 +55,7 @@ public class RuntimePlayerDataManager implements PlayerDataManager, Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
             if (! event.getPlayer().isOnline())
-                removePlayer(event.getPlayer().getUniqueId());
+                playerDataMap.remove(event.getPlayer().getUniqueId());
         }, 600L);
     }
 
