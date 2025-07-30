@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "net.kamiland"
-version = "1.0.2"
+version = "1.1"
 description = "An efficient and modern integrated server security management plugin."
 java.sourceCompatibility = JavaVersion.VERSION_21
 java.targetCompatibility = JavaVersion.VERSION_21

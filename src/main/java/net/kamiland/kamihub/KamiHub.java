@@ -72,7 +72,7 @@ public class KamiHub extends JavaPlugin {
             Bukkit.getScheduler().runTaskLaterAsynchronously(this, () -> {
                 logger.info("Checking for updates...");
                 Optional<GitHubRelease> newVersion = new GitHubUpdateChecker("https://api.github.com/repos/KamiLand-Network/KamiHub/releases",
-                        "1.0.2",
+                        "1.1",
                         release -> !release.prerelease())
                         .fetchLatestRelease(logger);
                 newVersion.ifPresentOrElse(gitHubRelease -> getComponentLogger().info(MessageUtil.getMessage(
