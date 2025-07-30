@@ -10,27 +10,31 @@ import net.kamiland.kamihub.manager.ConfigManager;
 import net.kamiland.kamihub.util.MessageUtil;
 import net.kyori.adventure.inventory.Book;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.Nullable;
 
+import java.time.Duration;
 import java.util.*;
 
 public class AgreementModule extends EventModule {
 
     private final ConfigManager configManager;
     private final RuntimePlayerDataManager runtimePDM;
+    private final ModuleConfig moduleConfig;
     public final Map<UUID, Integer> playerTaskMap = new HashMap<>();
-
-    private Book book;
 
     public AgreementModule(KamiHub plugin) {
         super(plugin, "agreement");
 
         this.configManager = plugin.getConfigManager();
         this.runtimePDM = plugin.getRuntimePDM();
+        this.moduleConfig = configManager.getModuleConfig();
     }
 
     @Override
@@ -47,19 +51,50 @@ public class AgreementModule extends EventModule {
     public void onPlayerJoin(PlayerJoinEvent event) {
         if (!isEnabled()) return;
         Player player = event.getPlayer();
-        ModuleConfig moduleConfig = configManager.getModuleConfig();
         Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
             if (! player.isOnline()) return;
+            boolean isPlayerAccepted = isPlayerAccepted(player);
             if (moduleConfig.IS_AGREEMENT_ON_EVERY_JOIN) {
                 openAgreementBook(player);
                 if (configManager.getModuleConfig().IS_AGREEMENT_KICK_ON_TIMEOUT)
                     scheduleKickTask(player);
-            } else if (! checkIfPlayerAgreed(player) && moduleConfig.IS_AGREEMENT_ON_JOIN) {
+            } else if (moduleConfig.IS_AGREEMENT_ON_JOIN) {
+                if (isPlayerAccepted) return;
                 openAgreementBook(player);
                 if (configManager.getModuleConfig().IS_AGREEMENT_KICK_ON_TIMEOUT)
                     scheduleKickTask(player);
             }
         }, configManager.getModuleConfig().AGREEMENT_DELAY);
+
+        new BukkitRunnable() {
+            int remaining = moduleConfig.AGREEMENT_TIMEOUT / 20;
+            @Override
+            public void run() {
+                if (moduleConfig.IS_AGREEMENT_SHOW_TITLE && player.isOnline() && ! isPlayerAccepted(player)) {
+                    Title title = Title.title(
+                            MessageUtil.getMessage(player, moduleConfig.AGREEMENT_TITLE, player.getName(), String.valueOf(remaining)),
+                            MessageUtil.getMessage(player, moduleConfig.AGREEMENT_SUBTITLE, player.getName(), String.valueOf(remaining)),
+                            Title.Times.times(Duration.ofSeconds(0), Duration.ofSeconds(1), Duration.ofMillis(500))
+                    );
+                    player.showTitle(title);
+                } else {
+                    this.cancel();
+                }
+                remaining --;
+            }
+        }.runTaskTimer(plugin, 0L, 20L);
+    }
+
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent event) {
+        if (moduleConfig.IS_AGREEMENT_REOPEN_ON_MOVE) {
+            Player player = event.getPlayer();
+            Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+                if (! isPlayerAccepted(player)) {
+                    openAgreementBook(player);
+                }
+            });
+        }
     }
 
     private Book generateBook(Player player) {
@@ -74,7 +109,7 @@ public class AgreementModule extends EventModule {
         return Book.book(bookTitle, bookAuthor, bookPages);
     }
 
-    private Boolean checkIfPlayerAgreed(Player player) {
+    private Boolean isPlayerAccepted(Player player) {
         PlayerData playerData = runtimePDM.getPlayerData(player.getUniqueId());
         if (playerData == null) {
             playerData = runtimePDM.getPlayerDataFromStorage(player.getUniqueId());
@@ -91,14 +126,15 @@ public class AgreementModule extends EventModule {
         });
     }
 
-    private void scheduleKickTask(Player player) {
+    public void scheduleKickTask(Player player) {
         int taskId = Bukkit.getScheduler().runTaskLater(plugin, () -> kickPlayer(player), configManager.getModuleConfig().AGREEMENT_TIMEOUT).getTaskId();
         playerTaskMap.put(player.getUniqueId(), taskId);
     }
 
     private void kickPlayer(Player player) {
         playerTaskMap.remove(player.getUniqueId());
-        player.kick(MessageUtil.getMessage(configManager.getModuleConfig().AGREEMENT_KICK_MESSAGE));
+        if (player.isOnline())
+            player.kick(MessageUtil.getMessage(configManager.getModuleConfig().AGREEMENT_KICK_MESSAGE));
     }
 
     public void onAccept(Player player) {
