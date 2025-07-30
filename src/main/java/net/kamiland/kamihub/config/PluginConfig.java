@@ -4,7 +4,7 @@ import net.kamiland.kamihub.KamiHub;
 
 public class PluginConfig extends Config {
 
-    public String CONFIG_VERSION;
+    public Version CONFIG_VERSION;
     public boolean CHECK_FOR_UPDATES;
     public String DATASOURCE_STORAGE;
     public String DATASOURCE_MYSQL_JDBC_URL;
@@ -31,7 +31,7 @@ public class PluginConfig extends Config {
     public void load() {
         super.load();
 
-        CONFIG_VERSION = config.getString("config-version");
+        CONFIG_VERSION = new Version(config.getString("config-version", "0.0.0"));
         CHECK_FOR_UPDATES = config.getBoolean("check-for-updates");
 
         // Data Source
@@ -59,6 +59,12 @@ public class PluginConfig extends Config {
         CP_VALIDATION_TIMEOUT = config.getLong("datasource.connection-pool.validation-timeout");
         CP_LEAK_DETECTION_THRESHOLD = config.getLong("datasource.connection-pool.leak-detection-threshold");
         CP_AUTO_COMMIT = config.getBoolean("datasource.connection-pool.auto-commit");
+    }
+
+    public void updateConfigComplete() {
+        config.set("config-version", "1.1");
+        save();
+        CONFIG_VERSION = new Version(config.getString("config-version", "0.0.0"));
     }
 
 }

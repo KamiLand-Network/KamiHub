@@ -11,6 +11,8 @@ import java.util.*;
 
 public class ModuleConfig extends Config {
 
+    private Version CONFIG_VERSION;
+
     public boolean IS_ACTIONBAR_ENABLED;
     public long ACTIONBAR_INTERVAL;
     public Map<String, List<String>> ACTIONBAR_WORLDS;
@@ -19,6 +21,10 @@ public class ModuleConfig extends Config {
     public boolean IS_AGREEMENT_ON_JOIN;
     public boolean IS_AGREEMENT_ON_EVERY_JOIN;
     public boolean IS_AGREEMENT_ON_CHANGE;
+    public boolean IS_AGREEMENT_SHOW_TITLE;
+    public String AGREEMENT_TITLE;
+    public String AGREEMENT_SUBTITLE;
+    public boolean IS_AGREEMENT_REOPEN_ON_MOVE;
     public int AGREEMENT_DELAY;
     public boolean IS_AGREEMENT_KICK_ON_TIMEOUT;
     public int AGREEMENT_TIMEOUT;
@@ -103,11 +109,13 @@ public class ModuleConfig extends Config {
 
     public ModuleConfig(KamiHub plugin) {
         super(plugin, "modules.yml");
+        CONFIG_VERSION = plugin.getConfigManager().getPluginConfig().CONFIG_VERSION;
     }
 
     @Override
     public void load() {
         super.load();
+        updateConfig();
         ConfigurationSection section;
 
         IS_ACTIONBAR_ENABLED = config.getBoolean("modules.action-bar.enabled");
@@ -122,6 +130,10 @@ public class ModuleConfig extends Config {
         IS_AGREEMENT_ON_JOIN = config.getBoolean("modules.agreement.on-join");
         IS_AGREEMENT_ON_EVERY_JOIN = config.getBoolean("modules.agreement.on-every-join");
         IS_AGREEMENT_ON_CHANGE = config.getBoolean("modules.agreement.on-change");
+        IS_AGREEMENT_SHOW_TITLE = config.getBoolean("modules.agreement.show-title");
+        AGREEMENT_TITLE = config.getString("modules.agreement.title");
+        AGREEMENT_SUBTITLE = config.getString("modules.agreement.subtitle");
+        IS_AGREEMENT_REOPEN_ON_MOVE = config.getBoolean("modules.agreement.reopen-on-move");
         AGREEMENT_DELAY = config.getInt("modules.agreement.delay");
         IS_AGREEMENT_KICK_ON_TIMEOUT = config.getBoolean("modules.agreement.kick-on-timeout");
         AGREEMENT_TIMEOUT = config.getInt("modules.agreement.timeout");
@@ -231,6 +243,18 @@ public class ModuleConfig extends Config {
         IS_VOIDTELEPORT_ENABLED = config.getBoolean("modules.void-teleport.enabled");
         VOIDTELEPORT_LEVEL = config.getInt("modules.void-teleport.level");
         VOIDTELEPORT_WORLDS = config.getStringList("modules.void-teleport.worlds");
+    }
+
+    private void updateConfig() {
+        if (CONFIG_VERSION.compareTo(new Version("1.1")) < 0) {
+            config.set("modules.agreement.show-title", true);
+            config.set("modules.agreement.title", "<red>You have not accepted the agreement");
+            config.set("modules.agreement.subtitle", "<gray>Please read and accept the agreement to continue");
+            config.set("modules.agreement.reopen-on-move", true);
+            save();
+        }
+
+        CONFIG_VERSION = new Version("1.1");
     }
 
 }

@@ -76,6 +76,8 @@ public class ConfigManager {
         spawnConfig.load();
         messageConfig = new MessageConfig(plugin);
         messageConfig.load();
+
+        pluginConfig.updateConfigComplete();
     }
 
 }
