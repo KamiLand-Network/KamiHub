@@ -21,6 +21,11 @@ public class AgreementCommand {
         this.messages = plugin.getConfigManager().getMessageConfig();
     }
 
+    @Execute
+    void executeAgreement(@Context Player player) {
+        agreementModule.openAgreementBook(player);
+    }
+
     @Execute(name = "accept")
     void accept(@Context Player player) {
         agreementModule.onAccept(player);
