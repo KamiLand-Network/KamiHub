@@ -1,7 +1,7 @@
 package net.kamiland.kamihub.manager;
 
+import lombok.Getter;
 import net.kamiland.kamihub.KamiHub;
-import net.kamiland.kamihub.config.ModuleConfig;
 import net.kamiland.kamihub.module.*;
 import net.kamiland.kamihub.module.Module;
 import net.kyori.adventure.text.Component;
@@ -10,7 +10,6 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -18,6 +17,7 @@ import java.util.Objects;
 public class ModuleManager {
 
     private final KamiHub plugin;
+    @Getter
     private final LinkedHashMap<String, Module> modules = new LinkedHashMap<>();
 
     public ModuleManager(KamiHub plugin) {
@@ -39,7 +39,7 @@ public class ModuleManager {
         put(new ClearChatModule(plugin));
         put(new FlyModule(plugin));
         put(new InventoryModule(plugin));
-        put(new JQMessageModule(plugin));
+        put(new JoinQuitMessageModule(plugin));
         put(new PotionEffectModule(plugin));
         put(new SpawnModule(plugin));
         put(new VoidTeleportModule(plugin));

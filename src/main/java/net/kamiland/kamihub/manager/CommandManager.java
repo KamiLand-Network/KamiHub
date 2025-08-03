@@ -13,7 +13,9 @@ import net.kamiland.kamihub.command.AgreementCommand;
 import net.kamiland.kamihub.command.FlyCommand;
 import net.kamiland.kamihub.command.KamiHubCommand;
 import net.kamiland.kamihub.command.SpawnCommand;
+import net.kamiland.kamihub.command.argument.ModuleArgument;
 import net.kamiland.kamihub.config.MessageConfig;
+import net.kamiland.kamihub.module.Module;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -37,6 +39,7 @@ public class CommandManager {
                         new SpawnCommand(plugin),
                         new KamiHubCommand(plugin)
                 )
+                .argument(Module.class, new ModuleArgument(plugin.getModuleManager()))
                 .missingPermission(new PermissionsHandler())
                 .invalidUsage(new UsageHandler())
                 .build();

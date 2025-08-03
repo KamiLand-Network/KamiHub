@@ -101,8 +101,7 @@ public class KamiHub extends JavaPlugin {
             connectionPoolManager.init();
             runtimePDM = new RuntimePlayerDataManager(this);
 
-            moduleManager = new ModuleManager(this);
-            moduleManager.load();
+            moduleManager.enableByConfig();
 
             commandManager = new CommandManager(this);
             commandManager.registerCommands();
