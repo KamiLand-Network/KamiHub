@@ -29,6 +29,8 @@ public class MessageConfig extends Config {
 
                 "modules.not-found",
                 "modules.list",
+                "modules.enabled",
+                "modules.disabled",
 
                 "modules.agreement.accept",
                 "modules.agreement.reject",
@@ -109,6 +111,11 @@ public class MessageConfig extends Config {
         if (CONFIG_VERSION.compareTo(new Version("1.1")) < 0) {
             config.set("modules.fly.enable", "<green>You have enabled fly mode!");
             config.set("modules.fly.disable", "<green>You have disabled fly mode!");
+            save();
+        }
+        if (CONFIG_VERSION.compareTo(new Version("1.1")) < 0) {
+            config.set("modules.enabled", "<green>Module enabled: {0}");
+            config.set("modules.disabled", "<green>Module disabled: {0}");
             save();
         }
 
