@@ -24,8 +24,7 @@ public class FlyCommand {
     void executeFly(@Context Player player) {
         flyModule.setAllowFly(player, !flyModule.isAllowFly(player));
         if (flyModule.isAllowFly(player)) {
-            player.setFlying(true);
-            player.setVelocity(player.getVelocity().add(new Vector(0, 0.3, 0)));
+            player.setVelocity(player.getVelocity().add(new Vector(0, 0.5, 0)));
             player.sendMessage(messages.getMessage("modules.fly.enable"));
         } else {
             player.sendMessage(messages.getMessage("modules.fly.disable"));

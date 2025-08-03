@@ -83,7 +83,13 @@ public class FlyModule extends EventModule {
 
     public void setAllowFly(Player player, boolean allow) {
         playerFlyMap.put(player, allow);
-        player.setAllowFlight(allow);
+        if (allow) {
+            player.setAllowFlight(true);
+            player.setFlying(true);
+        } else {
+            player.setFlying(false);
+            player.setAllowFlight(false);
+        }
     }
 
     @Override
