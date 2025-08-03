@@ -64,7 +64,7 @@ public class ModuleManager {
                 try {
                     config.save(plugin.getConfigManager().getModuleConfig().getFile());
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    plugin.getSLF4JLogger().error("Failed to save module config", e);
                 }
             });
             plugin.getConfigManager().getModuleConfig().load();
@@ -97,7 +97,7 @@ public class ModuleManager {
                 try {
                     config.save(plugin.getConfigManager().getModuleConfig().getFile());
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    plugin.getSLF4JLogger().error("Failed to save module config", e);
                 }
             });
             plugin.getConfigManager().getModuleConfig().load();
