@@ -2,6 +2,7 @@ package net.kamiland.kamihub.module;
 
 import net.kamiland.kamihub.KamiHub;
 import net.kamiland.kamihub.config.MessageConfig;
+import net.kamiland.kamihub.config.ModuleConfig;
 import net.kamiland.kamihub.manager.ConfigManager;
 import org.bukkit.GameMode;
 import org.bukkit.block.Block;
@@ -14,6 +15,7 @@ import org.bukkit.block.data.type.Jukebox;
 import org.bukkit.block.data.type.Sign;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -21,30 +23,32 @@ import org.jetbrains.annotations.Nullable;
 public class AntiUseModule extends EventModule {
 
     private final ConfigManager configManager;
-    private final MessageConfig messages;
+    private ModuleConfig config;
+    private MessageConfig messages;
 
     public AntiUseModule(KamiHub plugin) {
         super(plugin, "anti-use");
         this.configManager = plugin.getConfigManager();
-        this.messages = configManager.getMessageConfig();
     }
 
     @Override
     protected void load() {
-
+        config = configManager.getModuleConfig();
+        messages = configManager.getMessageConfig();
     }
 
     @Override
     protected void unload() {
-
+        config = null;
+        messages = null;
     }
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (isEnabled() && configManager.getModuleConfig().ANTIUSE_WORLDS.contains(event.getPlayer().getWorld().getName())) {
+        if (isEnabled() && config.ANTIUSE_WORLDS.contains(event.getPlayer().getWorld().getName())) {
             if (! (event.getAction().isRightClick() && event.useInteractedBlock().equals(Event.Result.ALLOW) && event.getClickedBlock() != null && isUsable(event.getClickedBlock()))) return;
             if (event.getPlayer().hasPermission(getBypassPermission())) {
-                if (configManager.getModuleConfig().IS_ANTIUSE_CREATIVE_ONLY) {
+                if (config.IS_ANTIUSE_CREATIVE_ONLY) {
                     if (event.getPlayer().getGameMode() == GameMode.CREATIVE)
                         return;
                 } else return;

@@ -25,26 +25,27 @@ import java.util.*;
 public class AgreementModule extends EventModule {
 
     private final ConfigManager configManager;
-    private final RuntimePlayerDataManager runtimePDM;
-    private final ModuleConfig moduleConfig;
+    private RuntimePlayerDataManager runtimePDM;
+    private ModuleConfig moduleConfig;
     public final Map<UUID, Integer> playerTaskMap = new HashMap<>();
 
     public AgreementModule(KamiHub plugin) {
         super(plugin, "agreement");
 
         this.configManager = plugin.getConfigManager();
-        this.runtimePDM = plugin.getRuntimePDM();
-        this.moduleConfig = configManager.getModuleConfig();
     }
 
     @Override
     protected void load() {
-
+        runtimePDM = plugin.getRuntimePDM();
+        moduleConfig = configManager.getModuleConfig();
     }
 
     @Override
     protected void unload() {
-
+        runtimePDM = null;
+        moduleConfig = null;
+        playerTaskMap.clear();
     }
 
     @EventHandler

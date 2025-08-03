@@ -12,21 +12,20 @@ import org.jetbrains.annotations.Nullable;
 
 public class InventoryModule extends EventModule {
 
-    private final ModuleConfig config;
+    private ModuleConfig config;
 
     public InventoryModule(KamiHub plugin) {
         super(plugin, "inventory");
-        this.config = plugin.getConfigManager().getModuleConfig();
     }
 
     @Override
     protected void load() {
-
+        config = plugin.getConfigManager().getModuleConfig();
     }
 
     @Override
     protected void unload() {
-
+        config = null;
     }
 
     @EventHandler

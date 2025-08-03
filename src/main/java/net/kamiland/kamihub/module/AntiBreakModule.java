@@ -2,9 +2,11 @@ package net.kamiland.kamihub.module;
 
 import net.kamiland.kamihub.KamiHub;
 import net.kamiland.kamihub.config.MessageConfig;
+import net.kamiland.kamihub.config.ModuleConfig;
 import net.kamiland.kamihub.manager.ConfigManager;
 import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -12,29 +14,31 @@ import org.jetbrains.annotations.Nullable;
 public class AntiBreakModule extends EventModule {
 
     private final ConfigManager configManager;
-    private final MessageConfig messages;
+    private ModuleConfig config;
+    private MessageConfig messages;
 
     public AntiBreakModule(KamiHub plugin) {
         super(plugin, "anti-break");
         this.configManager = plugin.getConfigManager();
-        this.messages = configManager.getMessageConfig();
     }
 
     @Override
     protected void load() {
-
+        config = configManager.getModuleConfig();
+        messages = configManager.getMessageConfig();
     }
 
     @Override
     protected void unload() {
-
+        config = null;
+        messages = null;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event) {
-        if (isEnabled() && configManager.getModuleConfig().ANTIBREAK_WORLDS.contains(event.getPlayer().getWorld().getName())) {
+        if (isEnabled() && config.ANTIBREAK_WORLDS.contains(event.getPlayer().getWorld().getName())) {
             if (event.getPlayer().hasPermission(getBypassPermission())) {
-                if (configManager.getModuleConfig().IS_ANTIBREAK_CREATIVE_ONLY) {
+                if (config.IS_ANTIBREAK_CREATIVE_ONLY) {
                     if (event.getPlayer().getGameMode() == GameMode.CREATIVE)
                         return;
                 } else return;

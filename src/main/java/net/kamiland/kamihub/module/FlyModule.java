@@ -5,6 +5,7 @@ import net.kamiland.kamihub.config.ModuleConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
@@ -17,24 +18,29 @@ import java.util.Map;
 
 public class FlyModule extends EventModule {
 
-    private final ModuleConfig config;
-    private final List<String> worlds;
     private final Map<Player, Boolean> playerFlyMap = new HashMap<>();
+    private ModuleConfig config;
+    private List<String> worlds;
 
     public FlyModule(KamiHub plugin) {
         super(plugin, "fly");
-        this.worlds = plugin.getConfigManager().getModuleConfig().FLY_WORLDS;
-        this.config = plugin.getConfigManager().getModuleConfig();
     }
 
     @Override
     protected void load() {
-
+        config = plugin.getConfigManager().getModuleConfig();
+        worlds = config.FLY_WORLDS;
     }
 
     @Override
     protected void unload() {
-
+        playerFlyMap.keySet().forEach(player -> {
+            player.setAllowFlight(false);
+            player.setFlying(false);
+        });
+        playerFlyMap.clear();
+        worlds.clear();
+        config = null;
     }
 
     @EventHandler
@@ -60,7 +66,7 @@ public class FlyModule extends EventModule {
         playerFlyMap.remove(event.getPlayer());
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerTeleport(PlayerTeleportEvent event) {
         if (! config.IS_FLY_ENABLED || event.getFrom().getWorld().equals(event.getTo().getWorld())) return;
         Player player = event.getPlayer();

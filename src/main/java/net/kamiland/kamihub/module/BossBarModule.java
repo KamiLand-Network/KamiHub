@@ -103,6 +103,8 @@ public class BossBarModule extends EventModule {
     @Override
     public void unload() {
         playerBossBarMap.forEach(Audience::hideBossBar);
+        playerBossBarMap.clear();
+        worldsMap.clear();
         if (bossBarTimerTask!= null) {
             bossBarTimerTask.cancel();
             bossBarTimerTask = null;

@@ -14,12 +14,11 @@ import java.util.List;
 
 public class PotionEffectModule extends EventModule {
 
-    private final ModuleConfig config;
+    private ModuleConfig config;
     private List<PotionEffect> effects;
 
     public PotionEffectModule(KamiHub plugin) {
         super(plugin, "potion-effect");
-        this.config = plugin.getConfigManager().getModuleConfig();
     }
 
     @EventHandler
@@ -44,6 +43,7 @@ public class PotionEffectModule extends EventModule {
 
     @Override
     protected void load() {
+        config = plugin.getConfigManager().getModuleConfig();
         effects = config.POTIONEFFECT_EFFECTS;
     }
 
