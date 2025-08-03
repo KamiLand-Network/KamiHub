@@ -94,7 +94,8 @@ paper {
     permissions {
         register("kamihub.*") {
             children = listOf(
-                "kamihub.agreement",
+                "kamihub.module.toggle", "kamihub.fly",
+                "kamihub.agreement", "kamihub.module.enable", "kamihub.module.disable",
                 "kamihub.action-bar", "kamihub.anti-break.bypass", "kamihub.anti-use.bypass",
                 "kamihub.anti-place.bypass", "kamihub.anti-drop.bypass", "kamihub.anti-pickup.bypass",
                 "kamihub.anti-hunger", "kamihub.anti-damage", "kamihub.anti-projectile.bypass",
@@ -103,6 +104,19 @@ paper {
                 "kamihub.spawn", "kamihub.spawn.add", "kamihub.spawn.set",
                 "kamihub.spawn.remove", "kamihub.spawn.list", "kamihub.void-tp",
                 "kamihub.help", "kamihub.reload", "kamihub.module.list")
+        }
+
+        register("kamihub.module.toggle") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.module.enable") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.module.disable") {
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("kamihub.fly") {
+            default = BukkitPluginDescription.Permission.Default.OP
         }
         register("kamihub.agreement") {
             default = BukkitPluginDescription.Permission.Default.OP
