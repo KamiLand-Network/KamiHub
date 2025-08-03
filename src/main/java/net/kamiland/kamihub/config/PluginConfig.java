@@ -62,9 +62,9 @@ public class PluginConfig extends Config {
     }
 
     public void updateConfigComplete() {
-        config.set("config-version", "1.1");
+        config.set("config-version", KamiHub.CURRENT_VERSION);
         save();
-        CONFIG_VERSION = new Version(config.getString("config-version", "0.0.0"));
+        CONFIG_VERSION = new Version(KamiHub.CURRENT_VERSION);
     }
 
 }

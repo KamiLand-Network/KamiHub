@@ -25,6 +25,8 @@ import java.util.Optional;
 
 public class KamiHub extends JavaPlugin {
 
+    public static final String CURRENT_VERSION = "1.2";
+
     private Logger logger;
     @Getter
     private ServerManager serverManager;
@@ -72,7 +74,7 @@ public class KamiHub extends JavaPlugin {
             Bukkit.getScheduler().runTaskLaterAsynchronously(this, () -> {
                 logger.info("Checking for updates...");
                 Optional<GitHubRelease> newVersion = new GitHubUpdateChecker("https://api.github.com/repos/KamiLand-Network/KamiHub/releases",
-                        "1.1",
+                        CURRENT_VERSION,
                         release -> !release.prerelease())
                         .fetchLatestRelease(logger);
                 newVersion.ifPresentOrElse(gitHubRelease -> getComponentLogger().info(MessageUtil.getMessage(

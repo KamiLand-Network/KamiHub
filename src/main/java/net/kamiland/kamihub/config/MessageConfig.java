@@ -112,7 +112,7 @@ public class MessageConfig extends Config {
             save();
         }
 
-        CONFIG_VERSION = new Version("1.1");
+        CONFIG_VERSION = new Version(KamiHub.CURRENT_VERSION);
     }
 
 }
