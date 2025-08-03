@@ -96,6 +96,22 @@ public class KamiHubCommand {
         sender.sendMessage(messages.getMessageWithComponentReplacements((sender instanceof Player ? (Player) sender : null), "modules.disabled", module.toComponent()));
     }
 
+    @Execute(name = "module toggle")
+    @Permission("kamihub.module.toggle")
+    void executeModuleToggle(@Context CommandSender sender, @Arg String name) {
+        if (! moduleManager.isModuleExist(name)) {
+            sender.sendMessage(messages.getMessage((sender instanceof Player ? (Player) sender : null), "modules.not-found"));
+            return;
+        }
+        Module module = moduleManager.getModule(name); assert module != null;
+        boolean before = moduleManager.isModuleEnabled(name);
+        if (before)
+            moduleManager.disable(name);
+        else
+            moduleManager.enable(name);
+        sender.sendMessage(messages.getMessageWithComponentReplacements((sender instanceof Player ? (Player) sender : null), before ? "modules.disabled" : "modules.enabled", module.toComponent()));
+    }
+
     @Execute(name = "reload")
     @Permission("kamihub.reload")
     void executeReload(@Context CommandSender sender) {
