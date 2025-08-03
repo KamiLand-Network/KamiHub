@@ -39,7 +39,7 @@ public abstract class Module {
                 enabled ? "<green>true" : "<red>false"
         );
         String color = enabled ? "<green>" : "<red>";
-        return MessageUtil.getMessage("<click:run_command:'/kh module toggle {0}'><hover:show_text:'" + hoverText + "'>" + color + name + "<newline><newline><gray>Click to toggle module status</hover>" + "</click>", name);
+        return MessageUtil.getMessage("<click:run_command:'/kh module toggle {0}'><hover:show_text:'" + hoverText + "<newline><newline><gray>Click to toggle module status'>" + color + name + "</click>", name);
     }
 
 }
