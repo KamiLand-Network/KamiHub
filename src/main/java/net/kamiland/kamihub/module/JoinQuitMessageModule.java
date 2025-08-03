@@ -15,11 +15,14 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class JQMessageModule extends EventModule {
+public class JoinQuitMessageModule extends EventModule {
 
     private final ConfigManager configManager;
     private Map<String, Map<String, List<String>>> groupMessages;
@@ -27,8 +30,8 @@ public class JQMessageModule extends EventModule {
     private UserManager lpUserManager;
     private Permission vaultPermission;
 
-    public JQMessageModule(KamiHub plugin) {
-        super(plugin, "jq-message");
+    public JoinQuitMessageModule(KamiHub plugin) {
+        super(plugin, "join-quit-message");
         this.configManager = plugin.getConfigManager();
     }
 
