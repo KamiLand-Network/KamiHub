@@ -250,15 +250,16 @@ public class ModuleConfig extends Config {
     }
 
     private void updateConfig() {
+        config.options().copyDefaults(true);
         if (CONFIG_VERSION.compareTo(new Version("1.1")) < 0) {
-            config.set("modules.agreement.show-title", true);
-            config.set("modules.agreement.title", "<red>You have not accepted the agreement");
-            config.set("modules.agreement.subtitle", "<gray>Please read and accept the agreement to continue");
-            config.set("modules.agreement.reopen-on-move", true);
+            config.addDefault("modules.agreement.show-title", true);
+            config.addDefault("modules.agreement.title", "<red>You have not accepted the agreement");
+            config.addDefault("modules.agreement.subtitle", "<gray>Please read and accept the agreement to continue");
+            config.addDefault("modules.agreement.reopen-on-move", true);
 
-            config.set("modules.fly.enabled", true);
-            config.set("modules.fly.auto-fly-on-join", true);
-            config.set("modules.fly.worlds", List.of("world"));
+            config.addDefault("modules.fly.enabled", true);
+            config.addDefault("modules.fly.auto-fly-on-join", true);
+            config.addDefault("modules.fly.worlds", List.of("world"));
             save();
         }
 
