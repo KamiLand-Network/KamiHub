@@ -61,7 +61,7 @@ public class KamiHub extends JavaPlugin {
         actionResolver = new ActionResolver(this);
 
         moduleManager = new ModuleManager(this);
-        moduleManager.load();
+        moduleManager.enableByConfig();
 
         commandManager = new CommandManager(this);
         commandManager.registerCommands();
@@ -101,6 +101,7 @@ public class KamiHub extends JavaPlugin {
             connectionPoolManager.init();
             runtimePDM = new RuntimePlayerDataManager(this);
 
+            moduleManager.disableAll();
             moduleManager.enableByConfig();
 
             commandManager = new CommandManager(this);

@@ -46,7 +46,7 @@ dependencies {
     compileOnly("com.zaxxer:HikariCP:6.3.0")
     compileOnly("dev.rollczi:litecommands-bukkit:3.10.0")
     compileOnly("com.github.LeonMangler:SuperVanish:6.2.19")
-    compileOnly("de.tr7zw:item-nbt-api-plugin:2.15.1")
+    compileOnly("de.tr7zw:item-nbt-api:2.15.1")
     compileOnly("com.mysql:mysql-connector-j:9.3.0")
     compileOnly("com.h2database:h2:2.3.232")
     implementation("org.bstats:bstats-bukkit:3.0.2")

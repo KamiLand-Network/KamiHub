@@ -4,6 +4,7 @@ import net.kamiland.kamihub.KamiHub;
 import net.kamiland.kamihub.config.MessageConfig;
 import net.kamiland.kamihub.config.ModuleConfig;
 import net.kamiland.kamihub.manager.ConfigManager;
+import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -35,7 +36,13 @@ public class AntiDropModule extends EventModule {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerDropItem(PlayerDropItemEvent event) {
-        if (isEnabled() && config.ANTIDROP_WORLDS.contains(event.getPlayer().getWorld().getName()) && ! event.getPlayer().hasPermission(getBypassPermission())) {
+        if (isEnabled() && config.ANTIDROP_WORLDS.contains(event.getPlayer().getWorld().getName())) {
+            if (event.getPlayer().hasPermission(getBypassPermission())) {
+                if (config.IS_ANTIDROP_CREATIVE_ONLY) {
+                    if (event.getPlayer().getGameMode() == GameMode.CREATIVE)
+                        return;
+                } else return;
+            }
             event.setCancelled(true);
             event.getPlayer().sendMessage(messages.getMessage(event.getPlayer(), "modules.anti-drop"));
         }

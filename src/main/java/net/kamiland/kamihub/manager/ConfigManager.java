@@ -2,10 +2,7 @@ package net.kamiland.kamihub.manager;
 
 import lombok.Getter;
 import net.kamiland.kamihub.KamiHub;
-import net.kamiland.kamihub.config.MessageConfig;
-import net.kamiland.kamihub.config.ModuleConfig;
-import net.kamiland.kamihub.config.PluginConfig;
-import net.kamiland.kamihub.config.SpawnConfig;
+import net.kamiland.kamihub.config.*;
 import org.slf4j.Logger;
 
 /**
@@ -50,6 +47,12 @@ public class ConfigManager {
     private MessageConfig messageConfig;
 
     /**
+     * Item configuration handler
+     */
+    @Getter
+    private ItemConfig itemConfig;
+
+    /**
      * Creates configuration manager instance
      * @param plugin Main plugin instance for file access
      */
@@ -70,6 +73,8 @@ public class ConfigManager {
         logger.info("Loading config...");
         pluginConfig = new PluginConfig(plugin);
         pluginConfig.load();
+        itemConfig = new ItemConfig(plugin);
+        itemConfig.load();
         moduleConfig = new ModuleConfig(plugin);
         moduleConfig.load();
         spawnConfig = new SpawnConfig(plugin);

@@ -1,0 +1,15 @@
+items:
+  - id: diamond_sword
+    slot: 0
+    name: '<aqua>Super Sword'
+    lore:
+      - '<light_purple>This is a sword with super ability'
+    click-actions:
+      - '[message]<aqua>Never gonna give you up~'
+  - id: minecraft:stick
+    slot: 1
+    name: '<gray>Powerless Stick'
+    lore:
+      - '<gray>Nothing here...'
+    click-actions:
+      - '[console]kick {0} §cYou are too powerless!'

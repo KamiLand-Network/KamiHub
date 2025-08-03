@@ -13,9 +13,9 @@ public class KamiHubLoader implements PluginLoader {
     public void classloader(PluginClasspathBuilder classpathBuilder) {
         MavenLibraryResolver resolver = new MavenLibraryResolver();
         resolver.addRepository(new RemoteRepository.Builder(
-                "paper",
+                "maven2",
                 "default",
-                "https://repo.papermc.io/repository/maven-public/")
+                "https://repo1.maven.org/maven2/")
                 .build());
         resolver.addRepository(new RemoteRepository.Builder(
                 "jitpack",
@@ -36,7 +36,7 @@ public class KamiHubLoader implements PluginLoader {
         resolver.addDependency(new Dependency(new DefaultArtifact("com.zaxxer:HikariCP:6.3.0"), null));
         resolver.addDependency(new Dependency(new DefaultArtifact("dev.rollczi:litecommands-bukkit:3.10.0"), null));
         resolver.addDependency(new Dependency(new DefaultArtifact("com.github.LeonMangler:SuperVanish:6.2.19"), null));
-        resolver.addDependency(new Dependency(new DefaultArtifact("de.tr7zw:item-nbt-api-plugin:2.15.1"), null));
+        resolver.addDependency(new Dependency(new DefaultArtifact("de.tr7zw:item-nbt-api:2.15.1"), null));
         resolver.addDependency(new Dependency(new DefaultArtifact("com.mysql:mysql-connector-j:9.3.0"), null));
         resolver.addDependency(new Dependency(new DefaultArtifact("com.h2database:h2:2.3.232"), null));
 

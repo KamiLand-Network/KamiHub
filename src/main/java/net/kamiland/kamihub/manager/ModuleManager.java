@@ -7,7 +7,9 @@ import net.kamiland.kamihub.module.Module;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.JoinConfiguration;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashMap;
@@ -45,10 +47,6 @@ public class ModuleManager {
         put(new VoidTeleportModule(plugin));
     }
 
-    public void load() {
-        enableByConfig();
-    }
-
     @Nullable
     public Module getModule(String name) {
         return modules.get(name);
@@ -59,6 +57,18 @@ public class ModuleManager {
                 .filter(e -> e.getKey().equalsIgnoreCase(name))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Module \"" + name + "\" does not exist"));
+        FileConfiguration config = plugin.getConfigManager().getModuleConfig().getConfig();
+        if (config != null) {
+            config.set("modules." + name + ".enabled", true);
+            Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+                try {
+                    config.save(plugin.getConfigManager().getModuleConfig().getFile());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            plugin.getConfigManager().getModuleConfig().load();
+        }
 
         entry.getValue().setEnabled(true);
     }
@@ -69,7 +79,8 @@ public class ModuleManager {
         Objects.requireNonNull(section);
         for (String name : modules.keySet()) {
             if (section.getBoolean(name + ".enabled")) {
-                enable(name);
+                Module module = getModule(name); assert module != null;
+                module.setEnabled(true);
             }
         }
     }
@@ -79,7 +90,18 @@ public class ModuleManager {
                 .filter(e -> e.getKey().equalsIgnoreCase(name))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Module \"" + name + "\" does not exist"));
-
+        FileConfiguration config = plugin.getConfigManager().getModuleConfig().getConfig();
+        if (config != null) {
+            config.set("modules." + name + ".enabled", false);
+            Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+                try {
+                    config.save(plugin.getConfigManager().getModuleConfig().getFile());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            plugin.getConfigManager().getModuleConfig().load();
+        }
         entry.getValue().setEnabled(false);
     }
 

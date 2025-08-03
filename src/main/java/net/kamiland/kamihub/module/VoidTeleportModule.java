@@ -18,7 +18,7 @@ public class VoidTeleportModule extends EventModule {
     private BukkitTask voidCheckTimerTask;
 
     public VoidTeleportModule(KamiHub plugin) {
-        super(plugin, "void-tp");
+        super(plugin, "void-teleport");
         this.configManager = plugin.getConfigManager();
     }
 
