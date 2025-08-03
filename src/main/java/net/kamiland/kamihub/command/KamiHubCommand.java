@@ -8,6 +8,7 @@ import dev.rollczi.litecommands.annotations.permission.Permission;
 import net.kamiland.kamihub.KamiHub;
 import net.kamiland.kamihub.config.MessageConfig;
 import net.kamiland.kamihub.manager.ModuleManager;
+import net.kamiland.kamihub.module.Module;
 import net.kamiland.kamihub.util.GitHubRelease;
 import net.kamiland.kamihub.util.GitHubUpdateChecker;
 import net.kamiland.kamihub.util.MessageUtil;
@@ -16,6 +17,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Command(name = "kamihub", aliases = {"khub", "kh"})
@@ -68,6 +70,30 @@ public class KamiHubCommand {
     @Permission("kamihub.module.list")
     void executeModuleList(@Context CommandSender sender) {
         sender.sendMessage(messages.getMessageWithComponentReplacements((sender instanceof Player ? (Player) sender : null), "modules.list", moduleManager.getModulesComponent()));
+    }
+
+    @Execute(name = "module enable")
+    @Permission("kamihub.module.enable")
+    void executeModuleEnable(@Context CommandSender sender, @Arg String name) {
+        if (! moduleManager.isModuleExist(name)) {
+            sender.sendMessage(messages.getMessage((sender instanceof Player ? (Player) sender : null), "modules.not-found"));
+            return;
+        }
+        Module module = moduleManager.getModule(name); assert module != null;
+        moduleManager.enable(name);
+        sender.sendMessage(messages.getMessageWithComponentReplacements((sender instanceof Player ? (Player) sender : null), "modules.enabled", module.toComponent()));
+    }
+
+    @Execute(name = "module disable")
+    @Permission("kamihub.module.disable")
+    void executeModuleDisable(@Context CommandSender sender, @Arg String name) {
+        if (! moduleManager.isModuleExist(name)) {
+            sender.sendMessage(messages.getMessage((sender instanceof Player ? (Player) sender : null), "modules.not-found"));
+            return;
+        }
+        Module module = moduleManager.getModule(name); assert module != null;
+        moduleManager.disable(name);
+        sender.sendMessage(messages.getMessageWithComponentReplacements((sender instanceof Player ? (Player) sender : null), "modules.disabled", module.toComponent()));
     }
 
     @Execute(name = "reload")
