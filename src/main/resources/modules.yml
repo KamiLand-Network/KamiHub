@@ -283,7 +283,7 @@ modules:
       - world
 
   # Inventory control
-  # Bypass permission: ultimate.inventory.bypass (admins by default)
+  # Bypass permission: kamihub.inventory.bypass (admins by default)
   inventory:
     enabled: true
     # Clear inventory on join
