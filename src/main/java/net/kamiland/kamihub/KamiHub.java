@@ -92,6 +92,7 @@ public class KamiHub extends JavaPlugin {
         Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
             if (commandManager != null) commandManager.unRegisterCommands();
             if (moduleManager != null) moduleManager.disableAll();
+            if (runtimePDM != null) runtimePDM.close();
             if (connectionPoolManager != null) connectionPoolManager.close();
 
             serverManager.load();

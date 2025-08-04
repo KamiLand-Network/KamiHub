@@ -1,5 +1,6 @@
 package net.kamiland.kamihub.data.impl.player;
 
+import lombok.Getter;
 import net.kamiland.kamihub.KamiHub;
 import net.kamiland.kamihub.data.manager.player.PlayerDataManager;
 import net.kamiland.kamihub.data.model.player.PlayerData;
@@ -25,6 +26,8 @@ public class RuntimePlayerDataManager implements PlayerDataManager, Listener {
     private final KamiHub plugin;
     private final PlayerDataManager storagePDM;
     private final Map<UUID, PlayerData> playerDataMap = new HashMap<>();
+    @Getter
+    private boolean closed;
 
     /**
      * Initializes the runtime manager and preloads data for currently online players.
@@ -42,6 +45,7 @@ public class RuntimePlayerDataManager implements PlayerDataManager, Listener {
      */
     @EventHandler(priority = EventPriority.LOWEST)
     public void onAsyncPlayerPreLogin(AsyncPlayerPreLoginEvent event) {
+        if (closed) return;
         if (isPlayerExistFromStorage(event.getUniqueId()))
             loadPlayer(event.getUniqueId());
         else
@@ -53,6 +57,7 @@ public class RuntimePlayerDataManager implements PlayerDataManager, Listener {
      */
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerQuit(PlayerQuitEvent event) {
+        if (closed) return;
         Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
             if (! event.getPlayer().isOnline())
                 playerDataMap.remove(event.getPlayer().getUniqueId());
@@ -199,6 +204,14 @@ public class RuntimePlayerDataManager implements PlayerDataManager, Listener {
      */
     public void unloadPlayer(UUID uuid) {
         playerDataMap.remove(uuid);
+    }
+
+    /**
+     * Closes the runtime manager and persists all data to storage.
+     */
+    public void close() {
+        closed = true;
+        playerDataMap.clear();
     }
 
 }
