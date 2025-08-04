@@ -33,7 +33,8 @@ public class ItemConfig extends Config {
                 continue;
             }
             short slot = Short.parseShort(im.get("slot").toString());
-            Component name = MessageUtil.getMessage(im.get("name").toString());
+            var tmpName = im.get("name");
+            Component name = MessageUtil.getMessage(tmpName != null ? tmpName.toString() : "");
             Object loreObj = im.get("lore");
             List<Component> lore = new ArrayList<>();
             if (loreObj instanceof List<?> rawList) {
