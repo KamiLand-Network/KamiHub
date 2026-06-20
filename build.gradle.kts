@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "net.kamiland"
-version = "1.2"
+version = "1.3"
 description = "An efficient and modern integrated server security management plugin."
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(25))
