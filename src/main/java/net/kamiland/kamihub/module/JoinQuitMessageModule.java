@@ -90,9 +90,20 @@ public class JoinQuitMessageModule extends EventModule {
         AtomicReference<String> group = new AtomicReference<>("default");
         if (ServerManager.LUCKPERMS) {
             group.set(Objects.requireNonNull(lpUserManager.getUser(player.getUniqueId())).getPrimaryGroup());
-        } else if (ServerManager.VAULT) {
-            group.set(vaultPermission.getPrimaryGroup(player));
-        } else {
+        } else if (ServerManager.VAULT && vaultPermission != null) {
+            try {
+                group.set(vaultPermission.getPrimaryGroup(player));
+            } catch (UnsupportedOperationException e) {
+                // Vault fell back to SuperPerms which does not support group queries.
+                // Fall through to permission-based group detection below.
+                plugin.getSLF4JLogger().warn(
+                        "Vault is using SuperPerms backend — group queries are not supported. "
+                        + "Install LuckPerms or assign kamihub.group.<name> permissions to players.");
+            }
+        }
+
+        // Permission-based group detection (used as fallback when Vault/SuperPerms fails)
+        if (group.get().equals("default")) {
             AtomicInteger priority = new AtomicInteger();
             groupPriority.forEach((g, p) -> {
                 if (player.hasPermission("kamihub.group." + g) && p > priority.get()) {

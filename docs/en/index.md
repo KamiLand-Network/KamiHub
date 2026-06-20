@@ -1,15 +1,6 @@
-<div align="center">
-  <h1>KamiHub</h1>
+# KamiHub - Lobby Management Plugin
 
 > Modern Minecraft Server Lobby Management Solution
-
-  <p>
-
-English •
-[简体中文](docs/zh/index.md)
-
-  </p>
-</div>
 
 > **Notice:** KamiHub has entered maintenance mode. Only bug fixes will be provided going forward. No new features will be added, and future game versions will not be supported. KamiLand is no longer active as the primary developer has stepped away from the Minecraft community.
 
@@ -29,24 +20,24 @@ KamiHub is a multi-functional open-source lobby management plugin, designed spec
 ### Boss Bar Display
 > Easy-to-configure multi-world Boss bar display function
 
-![Boss Bar](docs/boss_bar.gif)
+![Boss Bar](../boss_bar.gif)
 
 ### Action Bar Display
 > Rich and colorful action bar display function
 
-![Action Bar](docs/action_bar.gif)
+![Action Bar](../action_bar.gif)
 
 ### Player Agreement System
 > Innovative player agreement function, supporting full customization and PAPI variable parsing.
 
-![Player Agreement](docs/agreement_reject.gif)
+![Player Agreement](../agreement_reject.gif)
 
 ### Modular Management
 > Flexible module system, supporting dynamic loading, hot reload, and dependency management.
 
-![Module System](docs/modules.png)
+![Module System](../modules.png)
 
-> > Expected to add hot enable/disable module function in the next version.
+> Hot enable/disable module functionality is expected in the next version.
 
 ## Project Overview
 
@@ -60,26 +51,26 @@ KamiHub is a multi-functional server lobby plugin, providing customizable manage
 ## Related Links
 
 - **GitHub Repository**: [github.com](https://github.com/KamiLand-Network/KamiHub)
-- **SpigotMC Page**: [spigotmc.org](https://spigotmc.org/resources/kamihub)
 - **Issue Feedback**: [github.com](https://github.com/KamiLand-Network/KamiHub/issues)
 - **Discussion Community**: [discord.gg](https://discord.gg/7nN4pVZV4f)
+- **SpigotMC Page**: [spigotmc.org](https://spigotmc.org/resources/kamihub)
 
 ## Dependencies Used
 
 This plugin uses the following dependencies (not included in the plugin itself, source code not modified, only provided at runtime):
 
-> - [Paper API](https://papermc.io) by PaperMC – GPL 3.0 License
-> - [Lombok](https://projectlombok.org) by The Project Lombok Authors – MIT License
-> - [HikariCP](https://github.com/brettwooldridge/HikariCP) by Brett Wooldridge – Apache-2.0
-> - [LiteCommands](https://github.com/Rollczi/LiteCommands) by Rollczi – Apache-2.0
-> - [SuperVanish](https://github.com/LeonMangler/SuperVanish) by LeonMangler – MIT License
-> - [Item-NBT-API](https://github.com/tr7zw/Item-NBT-API) by tr7zw – MIT License
-> - [mysql-connector-j](https://dev.mysql.com) – GPLv2 + FOSS Exception
-> - [H2 Database](https://www.h2database.com) – EPL 1.0 / MPL 2.0
-> - [bStats](https://github.com/Bastian/bstats-metrics) by Bastian – MIT License
-> - [PlaceholderAPI](https://github.com/PlaceholderAPI/PlaceholderAPI) by HelpChat – GPL 3.0 License
-> - [LuckPerms API](https://luckperms.net) by Luck – MIT License
-> - [Vault API](https://github.com/MilkBowl/Vault) by MilkBowl – LGPL 3.0 License
+> - [Paper API](https://papermc.io) by PaperMC -- GPL 3.0 License
+> - [Lombok](https://projectlombok.org) by The Project Lombok Authors -- MIT License
+> - [HikariCP](https://github.com/brettwooldridge/HikariCP) by Brett Wooldridge -- Apache-2.0
+> - [LiteCommands](https://github.com/Rollczi/LiteCommands) by Rollczi -- Apache-2.0
+> - [SuperVanish](https://github.com/LeonMangler/SuperVanish) by LeonMangler -- MIT License
+> - [Item-NBT-API](https://github.com/tr7zw/Item-NBT-API) by tr7zw -- MIT License
+> - [mysql-connector-j](https://dev.mysql.com) -- GPLv2 + FOSS Exception
+> - [H2 Database](https://www.h2database.com) -- EPL 1.0 / MPL 2.0
+> - [bStats](https://github.com/Bastian/bstats-metrics) by Bastian -- MIT License
+> - [PlaceholderAPI](https://github.com/PlaceholderAPI/PlaceholderAPI) by HelpChat -- GPL 3.0 License
+> - [LuckPerms API](https://luckperms.net) by Luck -- MIT License
+> - [Vault API](https://github.com/MilkBowl/Vault) by MilkBowl -- LGPL 3.0 License
 
 Sincere thanks to all dependency projects for their contributions to the open source community!
 

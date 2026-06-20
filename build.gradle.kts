@@ -10,11 +10,8 @@ plugins {
 group = "net.kamiland"
 version = "1.2"
 description = "An efficient and modern integrated server security management plugin."
-java.sourceCompatibility = JavaVersion.VERSION_21
-java.targetCompatibility = JavaVersion.VERSION_21
-
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(25))
 }
 
 repositories {
@@ -41,7 +38,7 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.38")
     annotationProcessor("org.projectlombok:lombok:1.18.38")
 
-    compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:26.1.2.build.+")
 
     compileOnly("com.zaxxer:HikariCP:6.3.0")
     compileOnly("dev.rollczi:litecommands-bukkit:3.10.0")

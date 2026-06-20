@@ -45,10 +45,22 @@ public class ItemConfig extends Config {
                         .toList();
             }
             ItemStack is = Registry.ITEM.get(namespacedKey).createItemStack();
+            Object modelObj = im.get("item-model");
+            NamespacedKey modelKey = null;
+            if (modelObj != null) {
+                modelKey = NamespacedKey.fromString(modelObj.toString());
+                if (modelKey == null) {
+                    plugin.getSLF4JLogger().warn("Invalid item-model: {}", modelObj);
+                }
+            }
+            NamespacedKey finalModelKey = modelKey;
             List<Component> finalLore = lore;
             is.editMeta(itemMeta -> {
                 itemMeta.itemName(name);
                 itemMeta.lore(finalLore);
+                if (finalModelKey != null) {
+                    itemMeta.setItemModel(finalModelKey);
+                }
             });
             itemMap.put(slot, is);
             if (im.get("click-actions") != null) {
